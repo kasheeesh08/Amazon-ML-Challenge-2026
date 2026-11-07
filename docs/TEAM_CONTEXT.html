@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TEAM_CONTEXT — Amazon ML Challenge 2026 · Business Entity Resolution</title>
+<style>
+  @page { size: A4; margin: 16mm 14mm 16mm 14mm; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 9.6pt; line-height: 1.38; color: #1d1d1f; }
+  h1 { font-size: 20pt; margin: 0 0 4px 0; color: #0b3d66; }
+  h2 { font-size: 14pt; color: #0b3d66; border-bottom: 2px solid #0b3d66; padding-bottom: 3px; margin-top: 0; page-break-before: always; }
+  h2.first { page-break-before: avoid; }
+  h3 { font-size: 11pt; color: #14507f; margin: 14px 0 5px 0; }
+  p { margin: 5px 0; }
+  ul, ol { margin: 4px 0 6px 0; padding-left: 20px; }
+  li { margin: 2px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 6px 0 10px 0; font-size: 8.6pt; page-break-inside: auto; }
+  tr { page-break-inside: avoid; }
+  th { background: #e6eef6; text-align: left; border: 1px solid #b8c7d6; padding: 3px 5px; }
+  td { border: 1px solid #cfd9e3; padding: 3px 5px; vertical-align: top; }
+  td.n, th.n { text-align: right; white-space: nowrap; }
+  code, .mono { font-family: Consolas, "Courier New", monospace; font-size: 8.4pt; background: #f3f5f7; padding: 0 2px; }
+  pre { font-family: Consolas, "Courier New", monospace; font-size: 7.8pt; background: #f3f5f7; border: 1px solid #dde3e8; padding: 6px 8px; white-space: pre-wrap; margin: 5px 0 8px 0; }
+  .box { border: 1px solid #b8c7d6; background: #f7fafc; padding: 7px 10px; margin: 8px 0; }
+  .warn { border: 1px solid #d9a441; background: #fff8ea; padding: 7px 10px; margin: 8px 0; }
+  .fact { color: #0f6b2f; font-weight: 600; }
+  .hyp { color: #9a5b00; font-weight: 600; }
+  .unres { color: #b00020; font-weight: 700; }
+  .tag { display: inline-block; font-size: 7.6pt; font-weight: 700; padding: 0 5px; border-radius: 3px; }
+  .ok { background: #d8f0de; color: #0f5c28; }
+  .part { background: #fff0cc; color: #8a5a00; }
+  .run { background: #dbe8ff; color: #1b4b9b; }
+  .ur { background: #fbdada; color: #9b1111; }
+  .small { font-size: 8.2pt; color: #444; }
+  .cover-meta td { border: none; padding: 1px 6px 1px 0; font-size: 9pt; }
+</style>
+</head>
+<body>
+
+<h1>TEAM_CONTEXT — Business Entity Resolution</h1>
+<p><b>Amazon ML Challenge 2026</b> · Team <b>camelcase</b> · Handoff document compiled 2026-09-26 from the project's own files: its reports, logs, configs and saved artifacts.</p>
+<table class="cover-meta">
+<tr><td><b>Labels used:</b></td><td><span class="fact">MEASURED</span> = a number read from a project artifact (the path is given). <span class="hyp">HYPOTHESIS</span> = an inference, not proven. <span class="unres">UNRESOLVED</span> = cannot be determined from the project files.</td></tr>
+<tr><td><b>Scope:</b></td><td>Documentation only. Writing it changed no code, model, threshold, config, output or package.</td></tr>
+</table>
+
+<h2 class="first">0. Executive summary (one page)</h2>
+<table>
+<tr><th style="width:28%">Item</th><th>Value</th></tr>
+<tr><td>Current public leaderboard score</td><td><b>0.924</b>. After uploading <code>output/matching_results.tsv</code> on 2026-09-26, the team reported this score in the working session. <span class="unres">It is not recorded in any project file.</span> The public/private split size and the team's rank are <span class="unres">UNRESOLVED</span>.</td></tr>
+<tr><td>Local validation score (NOT the leaderboard)</td><td><span class="fact">Official macro F0.5 = 0.96285</span> on the held-out 20% validation split (441,364 S1). Source: <code>experiments/matching/MATCHING_REPORT.md</code>.</td></tr>
+<tr><td>Candidate recall (blocking ceiling)</td><td>98.214% on validation. 95.631% when validation S1 are matched against the full training pool (10.3M records). 95.646% for final training (all train S1 × full train pool). Test recall has no labels: <span class="unres">UNRESOLVED</span>.</td></tr>
+<tr><td>Architecture</td><td>
+  <ul>
+    <li>Normalisation, then blocking: TF-IDF top-10 per source for a name+address channel and an address channel, both within the query's country, plus 16 exact-key joins with a block cap of 100.</li>
+    <li>50 pair features, scored by a numba histogram GBDT written from scratch: 300 trees, depth 6, learning rate 0.1.</li>
+    <li>No external data and no pretrained models.</li>
+  </ul></td></tr>
+<tr><td>Final decision rule</td><td>Probability ≥ <b>0.69</b>, plus the <b>one-S1-per-target</b> rule: each S2/S3 record goes to at most one S1, the one with the highest probability.</td></tr>
+<tr><td>Biggest known weaknesses (measured)</td><td>
+  <ul>
+    <li>Orphaned-target sensitivity: stress F0.5 is 0.840, driven by false positives on the target-context features.</li>
+    <li>Native-script names: 89.26% blocking recall.</li>
+    <li>Empty target addresses: 90.02% blocking recall.</li>
+    <li>House-number conflicts.</li>
+    <li>Near-duplicates that differ only in legal form, which cause false merges.</li>
+    <li>France: unlabelled, <span class="unres">performance UNRESOLVED</span>.</li>
+  </ul></td></tr>
+<tr><td>Current diagnostic status</td><td><span class="tag ok">COMPLETE</span> The <code>t_rank</code> diagnostic in <code>experiments/diagnostics/trank/</code> exited with code 0. Nothing is running now.
+  <ul>
+    <li>Removing, capping or taking the percentile of <code>t_rank</code> alone does not change results: <code>t_gap</code> takes its place.</li>
+    <li>Removing all three target-context features helps only in the extreme stress environment.</li>
+    <li>At the test-like pool ratio (environment T) the current model scores 0.9543.</li>
+  </ul></td></tr>
+<tr><td>Exact project state</td><td>Steps 1–3, the stress evaluation, final training and inference, the submission file and <code>camelcase_submission.zip</code> are all <b>COMPLETE</b>. The submission has been uploaded (score as above). No model change has been approved, and the production files are unchanged; hashes were checked at the end of the diagnostic.</td></tr>
+<tr><td>Immediate next investigation</td><td>The team has <b>not yet approved</b> a next step. The candidate directions come from the diagnostic and are documented without ranking in §13: unseen-country robustness, orphan-aware training / calibration, threshold hedging, native-script and empty-address handling, and blocking recall.</td></tr>
+</table>
+<div class="box small">
+Gap accounting, from measured numbers:
+<ul>
+  <li>Validation 0.963 → test-ratio environment T 0.954: about −0.009, <span class="fact">measured</span>.</li>
+  <li>T 0.954 → public 0.924: about −0.030, <span class="unres">cause UNRESOLVED</span>.</li>
+  <li><span class="hyp">Hypothesis:</span> France (15% of test, no labels) is a likely contributor. This is not proven.</li>
+</ul>
+</div>
+
+<h2>1. Project overview</h2>
+<h3>1.1 Problem in simple terms</h3>
+<ul>
+<li>There are three independent sources of business records (name, address, country) with no shared identifiers.</li>
+<li><b>Source 1 (S1)</b> is the deduplicated reference list. <b>S2 and S3</b> are noisy sources that are <i>not</i> internally deduplicated: one business can appear several times in each.</li>
+<li>Task: for <b>every S1 entity in test</b>, list all S2/S3 records that are the same real-world business. That can be zero, one or many records (training maximum: 11 per S1).</li>
+<li>Matching goes strictly S1 → {S2, S3}; outputs contain only S2-/S3- IDs. It must be an ML solution trained only on the provided data.</li>
+</ul>
+<p class="small">Sources: <code>docs/problem_statement.pdf</code>, and <code>docs/COMPETITION_NOTES.md</code> §1–§11, which carries page references to the PDF.</p>
+
+<h3>1.2 Required output</h3>
+<table>
+<tr><th>File</th><th>Header</th><th>Rules</th></tr>
+<tr><td><code>output/matching_results.tsv</code> (the only scored file)</td><td><code>source1_entity_id&lt;TAB&gt;matched_entity_ids</code></td><td>
+  <ul>
+    <li>Exactly one row per test S1, with an empty list written as <code>S1-x&lt;TAB&gt;</code>.</li>
+    <li>IDs are comma-separated with no spaces and no duplicates.</li>
+    <li>Only S2/S3 IDs that exist in test are allowed.</li>
+  </ul></td></tr>
+<tr><td><code>output/candidate_pairs.tsv</code> (not scored)</td><td><code>source1_entity_id&lt;TAB&gt;candidate_entity_ids</code></td><td>
+  <ul>
+    <li>The exact final candidate set the model scores.</li>
+    <li>Invariant: matched ⊆ candidates. The validator warns if this is violated.</li>
+  </ul></td></tr>
+</table>
+
+<h3>1.3 Metric: macro F0.5</h3>
+<ul>
+<li>Per S1 entity: P = |pred ∩ true| / |pred|, R = |pred ∩ true| / |true|, and <b>F0.5 = 1.25·P·R / (0.25·P + R)</b>. The score is the <b>average over all S1 entities</b>, singletons included.</li>
+<li>Singletons (no true match): an empty prediction scores <b>1.0</b>; <b>any</b> prediction scores <b>0.0</b>. 5.585% of training S1 are singletons.</li>
+<li>β = 0.5 weights precision about 4× more than recall. One false merge on a singleton wipes out that entity's whole score, which is why the pipeline uses a conservative threshold and the one-per-target rule.</li>
+<li>Two cases are <span class="unres">UNRESOLVED</span> in the official rules: true ≠ ∅ with an empty prediction, and true ≠ ∅ with no overlap. Both are scored 0.0 locally (R = 0), in <code>src/ber/metrics.py</code>; see COMPETITION_NOTES §4.</li>
+<li>Leaderboard: the public score uses a subset of test; the final ranking uses the private remainder. The split size is <span class="unres">UNRESOLVED</span>.</li>
+</ul>
+
+<h3>1.4 Constraints (official materials, via COMPETITION_NOTES §5–§7)</h3>
+<ul>
+<li><b>External data is strictly prohibited.</b> That includes external databases, APIs, entity-resolution services, government registries, geocoding, and data augmentation from the internet. Evidence of external lookup means disqualification.</li>
+<li><b>Model licence and size:</b> the final model must be MIT/Apache-2.0 and have at most 8B parameters. Our matcher is a GBDT trained from scratch, and no pretrained weights are used anywhere.</li>
+<li><b>Format:</b> an invalid format is not scored. Missing S1 rows, duplicate rows, duplicate IDs, S1 self-matches and non-existent IDs are rejected.</li>
+<li><b>Final zip</b> (<code>&lt;team&gt;_submission.zip</code>):
+  <ul>
+    <li><code>output/</code> with both TSVs</li>
+    <li><code>code/business_entity_resolution/</code> with <code>src/</code>, <code>README.md</code> and a pinned <code>requirements.txt</code>; it must be self-contained and runnable</li>
+    <li>the filled <code>Documentation_template.md</code></li>
+  </ul></li>
+<li>Test contains an <b>unseen country, France</b> (15% of test S1). The pipeline must treat country as an open set.</li>
+<li>Deadlines, submission rate limits and compute limits: <span class="unres">UNRESOLVED</span> (not in the materials; COMPETITION_NOTES §12).</li>
+</ul>
+
+<h3>1.5 Data sizes (measured, <code>experiments/EDA_REPORT.md</code>, COMPETITION_NOTES §13)</h3>
+<table>
+<tr><th>File</th><th class="n">Rows</th><th>Countries</th></tr>
+<tr><td>train_source1 / 2 / 3</td><td class="n">2,206,821 / 5,034,616 / 5,285,603</td><td>US ~60%, India ~40%</td></tr>
+<tr><td>train_ground_truth</td><td class="n">2,206,821 rows, 7,638,365 true pairs</td><td>123,247 singletons (5.58%)</td></tr>
+<tr><td>test_source1 / 2 / 3</td><td class="n">1,732,544 / 4,887,273 / 5,082,316</td><td>India 46.8%, US 38.3%, France 15.0%</td></tr>
+</table>
+<p>Measured structural facts:</p>
+<ul>
+<li>No S2/S3 record matches more than one S1.</li>
+<li>There are no cross-country true pairs.</li>
+<li>About 26% of S2/S3 records match no S1 (distractors).</li>
+<li>Test has 5.75 S2+S3 records per S1, against 4.68 in train. The reason is <span class="unres">UNRESOLVED</span>.</li>
+</ul>
+
+<h2>2. Current project status</h2>
+<table>
+<tr><th>Step</th><th>Status</th><th>What was done</th><th>Important result</th><th>Main files</th></tr>
+<tr><td>EDA</td><td><span class="tag ok">COMPLETE</span></td><td>Streaming EDA over the full data</td><td>Noise profile, key recall, singleton rate 5.58%</td><td><code>experiments/eda.py</code>, <code>EDA_REPORT.md</code></td></tr>
+<tr><td>Step 1: validation + scorer</td><td><span class="tag ok">COMPLETE</span></td><td>Leakage-safe 80/20 split at S1 level; official-metric scorer; tests</td><td>441,364 validation S1; the validator passes on the validation ground truth; scorer sanity checks OK</td><td><code>experiments/validation_split/</code>, <code>src/ber/metrics.py</code>, <code>src/score.py</code></td></tr>
+<tr><td>Step 2: blocking</td><td><span class="tag ok">COMPLETE</span></td><td>Design chosen on the fit fold; measured on validation and at full-pool scale</td><td>Recall 98.214%, 58.5 candidates/S1 (validation); 95.631% (full pool)</td><td><code>experiments/blocking/</code>, <code>blocking_config.json</code></td></tr>
+<tr><td>Step 3: matcher</td><td><span class="tag ok">COMPLETE</span></td><td>50 features; GBDT vs logistic regression; selection on the internal A2 split</td><td>Validation F0.5 0.96285 (logistic regression 0.94458)</td><td><code>experiments/matching/</code></td></tr>
+<tr><td>Test-scale check (unlabelled)</td><td><span class="tag ok">COMPLETE</span></td><td>Step 3 model run on the test set, counts only</td><td>t-feature drift on test is negligible (PSI 0.03–0.07)</td><td><code>experiments/test_scale/</code></td></tr>
+<tr><td>Labelled stress evaluation</td><td><span class="tag ok">COMPLETE</span></td><td>Validation S1 × full training pool</td><td>F0.5 0.840; 0.956 restricted to validation-pool records</td><td><code>experiments/TEST_SCALE_REPORT.md</code>, <code>experiments/test_scale/stress/</code></td></tr>
+<tr><td>Final training + inference</td><td><span class="tag ok">COMPLETE</span></td><td>Retrained on all training S1 × full pool; test inference</td><td>5,503,470 predictions for 1,732,544 S1; validator PASS</td><td><code>experiments/final/</code>, <code>experiments/final_pipeline.py</code></td></tr>
+<tr><td>Submission + package</td><td><span class="tag ok">COMPLETE</span></td><td>Uploaded <code>matching_results.tsv</code>; built and verified the zip</td><td>Public LB 0.924 (team-reported; not in files)</td><td><code>output/</code>, <code>submission_package/</code>, <code>camelcase_submission.zip</code></td></tr>
+<tr><td>Full-scale run of the packaged pipeline</td><td><span class="tag part">PARTIAL</span></td><td>Packaged <code>run_pipeline.py</code> only smoke-tested (bit-identical to the smoke reference)</td><td>Full-scale reproduction not performed: <span class="unres">UNRESOLVED</span></td><td><code>experiments/final/packaging/</code></td></tr>
+<tr><td><code>t_rank</code> diagnostic</td><td><span class="tag ok">COMPLETE</span></td><td>Variants A/B/B2/C/D × environments V/S/T</td><td>See §9</td><td><code>experiments/diagnostics/trank/</code></td></tr>
+<tr><td>Cause of the validation→leaderboard gap</td><td><span class="tag ur">UNRESOLVED</span></td><td>—</td><td>About 0.009 of the gap is explained by the orphan effect at test ratio; the rest (about 0.03) is not</td><td>§9, §12</td></tr>
+</table>
+<p>Nothing is <span class="tag run">CURRENTLY RUNNING</span>. The last background job, the <code>t_rank</code> diagnostic, finished with exit code 0.</p>
+
+<h2>3. Step 1: validation split and local scorer</h2>
+<h3>3.1 How the split was built</h3>
+<p class="small">Source: <code>src/build_validation_split.py</code> and <code>src/ber/validation_split.py</code>; report <code>experiments/validation_split/VALIDATION_SPLIT.md</code>.</p>
+<ul>
+<li><b>The unit of splitting is the S1 entity</b>, not the pair: 1/5 of S1 go to validation, with seed <code>20260925</code>.</li>
+<li><b>Stratification:</b> country × min(#true matches, 8) × (has an S2 match, has an S3 match), giving 38 non-empty strata. The largest per-stratum deviation from exactly 20% is 0.60 entities.</li>
+<li><b>Order within each stratum:</b> <code>blake2b("&lt;seed&gt;:&lt;entity_id&gt;")</code>. Quotas use floor plus largest remainder.</li>
+<li><b>Leakage prevention:</b>
+  <ul>
+    <li>Each S2/S3 target belongs to exactly one S1, re-checked at build time, and <b>inherits its S1's fold</b>.</li>
+    <li>Distractors are split 20/80, stratified by source × country.</li>
+    <li>So every record is in exactly one fold, and the fit and validation pools are disjoint. Verification found 0 fit targets inside the validation pool and 0 S1 in both folds.</li>
+  </ul></li>
+<li><b>Validation candidate pool:</b> all targets of the validation S1 plus their share of the distractors, giving 2,064,020 S2+S3 records (4.676 per S1; full train 4.677). It reproduces the <i>train</i> composition, not test's 5.75 per S1. The report lists this as a known limitation: validation may be optimistic on precision.</li>
+<li>The test files are never read by Step 1.</li>
+</ul>
+<h3>3.2 Validation statistics (measured)</h3>
+<table>
+<tr><th></th><th class="n">All train</th><th class="n">Fit (80%)</th><th class="n">Validation (20%)</th></tr>
+<tr><td>S1 entities</td><td class="n">2,206,821</td><td class="n">1,765,457</td><td class="n">441,364</td></tr>
+<tr><td>Singletons</td><td class="n">123,247</td><td class="n">98,598</td><td class="n">24,649 (5.585%)</td></tr>
+<tr><td>True pairs</td><td class="n">7,638,365</td><td class="n">6,110,715</td><td class="n">1,527,650</td></tr>
+<tr><td>Pool S2 / S3</td><td class="n">5,034,616 / 5,285,603</td><td class="n">4,027,964 / 4,228,235</td><td class="n">1,006,652 / 1,057,368</td></tr>
+<tr><td>Validation targets / distractors</td><td class="n">—</td><td class="n">—</td><td class="n">1,527,650 / 536,370</td></tr>
+</table>
+<p>Country shares match the full data to within 0.01 percentage points (US 59.98%, India 40.02%).</p>
+<h3>3.3 Local scorer</h3>
+<ul>
+<li><code>src/ber/metrics.py</code> implements the official per-entity macro F0.5, including the singleton rules above. <code>src/score.py</code> is its command-line wrapper, with optional official-validator checks. <code>src/ber/ids_tsv.py</code> handles the TSV input/output format.</li>
+<li>A vectorised copy, <code>src/ber/matcher.py::entity_f05</code>, is used in the experiments. It is cross-checked against <code>src/score.py</code> on every validation prediction file; in Step 3 the two values were identical (0.962847).</li>
+<li><b>Sanity scenarios</b> (<code>experiments/validation_sanity.py</code> → <code>experiments/validation_split/sanity_results.json</code>, log <code>experiments/validation_sanity_run.log</code>). For each, the validator passed and the scorer equalled both an exact recomputation and, where available, a closed-form value:
+  <ul>
+    <li>perfect = 1.000000</li>
+    <li>all-empty = 0.055847</li>
+    <li>keep-one = 0.696389</li>
+    <li>keep-half = 0.878121</li>
+    <li>add-distractor = 0.751544</li>
+    <li>rotate = 0.003145</li>
+  </ul></li>
+<li><b>Unit tests:</b> <code>src/tests/</code> has 60 <code>test_*</code> functions: blocking 10, ids_tsv 7, matching 18, metrics 20, validation_split 5. The notes record 32 tests passing at the end of Step 1.
+  <ul>
+    <li>A pass/fail record for the current full suite is <span class="unres">UNRESOLVED</span>; no log of a full-suite run was found.</li>
+    <li><code>src/ber/normalize.py</code> refers to <code>src/tests/test_normalize.py</code>, which does <b>not</b> exist.</li>
+  </ul></li>
+<li>The official validator passes on <code>val_ground_truth.tsv</code> against <code>val_as_test_dir</code> with <code>--check-ids</code>.</li>
+</ul>
+<h3>3.4 Artifacts</h3>
+<ul>
+<li><code>experiments/validation_split/assignment/s{1,2,3}_fold.npy</code>: fold per training-file row (0 = fit, 1 = validation).</li>
+<li><code>experiments/validation_split/val_as_test_dir/test_source{1,2,3}.tsv</code> and <code>val_ground_truth.tsv</code>: validation laid out like the test directory.</li>
+<li><code>manifest.json</code>, <code>verification.json</code>, <code>sanity_results.json</code>, <code>VALIDATION_SPLIT.md</code>.</li>
+</ul>
+
+<h2>4. Step 2: blocking and candidate generation</h2>
+<div class="warn"><b>Key principle:</b> a TRUE MATCH must enter the candidate set, otherwise the matcher can never recover it. Candidate recall is therefore a hard ceiling on end-to-end recall. Every candidate is also a chance for a false merge, which matters a lot under F0.5.</div>
+<h3>4.1 Normalisation (<code>src/ber/normalize.py</code>, NORM_VERSION 2, identical to the EDA)</h3>
+<ul>
+<li>General: NFKC, casefold, Latin diacritics stripped, punctuation turned into spaces, <code>&amp;</code> → <code>and</code>.</li>
+<li><b>Name keys:</b>
+  <ul>
+    <li><code>name_raw</code>: the stripped raw name.</li>
+    <li><code>name_n1</code>: the basic-normalised name.</li>
+    <li><code>name_n2</code>: <code>name_n1</code> with runs of single letters joined and legal-form tokens removed (inc, llc, ltd, pvt, private, corp, sarl, sas, …, plus some Devanagari forms).</li>
+    <li><code>name_n3</code>: the tokens of <code>name_n2</code>, sorted, so word order doesn't matter.</li>
+    <li><code>name_tok1</code>: the first token of <code>name_n2</code>.</li>
+  </ul></li>
+<li><b>Address keys:</b>
+  <ul>
+    <li><code>addr_n1</code>: the normalised comma-separated components.</li>
+    <li><code>addr_n2</code>: the sorted set of address tokens, with street and state abbreviations expanded (Rd → road, NC → north carolina).</li>
+    <li><code>addr_digits</code>: the sorted set of digit groups, with leading zeros removed.</li>
+    <li><code>postal</code>: a 5- or 6-digit code.</li>
+    <li><code>house</code>: the house number, with leading zeros stripped.</li>
+    <li><code>country</code>: casefolded.</li>
+  </ul></li>
+<li>Flags: name missing, address missing, non-Latin name, domain-like name, junk prefix, postal present, landmark.</li>
+<li>Retrieval tokens:
+  <ul>
+    <li>name: the words of <code>name_n2</code> plus character trigrams of the joined name</li>
+    <li>address: alphabetic tokens, digit groups and the house number</li>
+  </ul></li>
+</ul>
+<h3>4.2 Selected configuration (<code>experiments/blocking/blocking_config.json</code>, SHA-256 <code>91a38976…0e5f5</code>)</h3>
+<table>
+<tr><th>Channel</th><th>What it does and why</th><th>Limit</th><th>Source / country handling</th></tr>
+<tr><td><b>retrieval: nameaddr @10</b></td><td>TF-IDF cosine (binary term frequency, smooth IDF from the pool) over name+address tokens. It is the main recall channel: 93.97% recall alone on validation.</td><td>Top 10 per source; rarest query tokens scanned first, up to 20,000 postings</td><td>S2 and S3 searched separately (up to 20 per S1); only within the query's country</td></tr>
+<tr><td><b>retrieval: addr @10</b></td><td>TF-IDF over address tokens only. It recovers pairs whose names differ (typos, trade names, scripts): 87.24% alone.</td><td>Top 10 per source; 20,000 postings</td><td>Per source; within country</td></tr>
+<tr><td>exact: name_n1, name_n2, name_n3</td><td>Equality on normalised name variants (casing, legal form, word order)</td><td rowspan="5">Cap 100: any block with more than 100 pool records for a key is dropped</td><td rowspan="5">Joined per source. Country is part of a key only where listed; names and addresses already encode country.</td></tr>
+<tr><td>exact: addr_n1, addr_n2</td><td>Equality on the normalised or reordered address</td></tr>
+<tr><td>exact: name_n2+country, addr_n2+country</td><td>Country-qualified variants</td></tr>
+<tr><td>exact: name_n1+addr_n1, name_n2+addr_n2, name_n3+addr_n2, name_n3+house</td><td>High-precision name+address combinations</td></tr>
+<tr><td>exact: name_tok1+house, name_tok1+addr_digits, postal+name_tok1, postal+house, house+addr_digits</td><td>Recover pairs with partial name agreement anchored on address numbers</td></tr>
+</table>
+<p>The candidate set is the <b>union</b> of all channels. Design rules, applied on the <b>fit fold only</b> with 100,000 fit S1 queries:</p>
+<ul>
+<li><b>Postings budget:</b> the smallest budget within 0.1 pp of the largest budget's recall at 50. 20k was chosen over 100k and 500k.</li>
+<li><b>Union growth:</b> keep adding while the marginal gain is at least 0.02 pp per extra candidate per S1, with the mean capped at 100 per S1. The result was <code>k_nameaddr=10, k_name=0, k_addr=10, exact=True</code>: fit recall 96.10% at 70.1 per S1.</li>
+</ul>
+<h3>4.3 Measured results</h3>
+<table>
+<tr><th>Metric</th><th class="n">Validation (validation pool)</th><th class="n">Stress (full training pool)</th><th class="n">Test (no labels)</th></tr>
+<tr><td>Candidate recall (union)</td><td class="n"><b>98.214%</b> (S2 98.148%, S3 98.277%)</td><td class="n">95.631%</td><td class="n"><span class="unres">UNRESOLVED</span></td></tr>
+<tr><td>Matched S1 with all / at least one match retrieved</td><td class="n">94.51% / 99.83%</td><td class="n">87.22% / 99.54%</td><td class="n">—</td></tr>
+<tr><td>Candidate pairs</td><td class="n">25,826,498</td><td class="n">32,131,328</td><td class="n">126,274,337</td></tr>
+<tr><td>Candidates per S1: mean / median / p99 / max</td><td class="n">58.5 / 39 / 208 / 390</td><td class="n">72.8 / 42 / 250 / 437</td><td class="n">72.9 / 42 / 255 / 533</td></tr>
+<tr><td>Reduction ratio (vs full Cartesian product)</td><td class="n">0.9999716</td><td class="n">0.9999929</td><td class="n">—</td></tr>
+<tr><td>S1 with zero candidates</td><td class="n">0</td><td class="n">0</td><td class="n">0</td></tr>
+</table>
+<p>Recall of each channel alone on validation:</p>
+<ul>
+<li>nameaddr@10 93.97%; addr@10 87.24%; name@10 71.31% (not used).</li>
+<li>house+addr_digits 36.44% at cap 100 (59.78% with no cap).</li>
+<li>name_n3 52.50%.</li>
+<li>The 16 exact keys together (cap 100): 81.72% on the fit fold.</li>
+</ul>
+<h3>4.4 Failure cases and tradeoffs (measured)</h3>
+<table>
+<tr><th>Case (true pairs)</th><th class="n">Validation union recall</th><th class="n">Stress union recall</th></tr>
+<tr><td>Target name non-Latin (110,516)</td><td class="n">89.26%</td><td class="n">80.75%</td></tr>
+<tr><td>Target address missing (67,222)</td><td class="n">90.02%</td><td class="n">78.51%</td></tr>
+<tr><td>House number differs (269,280)</td><td class="n">95.26%</td><td class="n">88.93%</td></tr>
+<tr><td>Name other difference (723,947)</td><td class="n">96.23%</td><td class="n">91.03%</td></tr>
+<tr><td>Domain-like target name (78,737)</td><td class="n">98.08%</td><td class="n">91.72%</td></tr>
+<tr><td>Casing/punctuation, legal suffix, word order, address reorder</td><td class="n">100.00%</td><td class="n">99.47–100%</td></tr>
+</table>
+<ul>
+<li>In a sample of 40 validation misses the tags were: house number differs (23), other address difference (22), no shared name token (17), non-Latin / transliterated (14), typo-like (13), address missing on one side (12).</li>
+<li>Tradeoff: recall falls as the pool grows, because top-K retrieval competes with more records. The test pool is test-sized, so the test recall ceiling is probably closer to the full-pool figure than to validation. <span class="hyp">This is a hypothesis; test recall is UNRESOLVED.</span></li>
+</ul>
+<p class="small">Files: <code>experiments/blocking/BLOCKING_REPORT.md</code>, <code>checkpoints/*.json</code>, <code>val_candidate_pairs.tsv</code> (339 MB), <code>experiments/blocking_experiment.py</code>, <code>src/ber/blocking.py</code>, <code>src/ber/features.py</code>, <code>src/generate_candidates.py</code>.</p>
+
+<h2>5. Step 3: the matcher</h2>
+<h3>5.1 Features (50 per pair; <code>src/ber/match_features.py</code>)</h3>
+<table>
+<tr><th>Group</th><th>Features</th><th>Notes</th></tr>
+<tr><td>Source</td><td><code>is_s3</code></td><td>Keeps S2 and S3 distinguishable</td></tr>
+<tr><td>Exact-key equality</td><td><code>eq_</code> + name_raw, name_n1, name_n2, name_n3, name_tok1, addr_n1, addr_n2, addr_digits, postal, house, country</td><td>0 if either side is empty</td></tr>
+<tr><td>Presence indicators</td><td><code>postal_both</code>, <code>house_both</code>, <code>digits_both</code></td><td>Both sides have the field</td></tr>
+<tr><td>Missing-value and quality flags (target)</td><td><code>t_name_missing</code>, <code>t_addr_missing</code>, <code>t_name_nonlatin</code>, <code>t_name_domain</code>, <code>t_name_junk</code>, <code>t_postal</code>, <code>t_landmark</code></td><td>Flags of the S2/S3 record</td></tr>
+<tr><td>Query flags</td><td><code>q_postal</code>, <code>q_landmark</code></td><td>Flags of the S1 record</td></tr>
+<tr><td>Name similarity (words + character trigrams)</td><td><code>name_</code> + nq, nt, inter, jacc, cont_q, cont_t, cos, wjacc</td><td>Sizes, intersection, Jaccard, containment both ways, IDF cosine, IDF-weighted Jaccard</td></tr>
+<tr><td>Address similarity</td><td><code>addr_</code> + the same eight</td><td>Tokens: words, digit groups, house number</td></tr>
+<tr><td>TF-IDF</td><td><code>nameaddr_cos</code></td><td>IDF = log((N+1)/(df+1)) + 1, computed from the pool being matched, so train, validation and test each use their own pool</td></tr>
+<tr><td>Candidate rank (within S1)</td><td><code>rank_src</code>, <code>gap_src</code>, <code>n_cand_src</code>, <code>rank_all</code>, <code>gap_all</code>, <code>n_cand_all</code></td><td>Rank, gap to the best and group size of <code>nameaddr_cos</code> among the S1's candidates, per source and overall</td></tr>
+<tr><td><b>Target context</b></td><td><code>t_rank</code>, <code>t_gap</code>, <code>t_ncand</code></td><td>Across <b>all S1 that retrieved the same target record</b>: this S1's rank (0 = best), the gap to the best S1's score, and the number of competing S1. Uses no labels. It depends on the true owner of each target being among the queries.</td></tr>
+</table>
+<p>There is no phone, e-mail or website field in the data.</p>
+<h3>5.2 Model (<code>src/ber/gbdt.py</code>)</h3>
+<ul>
+<li>A histogram GBDT written from scratch in numba (no GBDT library was available), with binary log-loss.</li>
+<li>Settings:
+  <ul>
+    <li><b>300 trees, depth 6, learning rate 0.1</b></li>
+    <li>L2 λ = 1.0, minimum child hessian 20</li>
+    <li><b>64 quantile bins</b>, with edges taken from a 400k-row seeded sample</li>
+    <li>seed 0</li>
+  </ul></li>
+<li><b>Deterministic:</b> no row or feature subsampling.</li>
+<li><b>Step 3 training data</b> (leakage-safe): an internal set <b>A</b> of 441,364 fit S1 with a validation-sized pool of their targets plus fit distractors.
+  <ul>
+    <li>A1 (353,091 S1) is used for fitting; A2 (88,273 S1) is used only for selection.</li>
+    <li>Rows: all 1,200,294 positives plus a deterministic 10% hash sample of negatives (1,942,608) with weight 10.</li>
+  </ul></li>
+<li><b>Selection</b> maximised the official macro F0.5 on A2, never on validation. The candidates were logistic regression and GBDT at 50/100/150/200/300 trees, each with and without the one-to-one rule. Chosen: GBDT, 300 trees, one-to-one ON, threshold 0.69 (A2 F0.5 0.96289).</li>
+<li><b>Gain importance:</b> <code>t_rank</code> 76.5%, <code>addr_cont_t</code> 9.1%, <code>t_gap</code> 6.1%, <code>nameaddr_cos</code> 1.6%, and all others below 1%.</li>
+</ul>
+<h3>5.3 Decision rule (<code>submission_package/.../src/config/matcher_config.json</code>)</h3>
+<ol>
+<li>Predict a match if probability ≥ <b>0.69</b>.</li>
+<li><b>One-S1-per-target:</b> if several S1 claim the same S2/S3 record, only the highest-probability S1 keeps it. This is justified because no training target belongs to more than one S1.</li>
+<li>No other post-processing.</li>
+</ol>
+<h3>5.4 GBDT vs logistic regression (validation, held out)</h3>
+<table>
+<tr><th>Metric</th><th class="n">GBDT (chosen)</th><th class="n">Logistic regression (t = 0.71, 1:1)</th></tr>
+<tr><td><b>Official macro F0.5</b></td><td class="n"><b>0.96285</b></td><td class="n">0.94458</td></tr>
+<tr><td>Pair precision / recall</td><td class="n">98.22% / 94.08%</td><td class="n">97.50% / 90.79%</td></tr>
+<tr><td>Singleton F0.5</td><td class="n">91.93%</td><td class="n">86.20%</td></tr>
+</table>
+<p>The validation-optimal threshold would have been 0.70 (0.96291), so the A2-chosen 0.69 transfers.</p>
+
+<h2>6. Validation results (Step 3 model, held-out validation, 441,364 S1)</h2>
+<table>
+<tr><th>Metric</th><th class="n">Value</th><th>Meaning</th></tr>
+<tr><td>Candidate recall</td><td class="n">98.214%</td><td>True pairs present in the candidates (the ceiling)</td></tr>
+<tr><td>Pair precision</td><td class="n">98.22%</td><td>Share of predicted pairs that are true (1,437,174 of 1,463,221)</td></tr>
+<tr><td>Pair recall (end-to-end)</td><td class="n">94.08%</td><td>Share of all true pairs predicted, including pairs never blocked</td></tr>
+<tr><td>Pair recall among blocked</td><td class="n">95.79%</td><td>Recall over true pairs that were candidates</td></tr>
+<tr><td>Pair F0.5 / F1</td><td class="n">97.36% / 96.10%</td><td>Pair-level (not the official metric)</td></tr>
+<tr><td><b>Official macro F0.5</b></td><td class="n"><b>0.96285</b></td><td>Competition metric, per S1 then averaged. Cross-checked with <code>src/score.py</code> and the official validator.</td></tr>
+<tr><td>Entity precision / recall</td><td class="n">98.01% / 94.04%</td><td>Mean per-S1 precision (over S1 with a prediction) and recall (over S1 with true matches)</td></tr>
+<tr><td>Singleton F0.5</td><td class="n">91.93%</td><td>Share of singleton S1 left correctly empty</td></tr>
+<tr><td>Singleton false-merge rate</td><td class="n">8.07%</td><td>Singletons that received any prediction (each scores 0)</td></tr>
+<tr><td>F0.5 on S1 with matches</td><td class="n">96.54%</td><td>—</td></tr>
+<tr><td>S1 predicted exactly right</td><td class="n">78.93%</td><td>The predicted set equals the true set</td></tr>
+<tr><td>By country</td><td class="n">US 0.9712 / India 0.9503</td><td>France cannot be validated (no labels)</td></tr>
+<tr><td>By source (pair precision / recall)</td><td class="n">S2 98.11% / 93.78%; S3 98.32% / 94.36%</td><td>—</td></tr>
+</table>
+
+<h2>7. Error analysis (observed)</h2>
+<p>Counts on validation (Step 3):</p>
+<ul>
+<li>TP 1,437,174.</li>
+<li>FP 26,047, of which 2,110 are on singleton S1.</li>
+<li>FN blocked but rejected by the matcher: 63,199.</li>
+<li>FN never in the candidates: 27,277.</li>
+</ul>
+<p class="small">Source: <code>experiments/matching/MATCHING_REPORT.md</code> §F and <code>errors.json</code>.</p>
+<table>
+<tr><th>Share of pairs with property</th><th class="n">TP</th><th class="n">FP</th><th class="n">FN (blocked)</th></tr>
+<tr><td>Same name, different address (name_cos ≥ 0.8 &amp; addr_cos &lt; 0.3)</td><td class="n">2.92%</td><td class="n">16.43%</td><td class="n">27.08%</td></tr>
+<tr><td>Same address, different name (addr_cos ≥ 0.8 &amp; name_cos &lt; 0.3)</td><td class="n">6.36%</td><td class="n">11.16%</td><td class="n">4.54%</td></tr>
+<tr><td>House numbers both present but different</td><td class="n">15.75%</td><td class="n">49.56%</td><td class="n">47.76%</td></tr>
+<tr><td>Target address empty</td><td class="n">2.75%</td><td class="n">18.07%</td><td class="n">33.22%</td></tr>
+<tr><td>Target name non-Latin</td><td class="n">6.07%</td><td class="n">16.82%</td><td class="n">18.11%</td></tr>
+<tr><td>Target name domain-like</td><td class="n">5.35%</td><td class="n">1.08%</td><td class="n">0.60%</td></tr>
+<tr><td>Target name junk prefix (noisy prefixes like <code>--</code>, <code>#</code>)</td><td class="n">2.52%</td><td class="n">1.22%</td><td class="n">0.97%</td></tr>
+<tr><td>Landmark on either side</td><td class="n">5.33%</td><td class="n">6.47%</td><td class="n">6.65%</td></tr>
+<tr><td>Query is a singleton</td><td class="n">0.00%</td><td class="n">8.10%</td><td class="n">0.00%</td></tr>
+</table>
+<ul>
+<li><b>Legal-suffix differences:</b> almost all of the top-confidence false positives (p ≈ 1.000) are records that differ only in legal form or by an extra token. Examples from the report: "Corner Tattoo" vs "Corner Tattoo Co"; "Delta Capital LLC" vs "Delta Capital Corp.". The labels say these are <i>different</i> entities.</li>
+<li><b>Singleton errors:</b> 8.07% of singletons are falsely merged, mostly with near-identical records (legal-suffix or token-subset variants).</li>
+<li><b>False negatives:</b> native-script names without transliteration, empty target addresses, changed house numbers, typo-heavy names, and token subsets such as "Psy Management Private Limited" vs "Psy Management Limited Services".</li>
+<li><b>Multiple true matches:</b> blocking recall on S1 with 2 or more true matches is 98.22% (validation). Matched S1 with <i>all</i> true matches retrieved: 94.51%.</li>
+<li>No cross-country errors: 0% in every group.</li>
+</ul>
+
+<h2>8. Test-scale and stress evaluation</h2>
+<h3>8.1 Why and how</h3>
+<ul>
+<li><b>Why:</b> the test pool is about 5× the validation pool and has a different S1-to-pool ratio. The model's target-context features depend on which S1 compete for each target.</li>
+<li><b>Unlabelled test check</b> (<code>experiments/test_scale/TEST_SCALE_REPORT.md</code>): the Step 3 model was run on test, <i>counts only</i>.
+  <ul>
+    <li>126,274,337 candidates.</li>
+    <li>Test S1 per pool record is 0.1738, against 0.2138 on validation.</li>
+    <li>Target-context feature drift is <b>negligible</b>: PSI <code>t_rank</code> 0.0297, <code>t_ncand</code> 0.0709, <code>t_gap</code> 0.0719. <code>n_cand_all</code> shows moderate drift (0.22).</li>
+  </ul></li>
+<li><b>Labelled stress evaluation</b> (<code>experiments/TEST_SCALE_REPORT.md</code>, <code>experiments/stress_matcher_eval.py</code>): the <i>same</i> 441,364 validation S1 matched against the <b>full training pool</b> (10,320,219 records).
+  <ul>
+    <li>The 8.26M added fit-fold records are true non-matches, so the labels stay complete.</li>
+    <li>This setup has 0.043 S1 per pool record, far more "orphaned" than test's 0.174.</li>
+  </ul></li>
+</ul>
+<h3>8.2 What happened (measured)</h3>
+<table>
+<tr><th>Metric</th><th class="n">A: normal validation</th><th class="n">B: stress</th></tr>
+<tr><td>Official macro F0.5</td><td class="n">0.962847</td><td class="n"><b>0.840024</b></td></tr>
+<tr><td>Pair precision / recall</td><td class="n">98.22% / 94.08%</td><td class="n">82.45% / 93.14%</td></tr>
+<tr><td>Singleton F0.5 / false-merge rate</td><td class="n">91.93% / 8.07%</td><td class="n">42.53% / 57.47%</td></tr>
+<tr><td>Predicted pairs / FP</td><td class="n">1,463,221 / 26,047</td><td class="n">1,725,775 / 302,910</td></tr>
+<tr><td>Candidate recall; candidates per S1</td><td class="n">98.214%; 58.5</td><td class="n">95.631%; 72.8</td></tr>
+<tr><td>Share of pairs with <code>t_rank</code> = 0</td><td class="n">7.73%</td><td class="n">20.80%</td></tr>
+</table>
+<ul>
+<li><b>Orphaned targets:</b> 272,558 of the 302,910 false positives (90.0%) are on fit-fold records, whose owner S1 is not queried in B. That lets some validation S1 become the "best S1" for the target (<code>t_rank</code> = 0) by default.
+  <ul>
+    <li>The later diagnostic (§9) split these into <b>183,185 on fit-fold true targets</b> (genuine orphans) and <b>89,373 on fit-fold distractors</b>.</li>
+  </ul></li>
+<li>Restricting the same predictions to validation-pool records gives <b>0.95603</b>, a decomposition rather than a deployable configuration (<code>experiments/test_scale/stress/orphan_decomposition.json</code>).</li>
+<li>Target-context features shifted <b>majorly</b> in B (PSI <code>t_gap</code> 1.18, <code>t_ncand</code> 0.92, <code>t_rank</code> 0.56). On real test the same features shifted only negligibly.</li>
+<li>All 28 Step 1–3 files had the same hashes before and after.</li>
+</ul>
+<h3>8.3 Conclusions</h3>
+<p><span class="fact">Justified:</span></p>
+<ul>
+<li>The matcher is stable when each target's owner is among the queries.</li>
+<li>It is not robust when owners are missing: it makes confident false merges, especially on legal-form near-duplicates.</li>
+<li>The GBDT relies heavily on <code>t_rank</code>.</li>
+</ul>
+<p><span class="unres">NOT justified:</span></p>
+<ul>
+<li>That test F0.5 will be 0.840. B is a pessimistic environment, not a replica of test.</li>
+<li>Anything about France. There are no labelled France records.</li>
+</ul>
+
+<h2>9. <code>t_rank</code> diagnostic <span class="tag ok">COMPLETE</span></h2>
+<p class="small">
+Script <code>experiments/trank_diagnostic.py</code>; outputs in <code>experiments/diagnostics/trank/</code>: <code>TRANK_DIAGNOSTIC_REPORT.md</code>, <code>evaluate.json</code>, <code>breakdown.json</code>, <code>select.json</code>, <code>train.json</code>, <code>threshold_curves.json</code>, <code>run.log</code>.
+It ran from 2026-09-26 01:25 to 11:47 with exit code 0; the machine slept for part of that time.
+All 34 protected production files had the same hashes before and after. The model A probabilities reproduced the saved production values exactly (max difference 0) on V and S.
+</p>
+<h3>9.1 Design</h3>
+<ul>
+<li><b>Environments</b> (validation S1 and labels only):
+  <ul>
+    <li><b>V:</b> normal validation.</li>
+    <li><b>S:</b> the stress run above.</li>
+    <li><b>T (new):</b> the validation pool plus 475,723 random fit-fold records (351,950 fit targets, i.e. orphans, and 123,773 distractors). This makes 5.754 pool records per S1, which gives 0.1738 S1 per pool record, <b>equal to test</b>. Blocking was rerun with the unchanged configuration: 26,368,048 candidates, recall 97.99%.</li>
+  </ul></li>
+<li><b>Variants</b>, all trained exactly like Step 3 (A1 rows, 300 trees) with the threshold chosen on A2 and the one-per-target rule:
+  <ul>
+    <li><b>A:</b> the current model (the saved Step 3 model).</li>
+    <li><b>B:</b> without <code>t_rank</code>.</li>
+    <li><b>B2:</b> without <code>t_rank</code>, <code>t_gap</code> and <code>t_ncand</code>.</li>
+    <li><b>C:</b> <code>t_rank</code> capped at 1. Monotonic transforms such as a log have no effect on trees.</li>
+    <li><b>D:</b> <code>t_rank</code> / max(<code>t_ncand</code> − 1, 1), a percentile.</li>
+  </ul></li>
+</ul>
+<h3>9.2 Results (measured)</h3>
+<table>
+<tr><th>Env</th><th>Var</th><th class="n">A2 threshold</th><th class="n">Macro F0.5</th><th class="n">Precision</th><th class="n">Recall</th><th class="n">Singleton F0.5</th><th class="n">FP</th><th class="n">FN</th><th class="n">FP on orphans</th></tr>
+<tr><td>V</td><td>A</td><td class="n">0.69</td><td class="n"><b>0.96285</b></td><td class="n">98.22%</td><td class="n">94.08%</td><td class="n">91.93%</td><td class="n">26,047</td><td class="n">90,476</td><td class="n">0</td></tr>
+<tr><td>V</td><td>B</td><td class="n">0.68</td><td class="n">0.96281</td><td class="n">98.20%</td><td class="n">94.13%</td><td class="n">91.77%</td><td class="n">26,361</td><td class="n">89,660</td><td class="n">0</td></tr>
+<tr><td>V</td><td>B2</td><td class="n">0.71</td><td class="n">0.95527</td><td class="n">98.67%</td><td class="n">90.90%</td><td class="n">93.64%</td><td class="n">18,681</td><td class="n">139,035</td><td class="n">0</td></tr>
+<tr><td>V</td><td>C</td><td class="n">0.70</td><td class="n">0.96292</td><td class="n">98.28%</td><td class="n">93.94%</td><td class="n">92.38%</td><td class="n">25,107</td><td class="n">92,555</td><td class="n">0</td></tr>
+<tr><td>V</td><td>D</td><td class="n">0.70</td><td class="n">0.96295</td><td class="n">98.32%</td><td class="n">93.87%</td><td class="n">92.45%</td><td class="n">24,534</td><td class="n">93,662</td><td class="n">0</td></tr>
+<tr><td>S</td><td>A</td><td class="n">0.69</td><td class="n"><b>0.84002</b></td><td class="n">82.45%</td><td class="n">93.14%</td><td class="n">42.53%</td><td class="n">302,910</td><td class="n">104,785</td><td class="n">183,185</td></tr>
+<tr><td>S</td><td>B</td><td class="n">0.68</td><td class="n">0.83753</td><td class="n">82.16%</td><td class="n">93.19%</td><td class="n">41.36%</td><td class="n">309,067</td><td class="n">103,997</td><td class="n">186,819</td></tr>
+<tr><td>S</td><td>B2</td><td class="n">0.71</td><td class="n">0.90154</td><td class="n">93.22%</td><td class="n">89.03%</td><td class="n">69.32%</td><td class="n">98,948</td><td class="n">167,605</td><td class="n">27,834</td></tr>
+<tr><td>S</td><td>C</td><td class="n">0.70</td><td class="n">0.84303</td><td class="n">82.73%</td><td class="n">93.04%</td><td class="n">44.77%</td><td class="n">296,644</td><td class="n">106,315</td><td class="n">181,118</td></tr>
+<tr><td>S</td><td>D</td><td class="n">0.70</td><td class="n">0.84347</td><td class="n">82.87%</td><td class="n">93.02%</td><td class="n">44.12%</td><td class="n">293,643</td><td class="n">106,693</td><td class="n">178,920</td></tr>
+<tr><td>T</td><td>A</td><td class="n">0.69</td><td class="n"><b>0.95432</b></td><td class="n">97.22%</td><td class="n">94.12%</td><td class="n">87.79%</td><td class="n">41,186</td><td class="n">89,791</td><td class="n">9,896</td></tr>
+<tr><td>T</td><td>B</td><td class="n">0.68</td><td class="n">0.95420</td><td class="n">97.19%</td><td class="n">94.17%</td><td class="n">87.65%</td><td class="n">41,585</td><td class="n">89,080</td><td class="n">10,014</td></tr>
+<tr><td>T</td><td>B2</td><td class="n">0.71</td><td class="n">0.95125</td><td class="n">98.28%</td><td class="n">90.79%</td><td class="n">91.73%</td><td class="n">24,308</td><td class="n">140,670</td><td class="n">2,561</td></tr>
+<tr><td>T</td><td>C</td><td class="n">0.70</td><td class="n">0.95471</td><td class="n">97.30%</td><td class="n">93.98%</td><td class="n">88.52%</td><td class="n">39,853</td><td class="n">91,980</td><td class="n">9,734</td></tr>
+<tr><td>T</td><td>D</td><td class="n">0.70</td><td class="n">0.95482</td><td class="n">97.35%</td><td class="n">93.92%</td><td class="n">88.41%</td><td class="n">39,033</td><td class="n">92,838</td><td class="n">9,471</td></tr>
+</table>
+<p class="small">FN includes pairs never blocked: 27,277 in V, 66,750 in S and 30,686 in T.</p>
+<p>Top gain features by variant:</p>
+<ul class="small">
+<li>B: <code>t_gap</code> 81.4%.</li>
+<li>B2: <code>addr_jacc</code> 68.4%, <code>nameaddr_cos</code> 11.3%.</li>
+<li>C: <code>t_rank_cap1</code> 73.9%.</li>
+<li>D: <code>t_gap</code> 50.0%, <code>t_rank_pct</code> 31.5%.</li>
+</ul>
+
+<p><b>Macro F0.5 against the threshold</b> (one-per-target rule ON; <code>threshold_curves.json</code>; diagnostic only, not a selection):</p>
+<table>
+<tr><th>Env / variant</th><th class="n">0.69</th><th class="n">0.72</th><th class="n">0.75</th><th class="n">0.78</th><th class="n">0.81</th><th class="n">0.85</th><th class="n">0.90</th><th class="n">0.95</th></tr>
+<tr><td>V / A</td><td class="n">0.9628</td><td class="n">0.9629</td><td class="n">0.9626</td><td class="n">0.9619</td><td class="n">0.9606</td><td class="n">0.9579</td><td class="n">0.9515</td><td class="n">0.9374</td></tr>
+<tr><td>T / A</td><td class="n">0.9543</td><td class="n">0.9552</td><td class="n">0.9557</td><td class="n">0.9559</td><td class="n">0.9555</td><td class="n">0.9540</td><td class="n">0.9491</td><td class="n">0.9366</td></tr>
+<tr><td>S / A</td><td class="n">0.8400</td><td class="n">0.8482</td><td class="n">0.8567</td><td class="n">0.8655</td><td class="n">0.8749</td><td class="n">0.8872</td><td class="n">0.9019</td><td class="n">0.9117</td></tr>
+<tr><td>V / B2</td><td class="n">0.9556</td><td class="n">0.9550</td><td class="n">0.9540</td><td class="n">0.9526</td><td class="n">0.9507</td><td class="n">0.9469</td><td class="n">0.9391</td><td class="n">0.9219</td></tr>
+<tr><td>T / B2</td><td class="n">0.9513</td><td class="n">0.9512</td><td class="n">0.9506</td><td class="n">0.9497</td><td class="n">0.9480</td><td class="n">0.9448</td><td class="n">0.9374</td><td class="n">0.9205</td></tr>
+<tr><td>S / B2</td><td class="n">0.8983</td><td class="n">0.9031</td><td class="n">0.9073</td><td class="n">0.9110</td><td class="n">0.9140</td><td class="n">0.9163</td><td class="n">0.9155</td><td class="n">0.9034</td></tr>
+</table>
+<p>Current model A in environment S, by category (<code>breakdown.json</code>):</p>
+<ul>
+<li>300,803 of the 302,910 FP (99%) have <code>t_rank</code> = 0.</li>
+<li>Precision in that bucket: 82.53% in S, against 97.24% in T.</li>
+<li>Precision with an empty target address: 41.62% in S / 84.11% in T.</li>
+<li>Precision on same-name, different-address pairs: 47.51% in S / 86.87% in T.</li>
+<li>Precision with different house numbers: 68.76% in S / 92.73% in T.</li>
+<li>Country (macro F0.5 in S): US 0.8623, India 0.8066.</li>
+<li>S2 and S3 behave the same (about 82% precision each in S).</li>
+</ul>
+<h3>9.3 What the diagnostic supports</h3>
+<p>All of the following are <span class="fact">measured</span>, on single deterministic runs with no repeated seeds or confidence intervals:</p>
+<ul>
+<li><b><code>t_rank</code> alone is not the cause.</b> B, C and D stay within ±0.004 of A in every environment. When <code>t_rank</code> is removed, the model moves its reliance to <code>t_gap</code>.</li>
+<li><b>The target-context family as a whole is orphan-sensitive.</b> Removing all three (B2) raises S by 0.0615 but lowers V by 0.0076 and T by 0.0031. At the test-like ratio these features still add value.</li>
+<li><b>In S the damage is mostly overconfident probabilities.</b> Model A at threshold 0.95 reaches 0.9117 in S, close to B2's best of about 0.916. The best threshold rises with orphan density: about 0.71 in V, 0.77 in T and 0.96 in S.</li>
+<li><b>At the test-like ratio, the orphan effect costs about 0.009</b> (V 0.9628 → T 0.9543). The rest of the gap to the leaderboard score is <span class="unres">UNRESOLVED</span>.</li>
+</ul>
+<p>Caveats:</p>
+<ul>
+<li>T assumes the extra test records resemble random fit-fold records. Their true nature is <span class="unres">UNRESOLVED</span>.</li>
+<li>No statistical significance testing was done. Differences below about 0.001 should be treated as noise-level. <span class="hyp">This is a judgement, not a measured value.</span></li>
+</ul>
+
+<h2>10. Final training and inference</h2>
+<p class="small">Sources: <code>experiments/final/FINAL_REPORT.md</code>, <code>final_run.log</code>, <code>timings.json</code> and <code>*.json</code>; script <code>experiments/final_pipeline.py</code>. The run started 2026-09-25 18:22, was resumed at 23:14 and finished 2026-09-26 00:03 with exit code 0.</p>
+<table>
+<tr><th>Item</th><th>Value (measured)</th></tr>
+<tr><td>Training data</td><td>All 2,206,821 training S1 blocked against the full training pool with the Step 2 config: 160,550,236 candidate pairs, candidate recall 95.646%.</td></tr>
+<tr><td>Training rows</td><td>22,629,394: all 7,305,755 positives plus 15,323,639 negatives (10% hash sample, weight 10).</td></tr>
+<tr><td>Model</td><td>Step 3 GBDT parameters (300 trees, depth 6, learning rate 0.1, λ 1, minimum child weight 20, seed 0). Threshold 0.69, one-per-target ON. Model SHA-256 <code>1bac9115…66755</code>; file <code>experiments/final/model_final.npz</code>.</td></tr>
+<tr><td>Integrity checks</td><td>The Step 3 model, selection and blocking config matched their recorded hashes before training.</td></tr>
+<tr><td>Test candidates</td><td>126,274,337 pairs for 1,732,544 S1, reused from the test-scale run. Per S1: mean 72.9, median 42, p99 255, max 533; 0 S1 without candidates.</td></tr>
+<tr><td>Test inference</td><td>126,274,337 pairs scored in 766.5 s.</td></tr>
+<tr><td>Predictions</td><td>5,523,440 before the rule; 19,970 removed by the one-to-one rule; <b>5,503,470 final</b> (S2 2,652,224, S3 2,851,246). 3.177 per S1.</td></tr>
+<tr><td>No-match S1</td><td><b>110,945 (6.40%)</b>. By country: US 6.13%, India 7.20%, France 4.62%. Predictions per S1: US 3.207, India 3.042, France 3.518.</td></tr>
+<tr><td>Step 3 model on test (diagnostic, for comparison)</td><td>6,254,297 predictions, 3.68% zero-prediction. Retraining on all data made the final model more conservative on test.</td></tr>
+<tr><td>Runtime</td><td>Phase seconds:
+  <ul>
+    <li>train_candidates 2,614.8; train_idf 17.3; train_cos 786.7; train_tc 133.3; train_rows 514.8; train_model 1,076.8</li>
+    <li>test_inputs 2.9; test_infer 767.2; decide 4.5; write 109.5; validate 463.0</li>
+    <li>about 1.8 h in total, <i>excluding</i> the test featurisation and candidate generation reused from the test-scale run (featurise 316.8, candidates 3,331.7, cos 991.9, target context 124.9)</li>
+  </ul></td></tr>
+<tr><td>Memory</td><td>Peak working set 7.99 GB (it includes memory-mapped pages); private memory about 1.3–2.1 GB.</td></tr>
+<tr><td>Disk</td><td><code>experiments/final/</code> holds about 8.5 GB of intermediates (training feature matrix <code>train_X.f32</code> 4.5 GB, candidate and context arrays), plus the 1.65 GB <code>candidate_pairs.tsv</code>; 10.1 GB in total.
+  <ul>
+    <li>The package README says <b>about 22 GB</b> of work directory is needed.</li>
+    <li>The <code>--work-dir</code> help text in <code>run_pipeline.py</code> says <b>about 40 GB</b>.</li>
+    <li>The two figures are <b>inconsistent</b>; <span class="unres">UNRESOLVED</span>.</li>
+  </ul></td></tr>
+</table>
+
+<h2>11. Submission</h2>
+<table>
+<tr><th>Item</th><th>Value</th></tr>
+<tr><td>File uploaded to the portal</td><td><code>output/matching_results.tsv</code>: 93,375,709 bytes, SHA-256 <code>84ede6d4f2e44ab4469ea7798a95fbd8b3c49fc0f3f1561d47064c1caaa0e807</code>.</td></tr>
+<tr><td>Format</td><td>Header <code>source1_entity_id&lt;TAB&gt;matched_entity_ids</code>; 1,732,544 rows (110,945 empty, 1,621,599 non-empty); comma-separated IDs with no spaces.</td></tr>
+<tr><td>Candidate file</td><td><code>output/candidate_pairs.tsv</code>: 1,649,916,409 bytes, SHA-256 <code>1842a3df…4835ea</code>, identical to <code>experiments/final/candidate_pairs.tsv</code>. 1,732,544 rows, 0 empty.</td></tr>
+<tr><td>Official validator</td><td><b>PASS</b>, exit 0, with <code>--matching</code>, <code>--candidate</code> and <code>--check-ids</code> (9,969,589 valid S2/S3 IDs). No matched ID falls outside the candidates. It was rerun on 2026-09-26 just before packaging.</td></tr>
+<tr><td>Zip</td><td><code>camelcase_submission.zip</code> at the project root: 728,869,951 bytes, 17 entries, CRC test OK. The output files inside match the original hashes.
+  <ul>
+    <li><code>output/matching_results.tsv</code>, <code>output/candidate_pairs.tsv</code></li>
+    <li><code>Documentation_template.md</code> (filled)</li>
+    <li><code>code/business_entity_resolution/</code> with <code>README.md</code>, <code>requirements.txt</code>, <code>src/run_pipeline.py</code>, <code>src/ber/</code> (9 modules) and <code>src/config/</code> (<code>blocking_config.json</code>, <code>matcher_config.json</code>)</li>
+    <li>Caches were removed and there are no local paths or secrets.</li>
+  </ul></td></tr>
+<tr><td>Environment (pinned)</td><td>Python 3.11.9, numpy 2.4.6, numba 0.65.1, llvmlite 0.47.0, scipy 1.17.1 (<code>submission_package/.../requirements.txt</code>).</td></tr>
+<tr><td><b>Local validation score</b></td><td><b>0.96285</b>: held-out training labels, Step 3 model.</td></tr>
+<tr><td><b>Competition leaderboard score</b></td><td><b>0.924</b>: public subset of test, final model. Team-reported and not stored in any file. <i>These are different populations and different models; do not compare them as like for like.</i></td></tr>
+<tr><td>Zip uploaded as the final package?</td><td><span class="unres">UNRESOLVED</span>. Only the upload of <code>matching_results.tsv</code> is recorded, in the session.</td></tr>
+</table>
+
+<h2>12. What we currently know</h2>
+<h3>A. Experimentally confirmed (measured)</h3>
+<ol>
+<li>The GBDT beats logistic regression on validation (0.96285 vs 0.94458). 300 trees beat 50–200, and the one-to-one rule helps slightly (A2).</li>
+<li>Blocking recall is 98.214% on validation. It falls to 95.631% against a test-sized pool; the ceiling drops as the pool grows.</li>
+<li>Legal-form, casing, word-order and address-reorder variants are 100% recalled by blocking. Native-script names (89.26%) and empty target addresses (90.02%) are the weakest blocking cases.</li>
+<li>The stress environment drops F0.5 to 0.840, and 90% of its false positives are on fit-fold records (183,185 orphaned targets and 89,373 fit distractors).</li>
+<li>Restricted to validation-pool records, the stress predictions score 0.956.</li>
+<li>Removing, capping or taking the percentile of <code>t_rank</code> changes F0.5 by no more than about 0.004 in V, S or T.</li>
+<li>Removing all target-context features helps S (+0.062) and hurts V (−0.0076) and T (−0.0031).</li>
+<li>At the test S1-to-pool ratio (T) the current model scores 0.9543.</li>
+<li>The best threshold rises with orphan density (about 0.71 in V, 0.77 in T, 0.96 in S). In T, threshold 0.75–0.78 gives 0.9557–0.9559 against 0.9543 at 0.69.</li>
+<li>Target-context feature drift between validation and real test is negligible (PSI ≤ 0.072).</li>
+<li>Final model on test: 5,503,470 predictions and 6.40% zero-prediction S1. The validator passes.</li>
+<li>India is consistently weaker than the US: validation 0.9503 vs 0.9712, and every environment agrees.</li>
+</ol>
+<h3>B. Suspected but NOT proven (hypotheses)</h3>
+<ol>
+<li>France (15% of test, no labels) causes a large part of the remaining gap of about 0.03. <span class="hyp">If the non-France 85% scored like T (0.954), France would need about 0.75 to give 0.924.</span></li>
+<li>France is over-merged. Final-model test statistics: France 3.518 predictions per S1 and 4.62% zero-prediction, against US/India 3.04–3.21 and 6.1–7.2%. For reference, the training singleton rate is 5.58%. This is suggestive only.</li>
+<li>The extra test pool records (5.75 vs 4.68 per S1) behave like orphans or distractors, lowering precision.</li>
+<li>The test candidate recall ceiling is nearer the full-pool figure (about 95.6%) than validation's 98.2%.</li>
+<li>Validation is optimistic on precision, because it reproduces the train pool composition (VALIDATION_SPLIT.md).</li>
+<li>Near-duplicates that differ only in legal form are intentionally distinct entities in the data generator, so name-similarity features alone cannot separate them.</li>
+</ol>
+<h3>C. Not tested yet</h3>
+<ol>
+<li>Leave-one-country-out (train US, evaluate India, and the reverse) as a proxy for unseen-country robustness.</li>
+<li>Orphan-aware training, i.e. training with fit-fold orphans added to the internal training pool.</li>
+<li>Any threshold other than 0.69 on the leaderboard. No alternative model or threshold has been submitted.</li>
+<li>GBDT hyperparameters other than tree count: depth, learning rate, λ, minimum child weight and bins were never tuned.</li>
+<li>Transliteration or script-aware handling of native-script names, in blocking or features.</li>
+<li>Special handling of empty-address targets.</li>
+<li>The end-to-end F0.5 effect of larger retrieval K, or an extra name channel. Only candidate recall was measured.</li>
+<li>Pretrained or embedding models (allowed if MIT/Apache and ≤ 8B; none used).</li>
+<li>A full-scale run of the packaged <code>run_pipeline.py</code>.</li>
+<li>Statistical significance or seed variance for any comparison.</li>
+</ol>
+
+<h2>13. Improvement opportunities (not ranked)</h2>
+<p class="small">Each direction below is backed only by existing evidence. None has been run. Unless stated otherwise, compare the official macro F0.5 on V and T, and check S as a robustness guard.</p>
+<table>
+<tr><th style="width:13%">Direction</th><th>Hypothesis</th><th>Evidence for</th><th>Evidence against</th><th>Risk</th><th>Experiment, metric and success criterion</th></tr>
+<tr><td>Unseen-country (France) robustness</td><td>France accounts for much of the remaining gap of about 0.03</td><td>T (0.954) is well above the leaderboard (0.924); France has more predictions per S1 and fewer empty predictions</td><td>No labels; the gap could come from other test differences</td><td>Changes aimed at France can't be validated directly</td><td>Leave-one-country-out training (US→India, India→US) with the V/T setup. Measure the drop from in-country to cross-country F0.5, and test whether a candidate fix reduces it without lowering in-country V.</td></tr>
+<tr><td>Orphan-aware training / calibration</td><td>Training with realistic competition makes the target-context features calibrated</td><td>S damage is mostly calibration (A at t = 0.95 reaches 0.912); the best threshold shifts with orphan density</td><td>At the test ratio the orphan cost is only about 0.009</td><td>May lower V</td><td>Rebuild set A with fit-fold orphans at the test ratio and retrain (Step 3 protocol). Success: T and S improve, and V drops by no more than about 0.001.</td></tr>
+<tr><td>Threshold hedging</td><td>A slightly higher threshold is more robust to test shift</td><td>T: 0.75–0.78 gives +0.0014–0.0016; S: +0.017–0.026; V costs only 0.0002–0.0009</td><td>If test behaves like V, there is a small loss; unverified on the leaderboard</td><td>Low</td><td>Compare thresholds 0.69–0.81 on V/T/S using saved probabilities. Only a leaderboard submission can confirm; one controlled upload.</td></tr>
+<tr><td>Native-script names</td><td>Transliteration or script-aware tokens would recover missed pairs</td><td>Blocking recall 89.26% (validation) and 80.75% (stress); 18.11% of FN and 16.82% of FP involve non-Latin targets</td><td>About 5% of target names; must be learned from the training data only (no external transliteration data)</td><td>Must avoid external resources</td><td>Measure blocking recall on the non-Latin category first, then end-to-end F0.5 on V/T.</td></tr>
+<tr><td>Empty target addresses</td><td>Dedicated handling reduces FN and FP</td><td>Recall 90.02%; FP share 18.07% and FN share 33.22%; S precision 41.6%</td><td>Small share of pairs (about 3.3% of records)</td><td>More false merges</td><td>A category-specific feature or threshold, tuned on A2. Measure category precision and recall and the macro F0.5 on V/T.</td></tr>
+<tr><td>House-number conflicts and legal-form near-duplicates</td><td>Better conflict features reduce confident FP</td><td>House-number differences appear in 49.56% of FP and 47.76% of FN; the top-confidence FPs are legal-suffix variants</td><td>The same patterns occur in TP (15.75% house differ)</td><td>Recall loss</td><td>Feature ablation or additions under the Step 3 protocol. Measure FP/FN in these categories and the macro F0.5.</td></tr>
+<tr><td>Blocking recall at test scale</td><td>A larger K or an extra channel raises the ceiling</td><td>Recall drops from 98.21% to 95.63% with a larger pool; name@50 and nameaddr@50 are higher (96.30%)</td><td>More candidates bring more false-merge opportunities; the current design rule limited growth</td><td>Runtime, disk and precision</td><td>Candidate recall in S/T, then end-to-end F0.5 on V/T/S. Success: F0.5 rises, not just recall.</td></tr>
+</table>
+
+<h2>14. Experiment history (chronological)</h2>
+<table>
+<tr><th>When (from file times)</th><th>Change / experiment</th><th>Why</th><th>Result</th><th>Kept?</th><th>Files</th></tr>
+<tr><td>09-25 00:17–08:10</td><td>Competition notes, streaming EDA</td><td>Understand rules and data</td><td>Measured facts (§1.5); PIN/ZIP blocking not viable (postal codes in &lt; 3% of records)</td><td>Kept</td><td><code>docs/COMPETITION_NOTES.md</code>, <code>experiments/EDA_REPORT.md</code></td></tr>
+<tr><td>09-25 08:20–08:31</td><td>Step 1 split, scorer, sanity checks</td><td>Leakage-safe local evaluation</td><td>441,364 validation S1; sanity OK</td><td>Kept</td><td><code>experiments/validation_split/</code></td></tr>
+<tr><td>09-25 08:47–09:22</td><td>Blocking on smoke data</td><td>Debugging</td><td>Pipeline works</td><td>Smoke only</td><td><code>experiments/_smoke/blocking*</code></td></tr>
+<tr><td>09-25 12:17–12:59</td><td>Blocking design (fit fold) and validation</td><td>Choose channels and budgets</td><td>Budget 20k chosen over 100k/500k; name channel K = 0 (not used); nameaddr and addr K = 10; exact cap 100. Validation recall 98.214%.</td><td>Kept (the alternatives were rejected by the pre-stated rules)</td><td><code>experiments/blocking/</code></td></tr>
+<tr><td>09-25 13:20</td><td>Blocking stress (full pool)</td><td>Test-scale recall</td><td>95.631%</td><td>Info</td><td><code>checkpoints/stress.json</code></td></tr>
+<tr><td>09-25 14:11–14:36</td><td>Step 3 matcher</td><td>Model selection on A2</td><td>GBDT@300 + 1:1 + 0.69 chosen; logistic regression and GBDT@50/100/150/200 rejected; validation 0.96285</td><td>Kept</td><td><code>experiments/matching/</code></td></tr>
+<tr><td>09-25 16:01–17:46</td><td>Unlabelled test-scale check</td><td>Test compatibility and drift</td><td>t-feature PSI negligible</td><td>Info</td><td><code>experiments/test_scale/</code></td></tr>
+<tr><td>09-25 17:52–18:12</td><td>Labelled stress evaluation</td><td>Robustness at test scale</td><td>0.840; orphan decomposition 0.956</td><td>Info (no change)</td><td><code>experiments/TEST_SCALE_REPORT.md</code></td></tr>
+<tr><td>09-25 18:22 – 09-26 00:03</td><td>Final retrain on all training data and test inference</td><td>Produce the submission</td><td>5,503,470 predictions; validator PASS</td><td>Kept (submitted)</td><td><code>experiments/final/</code>, <code>output/</code></td></tr>
+<tr><td>09-26 00:10–01:01</td><td>Package, documentation, zip</td><td>Final package</td><td>Zip verified</td><td>Kept</td><td><code>submission_package/</code>, <code>camelcase_submission.zip</code></td></tr>
+<tr><td>09-26 (session)</td><td>Leaderboard upload</td><td>Score</td><td>Public 0.924 (team-reported)</td><td>—</td><td>not in files</td></tr>
+<tr><td>09-26 01:25–11:47</td><td><code>t_rank</code> diagnostic (B, B2, C, D; environment T)</td><td>Explain the gap</td><td>§9</td><td>Nothing adopted; no selection made</td><td><code>experiments/diagnostics/trank/</code></td></tr>
+</table>
+<div class="box small">Please don't repeat these: <code>t_rank</code> removal, capping and percentile (no effect); full removal of the target context (V/T get worse); tree counts of 300 or fewer and logistic regression (already compared); postings budgets of 100k/500k (no recall gain).</div>
+
+<h2>15. Reproduction guide</h2>
+<div class="warn">
+<b>Do not run</b> <code>experiments/final_pipeline.py</code> with its defaults: <code>--submission-path</code> defaults to <code>output/matching_results.tsv</code> and <code>--out-dir</code> to <code>experiments/final</code>, so it would <b>overwrite the submitted file and the final model</b>. Always pass new output locations. Commands marked <b>[EXPENSIVE]</b> take tens of minutes to hours and need GB of RAM and disk. None of these commands were run to write this document.
+</div>
+<pre>
+# Environment: Python 3.11.9 + numpy 2.4.6, numba 0.65.1, llvmlite 0.47.0, scipy 1.17.1 (no pandas / sklearn needed).
+
+# Unit tests
+python -m unittest discover -s src/tests
+
+# Step 1 — rebuild / verify the validation split (reads training data only)
+python src/build_validation_split.py --verify-only        # checks the saved split
+python src/build_validation_split.py                      # rebuilds (seed 20260925)
+
+# Score a validation prediction file with the official metric
+python src/score.py -p &lt;predictions.tsv&gt; -g experiments/validation_split/val_ground_truth.tsv \
+       -t experiments/validation_split/val_as_test_dir [--check-ids]
+
+# Official format validator
+python utils/validate_submission.py --matching &lt;matching.tsv&gt; --candidate &lt;candidates.tsv&gt; \
+       --test-dir dataset/test --check-ids                # --check-ids loads ~10M IDs (a few GB RAM)
+
+# Step 2 — blocking experiment [EXPENSIVE]  (phases: design, evaluate, stress, report, ...)
+python experiments/blocking_experiment.py --phase &lt;phase&gt;
+python src/generate_candidates.py --test-dir &lt;dir&gt; --config experiments/blocking/blocking_config.json \
+       --features-dir &lt;dir&gt; --out &lt;candidate_pairs.tsv&gt;
+
+# Step 3 — matcher experiment [EXPENSIVE; X_A / X_val are ~5 GB each]
+python experiments/matching_experiment.py --phase all --out-dir &lt;new dir&gt;
+
+# Unlabelled test-scale check [EXPENSIVE, ~1.7 h]
+python experiments/test_scale_check.py --out-dir &lt;new dir&gt;
+
+# Labelled stress evaluation [EXPENSIVE]
+python experiments/stress_matcher_eval.py --out-dir &lt;new dir&gt; --report-path &lt;new file&gt;
+
+# t_rank diagnostic [EXPENSIVE, ~1.5 h active compute, ~15 GB disk]
+python experiments/trank_diagnostic.py --out-dir &lt;new dir&gt;
+
+# Final pipeline (experiment version) [EXPENSIVE, ~1.8 h with reused test candidates; more from scratch]
+python experiments/final_pipeline.py --out-dir &lt;new dir&gt; --submission-path &lt;new file&gt;
+
+# Packaged, self-contained pipeline [EXPENSIVE; README states ~3.2 h; only smoke-tested so far]
+cd submission_package/code/business_entity_resolution
+python src/run_pipeline.py --train-dir &lt;dataset&gt;/train --test-dir &lt;dataset&gt;/test --work-dir work --output-dir output
+</pre>
+<p class="small">Small copies of the data and every stage exist under <code>experiments/_smoke/</code>. Use them to test code changes in seconds before running a full-scale job.</p>
+
+<h2>16. File and directory map</h2>
+<table>
+<tr><th style="width:32%">Path</th><th>Purpose</th></tr>
+<tr><td><code>dataset/train/</code>, <code>dataset/test/</code></td><td>Official data (TSV). Never modify.</td></tr>
+<tr><td><code>docs/problem_statement.pdf</code>, <code>README.md</code></td><td>Official problem statement; the root README is a markdown copy of it.</td></tr>
+<tr><td><code>docs/COMPETITION_NOTES.md</code></td><td>Rules, spec, measured data facts, project status (§0). Start here.</td></tr>
+<tr><td><code>Documentation_template.md</code> (root)</td><td>Official unfilled template. The filled copy is in <code>submission_package/</code>.</td></tr>
+<tr><td><code>utils/validate_submission.py</code></td><td>Official validator (stdlib only). Do not modify.</td></tr>
+<tr><td><code>src/ber/</code></td><td>Library:
+  <ul>
+    <li><code>normalize.py</code>: keys, tokens, flags</li>
+    <li><code>features.py</code>: feature stores</li>
+    <li><code>blocking.py</code>: exact joins and TF-IDF retriever</li>
+    <li><code>blocking_eval.py</code></li>
+    <li><code>match_features.py</code>: 50 features</li>
+    <li><code>gbdt.py</code></li>
+    <li><code>matcher.py</code>: decision rule, vectorised F0.5, logistic regression, TSV writer</li>
+    <li><code>metrics.py</code>: official metric</li>
+    <li><code>ids_tsv.py</code></li>
+    <li><code>validation_split.py</code></li>
+  </ul></td></tr>
+<tr><td><code>src/build_validation_split.py</code>, <code>src/score.py</code>, <code>src/generate_candidates.py</code>, <code>src/tests/</code></td><td>Command-line entry points and unit tests.</td></tr>
+<tr><td><code>experiments/eda.py</code>, <code>EDA_REPORT.md</code>, <code>eda_results.json</code>, <code>_eda_cache/</code></td><td>EDA and the ground-truth cache used by later stages.</td></tr>
+<tr><td><code>experiments/validation_split/</code></td><td>Step 1 artifacts (§3.4).</td></tr>
+<tr><td><code>experiments/blocking/</code></td><td>Step 2 config, report, checkpoints, validation candidates, feature stores (<code>features/</code>).</td></tr>
+<tr><td><code>experiments/matching/</code></td><td>Step 3 model (<code>model_gbdt.npz</code>), <code>selection.json</code>, feature matrices, predictions, <code>errors.json</code>, report.</td></tr>
+<tr><td><code>experiments/test_scale/</code> (+ <code>stress/</code>)</td><td>Unlabelled test check and labelled stress run artifacts.</td></tr>
+<tr><td><code>experiments/TEST_SCALE_REPORT.md</code></td><td>Labelled stress report. Note: <code>experiments/test_scale/TEST_SCALE_REPORT.md</code> is a different report (the unlabelled test check).</td></tr>
+<tr><td><code>experiments/final/</code>, <code>experiments/final_pipeline.py</code></td><td>Final model, run log, report, final candidates; <code>packaging/</code> holds the package smoke test.</td></tr>
+<tr><td><code>experiments/diagnostics/trank/</code>, <code>experiments/trank_diagnostic.py</code></td><td><code>t_rank</code> diagnostic (about 15 GB of intermediates plus report and JSON).</td></tr>
+<tr><td><code>experiments/_smoke/</code></td><td>Small-scale copies of all stages for fast testing.</td></tr>
+<tr><td><code>experiments/*.log</code></td><td>Run logs of each stage.</td></tr>
+<tr><td><code>output/</code></td><td><b>Submitted</b> <code>matching_results.tsv</code> and <code>candidate_pairs.tsv</code>. Do not overwrite.</td></tr>
+<tr><td><code>submission_package/</code>, <code>camelcase_submission.zip</code></td><td>Final package source and the built zip. Do not overwrite.</td></tr>
+<tr><td><code>docs/TEAM_CONTEXT.html</code> → <code>TEAM_CONTEXT.pdf</code></td><td>This document (HTML source and PDF).</td></tr>
+</table>
+
+<h2>17. What a new team member should do first</h2>
+<ol>
+<li><b>Read this PDF</b>, especially §0, §9 and §12.</li>
+<li><b>Read the key reports:</b>
+  <ul>
+    <li><code>docs/COMPETITION_NOTES.md</code></li>
+    <li><code>experiments/validation_split/VALIDATION_SPLIT.md</code></li>
+    <li><code>experiments/blocking/BLOCKING_REPORT.md</code></li>
+    <li><code>experiments/matching/MATCHING_REPORT.md</code></li>
+    <li><code>experiments/TEST_SCALE_REPORT.md</code></li>
+    <li><code>experiments/final/FINAL_REPORT.md</code></li>
+    <li><code>experiments/diagnostics/trank/TRANK_DIAGNOSTIC_REPORT.md</code></li>
+  </ul></li>
+<li><b>Understand the baseline:</b> the Step 3 GBDT scores 0.96285 on local validation. The final model trained on all data is what was submitted, and it scored 0.924 on the public leaderboard (team-reported).</li>
+<li><b>Understand the known failure modes:</b> orphan-driven false merges on target-context features, legal-form near-duplicates, house-number conflicts, empty addresses, native-script names, and unlabelled France.</li>
+<li><b>Check the latest diagnostic results</b> (§9). The environments V, T and S are the agreed yardstick; T matches the test S1-to-pool ratio.</li>
+<li><b>Propose one controlled experiment at a time</b> (§13). Change one thing, keep the Step 3 protocol (fit on A1, choose on A2, report V/T/S), smoke-test in <code>experiments/_smoke/</code>, and write to a new output directory.</li>
+<li><b>Never overwrite the current submission or model before comparing results:</b> <code>output/</code>, <code>experiments/final/</code>, <code>experiments/matching/</code>, <code>experiments/blocking/blocking_config.json</code>, <code>submission_package/</code> and the zip. Hash them before and after, as the existing scripts do.</li>
+</ol>
+
+<h3>Unresolved items (collected)</h3>
+<ul>
+<li>The leaderboard score (0.924) is only team-reported; it is not stored in any project file. The public/private split size, the team's rank, and whether the zip has been submitted are also unknown.</li>
+<li>Test candidate recall and France performance: no labels exist.</li>
+<li>The cause of the remaining gap of about 0.03 between T and the leaderboard.</li>
+<li>The nature of the extra test pool records (5.75 vs 4.68 per S1).</li>
+<li>Official F0.5 conventions when the true set is non-empty and the prediction is empty or has no overlap. Locally both are scored 0.</li>
+<li>Deadlines, rate limits, and compute and hardware limits.</li>
+<li>No full-scale run of the packaged pipeline, and the work-dir estimates disagree (README about 22 GB vs help text about 40 GB).</li>
+<li>No recorded pass/fail result for the current unit-test suite. <code>test_normalize.py</code> is referenced in the code but missing.</li>
+</ul>
+
+</body>
+</html>

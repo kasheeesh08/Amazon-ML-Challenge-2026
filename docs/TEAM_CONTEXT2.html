@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>TEAM_CONTEXT2 — Amazon ML Challenge 2026 · Business Entity Resolution (handoff after diagnostics)</title>
+<style>
+  @page { size: A4; margin: 15mm 13mm 15mm 13mm; }
+  body { font-family: "Segoe UI", Arial, sans-serif; font-size: 9.3pt; line-height: 1.36; color: #1d1d1f; }
+  h1 { font-size: 19pt; margin: 0 0 4px 0; color: #0b3d66; }
+  h2 { font-size: 13.5pt; color: #0b3d66; border-bottom: 2px solid #0b3d66; padding-bottom: 3px; margin: 16px 0 6px 0; }
+  h2.pb { page-break-before: always; }
+  h3 { font-size: 10.6pt; color: #14507f; margin: 11px 0 4px 0; }
+  p { margin: 4px 0; }
+  ul { margin: 3px 0 5px 0; padding-left: 18px; }
+  li { margin: 1.5px 0; }
+  table { border-collapse: collapse; width: 100%; margin: 5px 0 9px 0; font-size: 8.4pt; }
+  tr { page-break-inside: avoid; }
+  th { background: #e6eef6; text-align: left; border: 1px solid #b8c7d6; padding: 3px 5px; }
+  td { border: 1px solid #cfd9e3; padding: 3px 5px; vertical-align: top; }
+  td.n, th.n { text-align: right; white-space: nowrap; }
+  code { font-family: Consolas, "Courier New", monospace; font-size: 8.1pt; background: #f3f5f7; padding: 0 2px; }
+  .box { border: 1px solid #b8c7d6; background: #f7fafc; padding: 6px 9px; margin: 7px 0; }
+  .warn { border: 1px solid #d9a441; background: #fff8ea; padding: 6px 9px; margin: 7px 0; }
+  .tag { display: inline-block; font-size: 7.4pt; font-weight: 700; padding: 0 5px; border-radius: 3px; }
+  .A { background: #d8f0de; color: #0f5c28; } .Bt { background: #dbe8ff; color: #1b4b9b; }
+  .Ct { background: #efe3ff; color: #5a2a8c; } .D { background: #ffe0cc; color: #8a3b00; } .E { background: #fff0cc; color: #8a5a00; }
+  .closed { background: #eee; color: #444; }
+  .small { font-size: 8pt; color: #444; }
+</style>
+</head>
+<body>
+
+<h1>TEAM_CONTEXT2 — handoff after the diagnostic phase</h1>
+<p><b>Amazon ML Challenge 2026 · Business Entity Resolution · Team camelcase</b>. Compiled 2026-09-26 at the end of the working day.</p>
+<ul>
+  <li><b>Read this first.</b> It extends <code>TEAM_CONTEXT.pdf</code>, which covers the pipeline and everything up to the first submission, with every experiment run since.</li>
+  <li><b>Sources:</b> all numbers come from the completed reports listed in the file map. Nothing here was recomputed.</li>
+</ul>
+<div class="box">
+<b>Evidence labels used throughout:</b>
+<ul>
+  <li><span class="tag A">A</span> measured local validation, labelled</li>
+  <li><span class="tag Bt">B</span> measured test-like or stress environment, labelled</li>
+  <li><span class="tag Ct">C</span> unlabelled real-test observation</li>
+  <li><span class="tag D">D</span> actual leaderboard score</li>
+  <li><span class="tag E">E</span> hypothesis or estimate</li>
+</ul>
+An <span class="tag E">E</span> number is never a measured leaderboard result.
+</div>
+<div class="box">
+<b>Labelled environments used by the diagnostics</b> (all use the 441,364 validation S1 and their labels):
+<ul>
+  <li><b>V:</b> normal validation (validation pool, 4.68 pool records per S1).</li>
+  <li><b>T:</b> test-ratio pool (validation pool plus random fit-fold records, 0.174 S1 per pool record, the same as the real test). Its target-context profile matches the real test.</li>
+  <li><b>S:</b> full 10.3M training pool, test-sized but orphan-heavy (0.043 S1 per pool record). Blocking on the real test behaves like S.</li>
+</ul>
+"Step 3 model" means <code>experiments/matching/model_gbdt.npz</code>. The submitted <b>final model</b> (<code>experiments/final/model_final.npz</code>) was trained on all labels, so it cannot be scored on labelled data.
+</div>
+
+<h2>CURRENT BEST-KNOWN STATE</h2>
+<table>
+<tr><th style="width:30%">Item</th><th>Value</th></tr>
+<tr><td>Local validation (official macro F0.5)</td><td><span class="tag A">A</span> <b>0.962847</b> (Step 3 GBDT, threshold 0.69, one-S1-per-target)</td></tr>
+<tr><td>Leaderboard: production submission</td><td><span class="tag D">D</span> <b>≈ 0.924</b> (<code>output/matching_results.tsv</code>, threshold 0.69). The exact decimals were not recorded in project files.</td></tr>
+<tr><td>Leaderboard: 0.72 probe</td><td><span class="tag D">D</span> <b>0.923607</b>, the same result as production within noise</td></tr>
+<tr><td>Current production threshold</td><td><b>0.69</b> (unchanged)</td></tr>
+<tr><td>Final matcher</td><td>From-scratch numba histogram GBDT: 300 trees, depth 6, learning rate 0.1, λ 1, minimum child weight 20, 64 bins, seed 0. 50 features. Retrained on all training S1 × the full training pool.</td></tr>
+<tr><td>Blocking recall, validation (V)</td><td><span class="tag A">A</span> 98.214% (27,277 true pairs missed)</td></tr>
+<tr><td>Blocking recall, test-sized pool (S)</td><td><span class="tag Bt">B</span> 95.631% (66,750 missed)</td></tr>
+<tr><td>Test-ratio environment T</td><td><span class="tag Bt">B</span> 0.95432 (current model)</td></tr>
+<tr><td>Stress environment S</td><td><span class="tag Bt">B</span> 0.84002 (current model; orphan-driven false positives)</td></tr>
+<tr><td>Main known sources of loss (from validation 0.963 to the leaderboard ≈ 0.924)</td><td>
+  <ul>
+    <li>Test ratio / orphan competition: <span class="tag Bt">B</span> −0.0085</li>
+    <li>Test-sized blocking: <span class="tag Bt">B</span> −0.0063</li>
+    <li>Country mix (India-heavier test): <span class="tag Bt">B</span> −0.0038</li>
+    <li>Lookalike singletons: <span class="tag E">E</span> −0.002 to −0.009</li>
+    <li>France (unlabelled): <span class="tag E">E</span> unknown; it would need about 0.80–0.87 for the total to reach 0.924</li>
+    <li>Residual: <span class="tag E">E</span> 0 to about 0.015, unexplained</li>
+  </ul></td></tr>
+<tr><td>Production artifacts</td><td><b>Unchanged</b> since the submission (hashes in the production-safety section)</td></tr>
+</table>
+
+<h2 class="pb">PHASE 1 — Existing pipeline (details in TEAM_CONTEXT.pdf)</h2>
+<table>
+<tr><th>Step</th><th>What</th><th>Key result</th></tr>
+<tr><td>Step 1: validation and scorer</td><td>Leakage-safe 80/20 split at S1 level (seed 20260925, stratified); official macro-F0.5 scorer; tests</td><td><span class="tag A">A</span> 441,364 validation S1; 5.585% singletons; validator PASS</td></tr>
+<tr><td>Step 2: blocking</td><td>TF-IDF name+address top-10 and address top-10 per source, within the query's country, max_postings 20,000; 16 exact-key joins with block cap 100 (config SHA <code>91a38976…0e5f5</code>)</td><td><span class="tag A">A</span> recall 98.214%, 58.5 candidates per S1; <span class="tag Bt">B</span> 95.631% on the full pool</td></tr>
+<tr><td>Step 3: matcher</td><td>50 features (keys, name/address similarity, TF-IDF, candidate rank, target context <code>t_rank</code>/<code>t_gap</code>/<code>t_ncand</code>); GBDT chosen on A2</td><td><span class="tag A">A</span> 0.962847 (logistic regression 0.94458); threshold 0.69, one-S1-per-target</td></tr>
+<tr><td>Final training, inference and submission</td><td>Retrained on all training data; 126.3M test candidates</td><td><span class="tag Ct">C</span> 5,503,470 predictions; 110,945 S1 (6.40%) with no match; validator PASS; zip built</td></tr>
+</table>
+
+<h2>PHASE 2 — Completed diagnostics (all read-only; production untouched)</h2>
+
+<h3>1. <code>t_rank</code> diagnostic <span class="tag closed">CLOSED</span></h3>
+<ul>
+<li><b>Question:</b> is <code>t_rank</code> (76.5% of GBDT gain) behind the gap?</li>
+<li><b>Experiment:</b> five variants retrained on the internal split (diagnostic only; no production retrain or inference):
+  <ul>
+    <li>A: current model</li>
+    <li>B: without <code>t_rank</code></li>
+    <li>B2: without all three target-context features</li>
+    <li>C: <code>t_rank</code> capped at 1</li>
+    <li>D: percentile <code>t_rank</code></li>
+  </ul>
+  Each was evaluated on V, T and S. The test-ratio environment T was introduced here.</li>
+<li><b>Results:</b>
+  <ul>
+    <li><span class="tag Bt">B</span> V / T / S for A: 0.96285 / 0.95432 / 0.84002.</li>
+    <li>B, C and D stay within ±0.004 of A everywhere; <code>t_gap</code> takes over from <code>t_rank</code>.</li>
+    <li>B2: 0.95527 / 0.95125 / 0.90154.</li>
+    <li>The best threshold rises with orphan density (about 0.71 in V, 0.77 in T, 0.96 in S).</li>
+  </ul></li>
+<li><b>Conclusion:</b> <code>t_rank</code> alone is not the cause. The target-context family is orphan-sensitive but still net-positive at the test ratio. <code>experiments/diagnostics/trank/TRANK_DIAGNOSTIC_REPORT.md</code></li>
+</ul>
+
+<h3>2. Leave-one-country-out (LOCO) <span class="tag closed">CLOSED</span></h3>
+<ul>
+<li><b>Question:</b> how badly does the matcher degrade in an unseen country, as France is?</li>
+<li><b>Experiment:</b> US-only, India-only and size-matched US-only models, trained with the Step 3 protocol (diagnostic retraining, internal set only), evaluated per country on V, T and S.</li>
+<li><b>Results</b> <span class="tag A">A</span>/<span class="tag Bt">B</span>:
+  <ul>
+    <li><b>India → US:</b> −0.011 on V and −0.015 on T. It over-merges: false positives double, singleton F0.5 drops about 10 points, and the best threshold moves up.</li>
+    <li><b>US → India:</b> −0.078 on V and −0.076 on T. Recall collapses (79% vs 92%).</li>
+    <li>Per-country models gain at most about 0.001 in-country.</li>
+  </ul></li>
+<li><b>France, unlabelled</b> <span class="tag Ct">C</span>:
+  <ul>
+    <li>Fewest S1 with no match (4.62% vs US 6.13%, India 7.20%).</li>
+    <li>Generic names are not left empty more often.</li>
+    <li>Very generic names (e.g. "Bordeaux Club SAS" ×516).</li>
+  </ul></li>
+<li><b>Conclusion:</b> unseen-country transfer is real but asymmetric. France's predictions show the over-merge pattern, which is suggestive only. <code>experiments/diagnostics/leave_one_country_out/LOCO_REPORT.md</code></li>
+</ul>
+
+<h3>3. France-only threshold <span class="tag closed">CLOSED</span></h3>
+<ul>
+<li><b>Question:</b> would a higher threshold for France only help?</li>
+<li><b>Experiment:</b> filter the submitted predictions for France S1 at 0.80, 0.82, 0.85 and 0.88. No retraining or inference.</li>
+<li><b>Results:</b>
+  <ul>
+    <li><span class="tag Ct">C</span> 0.80 removes 23,683 France predictions (2.59%), and France S1 with no match go from 4.62% to 4.96%. 0.88 removes 48,481 (5.31%).</li>
+    <li><span class="tag A">A</span>/<span class="tag Bt">B</span> In the labelled analogues, 54–85% of removed predictions were true matches.</li>
+    <li><span class="tag E">E</span> Overall effect about ±0.001.</li>
+  </ul></li>
+<li><b>Conclusion:</b> a weak lever; do not pursue. <code>experiments/diagnostics/france_threshold/FRANCE_THRESHOLD_REPORT.md</code></li>
+</ul>
+
+<h3>4. Target-context / <code>t_rank</code> ablation <span class="tag closed">CLOSED</span></h3>
+<ul>
+<li><b>Question:</b> does removing or neutralising the target-context features fix the shift?</li>
+<li><b>Experiment:</b> reused the <code>t_rank</code> diagnostic's models; added entity metrics and feature distributions, including the real test. No retraining or inference.</li>
+<li><b>Results:</b>
+  <ul>
+    <li><span class="tag Bt">B</span> Validation-to-stress gap: A 0.1228; without <code>t_rank</code> 0.1253; without all target context 0.0537. That comes at −0.0076 on V and −0.0031 on T.</li>
+    <li><span class="tag Ct">C</span> Real-test target-context distributions are close to V and T (PSI ≤ 0.072), far from S (0.56–1.17).</li>
+    <li>99.8% of true positives have <code>t_rank</code> = 0: it works as a soft "best claimant" rule.</li>
+  </ul></li>
+<li><b>Conclusion:</b> keep the current matcher. <code>experiments/diagnostics/target_context_ablation/TARGET_CONTEXT_ABLATION_REPORT.md</code></li>
+</ul>
+
+<h3>5. Blocking-gap investigation <span class="tag closed">CLOSED</span></h3>
+<ul>
+<li><b>Question:</b> could candidate generation explain the gap?</li>
+<li><b>Experiment:</b> analysis of saved candidate sets plus a hybrid estimate. No retraining or inference.</li>
+<li><b>Results:</b>
+  <ul>
+    <li><span class="tag Ct">C</span> The real test's candidates per S1 (mean 72.9, p99 255) match S, not T. Blocking depends on absolute pool size.</li>
+    <li><span class="tag Bt">B</span> A perfect matcher on the candidates would score: V 0.99386, T 0.99305, S 0.98453.</li>
+    <li>Test-sized blocking costs −0.0063 (T 0.9543 → hybrid 0.9480).</li>
+    <li>Weakest categories at test size: non-Latin 80.8%, empty address 78.5%, house number differs 88.9%, generic names (India 88.1%).</li>
+  </ul></li>
+<li><b>Conclusion:</b> blocking is healthy but costs about 0.006; do not modify. <code>experiments/diagnostics/blocking_gap/BLOCKING_GAP_REPORT.md</code></li>
+</ul>
+
+<h3>6. Deep France error analysis <span class="tag closed">CLOSED</span></h3>
+<ul>
+<li><b>Question:</b> which France-like error patterns could explain the gap?</li>
+<li><b>Experiment:</b> analogue profiling, France-profile reweighting, and a category-mix precision estimator validated on the LOCO cases. No retraining or inference.</li>
+<li><b>Results:</b>
+  <ul>
+    <li>The closest analogue is US in T.</li>
+    <li><span class="tag Ct">C</span> France-specific traits:
+      <ul>
+        <li>4.2% of France S1 share a name with 100+ others</li>
+        <li>initialism names ("SC") make up 1.74% of the pool, 9–17× the other countries</li>
+        <li>few house-number conflicts</li>
+      </ul></li>
+    <li>The implied precision of France's category mix is 0.969, no worse than the US.</li>
+    <li>Fewer S1 with no match is a test-wide pattern.</li>
+  </ul></li>
+<li><b>Classification:</b> D, unresolvable, with weak signs of over-merging.</li>
+<li><b>Conclusion:</b> no France-specific change is justified. <code>experiments/diagnostics/france_error_analysis/FRANCE_ERROR_ANALYSIS_REPORT.md</code></li>
+</ul>
+
+<h3>7. Orphan-aware training <span class="tag closed">CLOSED</span></h3>
+<ul>
+<li><b>Question:</b> does adding orphaned targets to training improve robustness at the test ratio?</li>
+<li><b>Experiment:</b> internal set A plus 475,494 fit-fold orphans, bringing the pool to 5.754 per S1; retrained with the Step 3 protocol (diagnostic only, not production). The threshold chosen on A2 was 0.69.</li>
+<li><b>Results</b> <span class="tag Bt">B</span>:
+  <ul>
+    <li>V: 0.96172 (−0.0011). T: 0.95652 (+0.0022). S: 0.87194 (+0.032).</li>
+    <li>At matched V, the T gain is only +0.0008.</li>
+    <li>Target-context gain falls from 82.8% to 55.1%.</li>
+  </ul></li>
+<li><b>Conclusion:</b> most of the gain is just conservatism; not worth a submission. Stop this family. <code>experiments/diagnostics/orphan_aware_training/ORPHAN_AWARE_TRAINING_REPORT.md</code></li>
+</ul>
+
+<h3>8. Train-vs-test distribution audit <span class="tag closed">CLOSED</span></h3>
+<ul>
+<li><b>Question:</b> is the gap a population difference?</li>
+<li><b>Experiment:</b> distribution tables, a test-matched labelled subset and singleton calibration. No retraining or inference.</li>
+<li><b>Results:</b>
+  <ul>
+    <li><span class="tag Ct">C</span> S1 shares: US 60%/India 40% in train vs US 38.3%/India 46.8%/France 15.0% in test. Pool per S1 is +23–24% (test 5.53–5.82 vs 4.67–4.68). Source mix and missing addresses are not shifted.</li>
+    <li><span class="tag Ct">C</span> The largest new shift does not depend on the model: only 0.07–0.31% of test S1 lack a candidate with cosine ≥ 0.5, against 1.8–3.2% in V/T. Either there are fewer singletons, or singletons have lookalikes.</li>
+    <li><span class="tag Ct">C</span> Under the Step 3 model, test has +7% predictions per S1 and roughly double the [0.69, 0.80) band.</li>
+    <li><span class="tag Bt">B</span> The test-matched subset scores 0.9523 in T and 0.9459 with blocking losses.</li>
+    <li><span class="tag Bt">B</span> Lookalike singletons in T: F0.5 0.854 (US) / 0.793 (India), against 0.894 / 0.854 for all singletons. <span class="tag E">E</span> A cost of −0.002 to −0.009.</li>
+  </ul></li>
+<li><b>Conclusion:</b> no single shift explains about 0.03. France would need about 0.80–0.87. <code>experiments/diagnostics/test_distribution_audit/TEST_DISTRIBUTION_AUDIT_REPORT.md</code></li>
+</ul>
+
+<h3>9. Global threshold diagnostic <span class="tag closed">CLOSED</span></h3>
+<ul>
+<li><b>Question:</b> should the global threshold be raised?</li>
+<li><b>Experiment:</b> re-applied the rule to the saved final and Step 3 probabilities. No retraining or inference.</li>
+</ul>
+<table>
+<tr><th>Threshold</th><th class="n">Test predictions <span class="tag Ct">C</span></th><th class="n">Removed</th><th class="n">S1 with no prediction</th><th class="n">V change <span class="tag A">A</span></th><th class="n">T change <span class="tag Bt">B</span></th><th class="n">S change <span class="tag Bt">B</span></th><th class="n">Test-like scenario <span class="tag E">E</span></th></tr>
+<tr><td>0.69</td><td class="n">5,503,470</td><td class="n">—</td><td class="n">6.40%</td><td class="n">—</td><td class="n">—</td><td class="n">—</td><td class="n">—</td></tr>
+<tr><td>0.70</td><td class="n">5,483,773</td><td class="n">0.36%</td><td class="n">6.47%</td><td class="n">+0.0001</td><td class="n">+0.0004</td><td class="n">+0.003</td><td class="n">≤ +0.0006</td></tr>
+<tr><td>0.72</td><td class="n">5,444,249</td><td class="n">1.08%</td><td class="n">6.60%</td><td class="n">+0.0000</td><td class="n">+0.0009</td><td class="n">+0.008</td><td class="n">+0.0001 to +0.0014</td></tr>
+<tr><td>0.75</td><td class="n">5,382,517</td><td class="n">2.20%</td><td class="n">6.81%</td><td class="n">−0.0003</td><td class="n">+0.0014</td><td class="n">+0.017</td><td class="n">−0.0004 to +0.0021</td></tr>
+<tr><td>0.78</td><td class="n">5,317,344</td><td class="n">3.38%</td><td class="n">7.03%</td><td class="n">−0.0010</td><td class="n">+0.0016</td><td class="n">+0.026</td><td class="n">−0.0016 to +0.0022</td></tr>
+<tr><td>0.80</td><td class="n">5,271,154</td><td class="n">4.22%</td><td class="n">7.19%</td><td class="n">−0.0017</td><td class="n">+0.0014</td><td class="n">+0.032</td><td class="n">−0.0026 to +0.0020</td></tr>
+</table>
+<ul>
+<li>46–53% of removed test predictions are house-number conflicts.</li>
+<li><b>Conclusion:</b> keep 0.69; 0.72 is the only low-risk probe. <code>experiments/diagnostics/global_threshold/GLOBAL_THRESHOLD_REPORT.md</code></li>
+</ul>
+
+<h2 class="pb">PHASE 3 — Controlled leaderboard probe <span class="tag closed">CLOSED</span></h2>
+<table>
+<tr><th style="width:30%">Item</th><th>Value</th></tr>
+<tr><td>Probe</td><td>Global threshold <b>0.72</b>, re-applied to the saved final-model probabilities with the unchanged one-S1-per-target rule. No retraining or inference.</td></tr>
+<tr><td>File</td><td><code>experiments/leaderboard_probe_072/matching_results_072.tsv</code>: 92,615,809 bytes, SHA-256 <code>77559ba89f662cb59991a87eee7a7a05ecad2d14b7c4f8e0c50f7b49f9b87a4f</code>. Official validator PASS with <code>--check-ids</code>.</td></tr>
+<tr><td>Change vs production</td><td><span class="tag Ct">C</span>
+  <ul>
+    <li><b>59,221 predictions removed</b> (−1.08%), 0 added; 5,444,249 remain.</li>
+    <li>S1 with no match: 110,945 → 114,353.</li>
+    <li>US −17,107, India −35,896, France −6,218.</li>
+  </ul></td></tr>
+<tr><td>Leaderboard</td><td><span class="tag D">D</span> <b>0.923607</b>, against production ≈ 0.924. <b>No material change.</b></td></tr>
+<tr><td>Production vs probe</td><td>The production submission (<code>output/matching_results.tsv</code>, threshold 0.69) is <b>unchanged</b>. The probe is a separate experimental file; the user uploaded it manually for evaluation.</td></tr>
+<tr><td>Conclusion</td><td>Threshold adjustment does not move the leaderboard. <b>All threshold work is stopped</b>: no 0.73, 0.75, 0.78, 0.80 or France thresholds.</td></tr>
+</table>
+
+<h2>PHASE 4 — Latest: blocking-miss analysis <span class="tag closed">CLOSED (analysis)</span></h2>
+<ul>
+<li><b>Question:</b> are the true pairs lost by blocking a realistic opportunity?</li>
+<li><b>Experiment:</b> features for missed pairs only, exact-channel cap checks, and targeted retrieval re-runs only for the S1 with misses plus a 20,000-S1 sample for cost. No retraining, no inference, no full regeneration.</li>
+<li><b>Recall:</b> <span class="tag A">A</span> V 98.214% (27,277 missed). <span class="tag Bt">B</span> S 95.631% (66,750 missed; S2 32,972 / S3 33,778; US 32,366 / India 34,384).</li>
+</ul>
+<table>
+<tr><th>Failure mode (S, mutually exclusive)</th><th class="n">Misses</th><th class="n">Share</th><th class="n">Budget-200k channel recovers</th></tr>
+<tr><td>Target name non-Latin (script differs)</td><td class="n">21,278</td><td class="n">31.9%</td><td class="n">34 (address K=20 recovers 2,547)</td></tr>
+<tr><td>House number differs</td><td class="n">18,316</td><td class="n">27.4%</td><td class="n">8,923</td></tr>
+<tr><td>Target address empty</td><td class="n">14,310</td><td class="n">21.4%</td><td class="n">5,230</td></tr>
+<tr><td>Other partial name/address differences</td><td class="n">8,584</td><td class="n">12.9%</td><td class="n">4,693</td></tr>
+<tr><td>Name shares no token (noisy/domain)</td><td class="n">3,566</td><td class="n">5.3%</td><td class="n">16</td></tr>
+<tr><td>Address dissimilar</td><td class="n">696</td><td class="n">1.0%</td><td class="n">236</td></tr>
+</table>
+<table>
+<tr><th>Retrieval variant (tested on the misses)</th><th class="n">S recovered</th><th class="n">V recovered</th><th class="n">New candidates per S1 (S / V)</th></tr>
+<tr><td>Name+address K=20 (K=50)</td><td class="n">7,316 (15,162)</td><td class="n">3,650 (7,306)</td><td class="n">16.6 (69.9) / 17.0</td></tr>
+<tr><td>Address K=20</td><td class="n">4,687</td><td class="n">3,355</td><td class="n">17.5 / 17.0</td></tr>
+<tr><td>New name-only K=10</td><td class="n">1,519</td><td class="n">172</td><td class="n">10.8 / 7.5</td></tr>
+<tr><td><b>Name+address top-10, max_postings 200,000</b></td><td class="n"><b>19,132 (28.7%)</b></td><td class="n">4,626 (17.0%)</td><td class="n"><b>6.7 / 5.8</b></td></tr>
+</table>
+<ul>
+<li>The exact-key misses in S were all dropped by the 100-record cap (e.g. house+addr_digits 7,122). Raising the cap is not efficient.</li>
+<li><b>Proposed, NOT implemented:</b> an <b>additional</b> name+address channel (top-10 per source, max_postings 200,000) alongside the existing one.
+  <ul>
+    <li>Add it rather than replace the existing budget: replacing swaps candidates, and the Step 2 design saw standalone recall fall at larger budgets.</li>
+    <li><span class="tag E">E</span> S recall 95.63% → about 96.88%.</li>
+    <li>Cost about +6.7 candidates per S1 (+9%; about +11.6M test pairs); retrieval about 6× slower per query.</li>
+    <li><span class="tag E">E</span> End-to-end gain about +0.001 to +0.003 F0.5.</li>
+  </ul></li>
+<li><code>experiments/diagnostics/blocking_miss_analysis/BLOCKING_MISS_ANALYSIS_REPORT.md</code></li>
+</ul>
+
+<h2 class="pb">CLOSED EXPERIMENTS — DO NOT REPEAT</h2>
+<p>Future sessions must <b>not</b> rerun or repeat any of these unless there is an explicit new reason:</p>
+<ol>
+  <li>Step 1 split and scorer, Step 2 blocking design, Step 3 matcher selection, final training and inference, submission and zip</li>
+  <li>Labelled stress evaluation (S), and the unlabelled test-scale check</li>
+  <li><code>t_rank</code> diagnostic (variants B, B2, C, D; environments V/T/S)</li>
+  <li>Leave-one-country-out (US-only, India-only, size-matched)</li>
+  <li>France-only threshold (0.80–0.88)</li>
+  <li>Target-context / <code>t_rank</code> ablation</li>
+  <li>Blocking-gap investigation (including the hybrid estimate)</li>
+  <li>Deep France error analysis</li>
+  <li>Orphan-aware training (a whole family; do not propose variants)</li>
+  <li>Train-vs-test distribution audit (including the test-matched subset)</li>
+  <li>Global threshold diagnostic (0.70–0.80)</li>
+  <li>0.72 leaderboard probe (scored 0.923607). <b>No further threshold probes.</b></li>
+  <li>Blocking-miss analysis (as analysis; its proposed follow-up is open, below)</li>
+</ol>
+
+<h2>REMAINING TECHNICAL OPTIONS (unranked)</h2>
+<table>
+<tr><th style="width:17%">Option</th><th>Expected upside</th><th>Expected compute</th><th>Known risks</th><th>Evidence that would justify proceeding</th></tr>
+<tr><td><b>1. Additional blocking channel</b> (name+address top-10, 200,000 postings)</td><td><span class="tag E">E</span> About +0.001 to +0.003 F0.5; recovers about 29% of test-sized misses</td><td>Step 1: S-environment end-to-end test, about 30–60 min (new channel for 441k validation S1; features and target context on the enlarged set; score with the existing Step 3 model). A production rebuild would add about 2–3 h (test candidates, features, inference), plus ideally retraining.</td><td>Recovered pairs are hard (house-number and address differences), so matcher precision on them is lower. +6.7 candidates per S1 add false-positive chances. Slower retrieval.</td><td>An S end-to-end macro F0.5 of at least about +0.002 over 0.84002, and no loss in T</td></tr>
+<tr><td><b>2. Alternative matcher</b> using the existing candidates and features</td><td><span class="tag E">E</span> Unknown. Only GBDT tree count and logistic regression were ever compared; depth, learning rate, λ and bins were never tuned.</td><td>Training on the saved A1 features (<code>experiments/matching/X_A.npy</code>) takes minutes per model; scoring the saved V/T/S matrices is cheap</td><td>Overfitting to A2; small gains that sit below leaderboard resolution; the leaderboard gap appears to be mostly population- and France-driven</td><td>A gain on T of at least about +0.002 with no loss on V, chosen on A2, not on V or T</td></tr>
+</table>
+
+<h2>TOMORROW — START HERE</h2>
+<ol>
+  <li>Read <b>TEAM_CONTEXT2.pdf</b> (this file). <code>TEAM_CONTEXT.pdf</code> is only needed for pipeline details.</li>
+  <li><b>Do not rerun any closed experiment.</b></li>
+  <li>Decide between exactly two options:
+    <ul>
+      <li>the proposed blocking channel (S end-to-end test first), or</li>
+      <li>a controlled alternative-matcher experiment on the existing features.</li>
+    </ul></li>
+  <li>The API budget is limited. Run <b>one tightly scoped experiment at a time</b>, and <b>stop if it fails to beat its baseline</b> (T 0.95432 / V 0.962847 / S 0.84002).</li>
+  <li>Never overwrite <code>output/</code>, <code>experiments/final/</code>, <code>submission_package/</code> or the zip. Write new outputs to a new directory, and hash production before and after.</li>
+</ol>
+
+<h2>PRODUCTION SAFETY</h2>
+<table>
+<tr><th>Artifact</th><th>Latest recorded SHA-256 / status</th></tr>
+<tr><td><code>output/matching_results.tsv</code> (production submission, threshold 0.69)</td><td><code>84ede6d4f2e44ab4469ea7798a95fbd8b3c49fc0f3f1561d47064c1caaa0e807</code></td></tr>
+<tr><td><code>output/candidate_pairs.tsv</code></td><td><code>1842a3df05f69fd9236e4601cef27ded0d18e7e2c481dd803f27e9f8ff4835ea</code></td></tr>
+<tr><td><code>experiments/final/model_final.npz</code></td><td><code>1bac911596c3d42eca3dc0c0c01660af3eb4bd6fe27f5e68299f3f4c02866755</code></td></tr>
+<tr><td><code>experiments/final/</code> (168 files)</td><td>All hash-identical before and after every diagnostic (last checked by the blocking-miss analysis)</td></tr>
+<tr><td><code>camelcase_submission.zip</code></td><td><code>93b8db37fd2c8a79d74cc80ceb8051451b546f817393b5b1278f76426ed374a8</code></td></tr>
+<tr><td><code>submission_package/</code></td><td>Unchanged; included in the 34 protected files checked by each diagnostic</td></tr>
+<tr><td>Blocking config</td><td><code>91a3897685414bb48c4bc4f00a162e1b245eb8640166f950a76bdc379042e0f5</code></td></tr>
+</table>
+<ul>
+  <li>No production artifact was modified by any diagnostic.</li>
+  <li>The 0.72 probe is a separate experimental file.</li>
+  <li>No new blocking has been implemented or applied.</li>
+  <li>No new final submission has been built since the 0.72 probe.</li>
+</ul>
+
+<h2>FILE MAP</h2>
+<table>
+<tr><th style="width:36%">What</th><th>Where</th></tr>
+<tr><td>Handoff documents</td><td><code>TEAM_CONTEXT.pdf</code>, <code>TEAM_CONTEXT2.pdf</code> (project root); sources <code>docs/TEAM_CONTEXT.html</code>, <code>docs/TEAM_CONTEXT2.html</code></td></tr>
+<tr><td>Rules and data facts</td><td><code>docs/COMPETITION_NOTES.md</code>, <code>docs/problem_statement.pdf</code></td></tr>
+<tr><td>Pipeline reports</td><td>
+  <ul>
+    <li><code>experiments/validation_split/VALIDATION_SPLIT.md</code></li>
+    <li><code>experiments/blocking/BLOCKING_REPORT.md</code></li>
+    <li><code>experiments/matching/MATCHING_REPORT.md</code></li>
+    <li><code>experiments/TEST_SCALE_REPORT.md</code> (stress)</li>
+    <li><code>experiments/test_scale/TEST_SCALE_REPORT.md</code> (unlabelled test)</li>
+    <li><code>experiments/final/FINAL_REPORT.md</code></li>
+  </ul></td></tr>
+<tr><td><code>t_rank</code> diagnostic (V/T/S models, probabilities, feature matrices <code>X_S</code>/<code>X_T</code>)</td><td><code>experiments/diagnostics/trank/</code>; script <code>experiments/trank_diagnostic.py</code></td></tr>
+<tr><td>LOCO</td><td><code>experiments/diagnostics/leave_one_country_out/LOCO_REPORT.md</code>; script <code>experiments/loco_diagnostic.py</code></td></tr>
+<tr><td>France threshold</td><td><code>experiments/diagnostics/france_threshold/FRANCE_THRESHOLD_REPORT.md</code></td></tr>
+<tr><td>Target-context ablation</td><td><code>experiments/diagnostics/target_context_ablation/TARGET_CONTEXT_ABLATION_REPORT.md</code></td></tr>
+<tr><td>Blocking gap</td><td><code>experiments/diagnostics/blocking_gap/BLOCKING_GAP_REPORT.md</code></td></tr>
+<tr><td>France error analysis</td><td><code>experiments/diagnostics/france_error_analysis/FRANCE_ERROR_ANALYSIS_REPORT.md</code></td></tr>
+<tr><td>Orphan-aware training</td><td><code>experiments/diagnostics/orphan_aware_training/ORPHAN_AWARE_TRAINING_REPORT.md</code></td></tr>
+<tr><td>Distribution audit</td><td><code>experiments/diagnostics/test_distribution_audit/TEST_DISTRIBUTION_AUDIT_REPORT.md</code></td></tr>
+<tr><td>Global threshold</td><td><code>experiments/diagnostics/global_threshold/GLOBAL_THRESHOLD_REPORT.md</code></td></tr>
+<tr><td>0.72 probe</td><td><code>experiments/leaderboard_probe_072/</code> (<code>matching_results_072.tsv</code>, <code>PROBE_REPORT.md</code>)</td></tr>
+<tr><td>Latest blocking-miss analysis</td><td><code>experiments/diagnostics/blocking_miss_analysis/BLOCKING_MISS_ANALYSIS_REPORT.md</code> (and <code>results.json</code>, <code>blocking_miss_analysis.py</code>)</td></tr>
+<tr><td>Production submission</td><td><code>output/matching_results.tsv</code>, <code>output/candidate_pairs.tsv</code>, <code>camelcase_submission.zip</code>, <code>submission_package/</code>, <code>experiments/final/</code></td></tr>
+<tr><td>Smoke-scale copies for quick code tests</td><td><code>experiments/_smoke/</code></td></tr>
+</table>
+<p class="small">Each diagnostic directory also contains its script, <code>results.json</code>/<code>evaluate.json</code>, <code>run.log</code> and hash files.</p>
+
+</body>
+</html>
