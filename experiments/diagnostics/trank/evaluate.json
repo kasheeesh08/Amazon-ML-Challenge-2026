@@ -1,0 +1,395 @@
+{
+ "V": {
+  "pairs": 25826498,
+  "candidate_recall": 0.9821444702647858,
+  "variants": {
+   "A": {
+    "threshold": 0.69,
+    "macro_f05": 0.9628472693234558,
+    "precision": 0.9821988612793283,
+    "recall": 0.9407743920400615,
+    "singleton_f05": 0.9192665016836383,
+    "nonsingleton_f05": 0.9654251039143726,
+    "singleton_false_merge_rate": 0.08073349831636172,
+    "pred": 1463221,
+    "tp": 1437174,
+    "fp": 26047,
+    "fn": 90476,
+    "fn_not_in_candidates": 27277,
+    "fp_by_target_origin": {
+     "validation_pool": 26047,
+     "fit_target_orphan": 0,
+     "fit_distractor": 0
+    },
+    "by_country": {
+     "US": 0.9711942421921572,
+     "India": 0.9503374896999047
+    },
+    "oracle_threshold": 0.71,
+    "oracle_macro_f05": 0.9629525174851797
+   },
+   "B": {
+    "threshold": 0.68,
+    "macro_f05": 0.9628086063797092,
+    "precision": 0.9819981684719032,
+    "recall": 0.9413085458056492,
+    "singleton_f05": 0.9177248569921701,
+    "nonsingleton_f05": 0.9654753434509773,
+    "singleton_false_merge_rate": 0.08227514300782993,
+    "pred": 1464351,
+    "tp": 1437990,
+    "fp": 26361,
+    "fn": 89660,
+    "fn_not_in_candidates": 27277,
+    "fp_by_target_origin": {
+     "validation_pool": 26361,
+     "fit_target_orphan": 0,
+     "fit_distractor": 0
+    },
+    "by_country": {
+     "US": 0.9710397951941632,
+     "India": 0.9504723546956088
+    },
+    "oracle_threshold": 0.7,
+    "oracle_macro_f05": 0.9629461106399821
+   },
+   "B2": {
+    "threshold": 0.71,
+    "macro_f05": 0.9552713475143184,
+    "precision": 0.9867256071217427,
+    "recall": 0.9089876607861749,
+    "singleton_f05": 0.9364274412755081,
+    "nonsingleton_f05": 0.9563859784848391,
+    "singleton_false_merge_rate": 0.06357255872449187,
+    "pred": 1407296,
+    "tp": 1388615,
+    "fp": 18681,
+    "fn": 139035,
+    "fn_not_in_candidates": 27277,
+    "fp_by_target_origin": {
+     "validation_pool": 18681,
+     "fit_target_orphan": 0,
+     "fit_distractor": 0
+    },
+    "by_country": {
+     "US": 0.965002219981703,
+     "India": 0.9406874891471353
+    },
+    "oracle_threshold": 0.6,
+    "oracle_macro_f05": 0.9561856023142316
+   },
+   "C": {
+    "threshold": 0.7,
+    "macro_f05": 0.9629176690999585,
+    "precision": 0.9828058035806005,
+    "recall": 0.9394134782181782,
+    "singleton_f05": 0.9237697269666112,
+    "nonsingleton_f05": 0.9652332987884623,
+    "singleton_false_merge_rate": 0.07623027303338878,
+    "pred": 1460202,
+    "tp": 1435095,
+    "fp": 25107,
+    "fn": 92555,
+    "fn_not_in_candidates": 27277,
+    "fp_by_target_origin": {
+     "validation_pool": 25107,
+     "fit_target_orphan": 0,
+     "fit_distractor": 0
+    },
+    "by_country": {
+     "US": 0.9712488841567302,
+     "India": 0.9504315060326957
+    },
+    "oracle_threshold": 0.71,
+    "oracle_macro_f05": 0.9629354540749266
+   },
+   "D": {
+    "threshold": 0.7,
+    "macro_f05": 0.9629518552480257,
+    "precision": 0.9831788618889533,
+    "recall": 0.9386888357935391,
+    "singleton_f05": 0.9244594101180575,
+    "nonsingleton_f05": 0.965228711804686,
+    "singleton_false_merge_rate": 0.07554058988194247,
+    "pred": 1458522,
+    "tp": 1433988,
+    "fp": 24534,
+    "fn": 93662,
+    "fn_not_in_candidates": 27277,
+    "fp_by_target_origin": {
+     "validation_pool": 24534,
+     "fit_target_orphan": 0,
+     "fit_distractor": 0
+    },
+    "by_country": {
+     "US": 0.9712808628646227,
+     "India": 0.9504690005166775
+    },
+    "oracle_threshold": 0.71,
+    "oracle_macro_f05": 0.9629779554739406
+   }
+  }
+ },
+ "S": {
+  "pairs": 32131328,
+  "candidate_recall": 0.9563054364546854,
+  "variants": {
+   "A": {
+    "threshold": 0.69,
+    "macro_f05": 0.8400239148892478,
+    "precision": 0.82447885732497,
+    "recall": 0.9314077177363925,
+    "singleton_f05": 0.4252910868595075,
+    "nonsingleton_f05": 0.8645556679533445,
+    "singleton_false_merge_rate": 0.5747089131404925,
+    "pred": 1725775,
+    "tp": 1422865,
+    "fp": 302910,
+    "fn": 104785,
+    "fn_not_in_candidates": 66750,
+    "fp_by_target_origin": {
+     "validation_pool": 30352,
+     "fit_target_orphan": 183185,
+     "fit_distractor": 89373
+    },
+    "by_country": {
+     "US": 0.8623379012153473,
+     "India": 0.8065814854177038
+    },
+    "oracle_threshold": 0.96,
+    "oracle_macro_f05": 0.9118056875876338
+   },
+   "B": {
+    "threshold": 0.68,
+    "macro_f05": 0.8375290849967363,
+    "precision": 0.821628999492128,
+    "recall": 0.9319235426962983,
+    "singleton_f05": 0.4136070428820642,
+    "nonsingleton_f05": 0.862604386860323,
+    "singleton_false_merge_rate": 0.5863929571179358,
+    "pred": 1732720,
+    "tp": 1423653,
+    "fp": 309067,
+    "fn": 103997,
+    "fn_not_in_candidates": 66750,
+    "fp_by_target_origin": {
+     "validation_pool": 30896,
+     "fit_target_orphan": 186819,
+     "fit_distractor": 91352
+    },
+    "by_country": {
+     "US": 0.8596460906836663,
+     "India": 0.8043818744536445
+    },
+    "oracle_threshold": 0.95,
+    "oracle_macro_f05": 0.9115100790650043
+   },
+   "B2": {
+    "threshold": 0.71,
+    "macro_f05": 0.9015440336949616,
+    "precision": 0.9321806204690496,
+    "recall": 0.8902857329885773,
+    "singleton_f05": 0.6931721368006816,
+    "nonsingleton_f05": 0.9138693852818905,
+    "singleton_false_merge_rate": 0.30682786319931843,
+    "pred": 1458993,
+    "tp": 1360045,
+    "fp": 98948,
+    "fn": 167605,
+    "fn_not_in_candidates": 66750,
+    "fp_by_target_origin": {
+     "validation_pool": 16054,
+     "fit_target_orphan": 27834,
+     "fit_distractor": 55060
+    },
+    "by_country": {
+     "US": 0.9180934955828334,
+     "India": 0.8767410153597839
+    },
+    "oracle_threshold": 0.86,
+    "oracle_macro_f05": 0.9166222042669769
+   },
+   "C": {
+    "threshold": 0.7,
+    "macro_f05": 0.8430338955362874,
+    "precision": 0.8273296705023752,
+    "recall": 0.9304061794259156,
+    "singleton_f05": 0.44772607408008436,
+    "nonsingleton_f05": 0.8664166451159138,
+    "singleton_false_merge_rate": 0.5522739259199156,
+    "pred": 1717979,
+    "tp": 1421335,
+    "fp": 296644,
+    "fn": 106315,
+    "fn_not_in_candidates": 66750,
+    "fp_by_target_origin": {
+     "validation_pool": 29491,
+     "fit_target_orphan": 181118,
+     "fit_distractor": 86035
+    },
+    "by_country": {
+     "US": 0.8649002538773595,
+     "India": 0.8102623353168796
+    },
+    "oracle_threshold": 0.96,
+    "oracle_macro_f05": 0.9116001826064812
+   },
+   "D": {
+    "threshold": 0.7,
+    "macro_f05": 0.8434689856669967,
+    "precision": 0.8287396477312493,
+    "recall": 0.9301587405492096,
+    "singleton_f05": 0.4412349385370603,
+    "nonsingleton_f05": 0.867261426610341,
+    "singleton_false_merge_rate": 0.5587650614629397,
+    "pred": 1714600,
+    "tp": 1420957,
+    "fp": 293643,
+    "fn": 106693,
+    "fn_not_in_candidates": 66750,
+    "fp_by_target_origin": {
+     "validation_pool": 29207,
+     "fit_target_orphan": 178920,
+     "fit_distractor": 85516
+    },
+    "by_country": {
+     "US": 0.8653974767977609,
+     "India": 0.810604305759928
+    },
+    "oracle_threshold": 0.96,
+    "oracle_macro_f05": 0.9118691114989782
+   }
+  }
+ },
+ "T": {
+  "pairs": 26368048,
+  "candidate_recall": 0.9799129381730108,
+  "variants": {
+   "A": {
+    "threshold": 0.69,
+    "macro_f05": 0.9543176451626308,
+    "precision": 0.9721536532018972,
+    "recall": 0.9412227931790659,
+    "singleton_f05": 0.8778855125968599,
+    "nonsingleton_f05": 0.9588386622501217,
+    "singleton_false_merge_rate": 0.12211448740314008,
+    "pred": 1479045,
+    "tp": 1437859,
+    "fp": 41186,
+    "fn": 89791,
+    "fn_not_in_candidates": 30686,
+    "fp_by_target_origin": {
+     "validation_pool": 26795,
+     "fit_target_orphan": 9896,
+     "fit_distractor": 4495
+    },
+    "by_country": {
+     "US": 0.9642550173062802,
+     "India": 0.9394243014906501
+    },
+    "oracle_threshold": 0.77,
+    "oracle_macro_f05": 0.9558903189391773
+   },
+   "B": {
+    "threshold": 0.68,
+    "macro_f05": 0.9541950835773326,
+    "precision": 0.9719049694119872,
+    "recall": 0.9416882139233463,
+    "singleton_f05": 0.8764655766968233,
+    "nonsingleton_f05": 0.9587928413136695,
+    "singleton_false_merge_rate": 0.1235344233031766,
+    "pred": 1480155,
+    "tp": 1438570,
+    "fp": 41585,
+    "fn": 89080,
+    "fn_not_in_candidates": 30686,
+    "fp_by_target_origin": {
+     "validation_pool": 27046,
+     "fit_target_orphan": 10014,
+     "fit_distractor": 4525
+    },
+    "by_country": {
+     "US": 0.9640991574632876,
+     "India": 0.9393516446878587
+    },
+    "oracle_threshold": 0.77,
+    "oracle_macro_f05": 0.9559420543297643
+   },
+   "B2": {
+    "threshold": 0.71,
+    "macro_f05": 0.9512516132839609,
+    "precision": 0.9827760173685315,
+    "recall": 0.9079173894543907,
+    "singleton_f05": 0.9173191610207311,
+    "nonsingleton_f05": 0.9532587428949333,
+    "singleton_false_merge_rate": 0.08268083897926894,
+    "pred": 1411288,
+    "tp": 1386980,
+    "fp": 24308,
+    "fn": 140670,
+    "fn_not_in_candidates": 30686,
+    "fp_by_target_origin": {
+     "validation_pool": 18268,
+     "fit_target_orphan": 2561,
+     "fit_distractor": 3479
+    },
+    "by_country": {
+     "US": 0.9617972288747008,
+     "India": 0.9354466826689938
+    },
+    "oracle_threshold": 0.68,
+    "oracle_macro_f05": 0.9513395988779065
+   },
+   "C": {
+    "threshold": 0.7,
+    "macro_f05": 0.9547077266677626,
+    "precision": 0.9729905938436744,
+    "recall": 0.9397898733348607,
+    "singleton_f05": 0.8852286096799059,
+    "nonsingleton_f05": 0.958817467748918,
+    "singleton_false_merge_rate": 0.11477139032009412,
+    "pred": 1475523,
+    "tp": 1435670,
+    "fp": 39853,
+    "fn": 91980,
+    "fn_not_in_candidates": 30686,
+    "fp_by_target_origin": {
+     "validation_pool": 25822,
+     "fit_target_orphan": 9734,
+     "fit_distractor": 4297
+    },
+    "by_country": {
+     "US": 0.9647360730908642,
+     "India": 0.9396780379752262
+    },
+    "oracle_threshold": 0.77,
+    "oracle_macro_f05": 0.9558222665131084
+   },
+   "D": {
+    "threshold": 0.7,
+    "macro_f05": 0.9548192742306368,
+    "precision": 0.9735162109991213,
+    "recall": 0.9392282263607502,
+    "singleton_f05": 0.8841332305570205,
+    "nonsingleton_f05": 0.9590004059165874,
+    "singleton_false_merge_rate": 0.11586676944297943,
+    "pred": 1473845,
+    "tp": 1434812,
+    "fp": 39033,
+    "fn": 92838,
+    "fn_not_in_candidates": 30686,
+    "fp_by_target_origin": {
+     "validation_pool": 25304,
+     "fit_target_orphan": 9471,
+     "fit_distractor": 4258
+    },
+    "by_country": {
+     "US": 0.9648285243235677,
+     "India": 0.9398182056002246
+    },
+    "oracle_threshold": 0.77,
+    "oracle_macro_f05": 0.955855497505066
+   }
+  }
+ }
+}

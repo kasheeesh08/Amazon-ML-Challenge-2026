@@ -1,0 +1,118 @@
+{
+ "pairs": 26368048,
+ "candidate_recall": 0.9799129381730108,
+ "channels": {
+  "exact:name_n1": {
+   "n_pairs": 1491585,
+   "candidate_recall_alone": 0.25691486924360946,
+   "seconds": 2.5,
+   "unique_true_pairs": 11
+  },
+  "exact:name_n2": {
+   "n_pairs": 4803748,
+   "candidate_recall_alone": 0.4990331555002782,
+   "seconds": 5.3,
+   "unique_true_pairs": 0
+  },
+  "exact:name_n3": {
+   "n_pairs": 4941140,
+   "candidate_recall_alone": 0.5223257945209963,
+   "seconds": 5.4,
+   "unique_true_pairs": 592
+  },
+  "exact:addr_n1": {
+   "n_pairs": 132871,
+   "candidate_recall_alone": 0.08256014139364383,
+   "seconds": 1.5,
+   "unique_true_pairs": 0
+  },
+  "exact:addr_n2": {
+   "n_pairs": 531104,
+   "candidate_recall_alone": 0.3290138447942919,
+   "seconds": 1.8,
+   "unique_true_pairs": 0
+  },
+  "exact:name_n2+country": {
+   "n_pairs": 4767579,
+   "candidate_recall_alone": 0.49906457631001866,
+   "seconds": 5.4,
+   "unique_true_pairs": 1
+  },
+  "exact:addr_n2+country": {
+   "n_pairs": 531104,
+   "candidate_recall_alone": 0.3290138447942919,
+   "seconds": 2.3,
+   "unique_true_pairs": 0
+  },
+  "exact:name_n1+addr_n1": {
+   "n_pairs": 23227,
+   "candidate_recall_alone": 0.015204398913363663,
+   "seconds": 1.8,
+   "unique_true_pairs": 0
+  },
+  "exact:name_n2+addr_n2": {
+   "n_pairs": 241229,
+   "candidate_recall_alone": 0.15790135174941905,
+   "seconds": 5.4,
+   "unique_true_pairs": 0
+  },
+  "exact:name_n3+addr_n2": {
+   "n_pairs": 253919,
+   "candidate_recall_alone": 0.16620757372434786,
+   "seconds": 3.1,
+   "unique_true_pairs": 0
+  },
+  "exact:name_n3+house": {
+   "n_pairs": 547317,
+   "candidate_recall_alone": 0.3552004713121461,
+   "seconds": 2.1,
+   "unique_true_pairs": 0
+  },
+  "exact:name_tok1+house": {
+   "n_pairs": 1534113,
+   "candidate_recall_alone": 0.5183504074886264,
+   "seconds": 2.5,
+   "unique_true_pairs": 402
+  },
+  "exact:name_tok1+addr_digits": {
+   "n_pairs": 1079949,
+   "candidate_recall_alone": 0.48399502503845776,
+   "seconds": 2.5,
+   "unique_true_pairs": 544
+  },
+  "exact:postal+name_tok1": {
+   "n_pairs": 9713,
+   "candidate_recall_alone": 0.006254050338755605,
+   "seconds": 0.6,
+   "unique_true_pairs": 2
+  },
+  "exact:postal+house": {
+   "n_pairs": 10843,
+   "candidate_recall_alone": 0.0063869341799495955,
+   "seconds": 0.4,
+   "unique_true_pairs": 0
+  },
+  "exact:house+addr_digits": {
+   "n_pairs": 8672759,
+   "candidate_recall_alone": 0.35021045396524075,
+   "seconds": 8.4,
+   "unique_true_pairs": 342
+  },
+  "retrieval:nameaddr@10": {
+   "n_pairs": 8827280,
+   "candidate_recall_alone": 0.9381815206362714,
+   "seconds": 67.6,
+   "unique_true_pairs": 51825
+  },
+  "retrieval:addr@10": {
+   "n_pairs": 8826440,
+   "candidate_recall_alone": 0.8649324125290478,
+   "seconds": 37.9,
+   "unique_true_pairs": 36968
+  }
+ },
+ "memory": {
+  "peak_ws_gb": 2.81,
+  "free_gb": 14.28
+ }
+}

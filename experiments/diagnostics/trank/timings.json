@@ -1,0 +1,15 @@
+{
+ "hashes_before": 2.8,
+ "setup_T": 10.5,
+ "candidates_T": 268.0,
+ "idf_T": 5.8,
+ "features_S": 97.6,
+ "features_T": 179.2,
+ "train": 655.4,
+ "select": 147.2,
+ "predict": 1768.4,
+ "evaluate": 34053.1,
+ "breakdown": 89.3,
+ "hashes_after": 2.7,
+ "report": 0.1
+}

@@ -1,0 +1,68 @@
+{
+ "V-US": {
+  "s1_maxp_lt_0.10": 0.04067948989151129,
+  "singletons_with_maxp_lt_0.10": 0.7144597063400772,
+  "nonsingletons_with_maxp_lt_0.10": 0.0008401713949645728,
+  "singleton_rate": 0.05582711311232662,
+  "singleton_f05": 0.9296298802354692,
+  "share_of_s1_that_are_singletons_with_a_prediction": 0.003928560635822429,
+  "pred_band_0.69_0.80_share": 0.024941782978661082,
+  "pred_band_0.69_0.80_precision": 0.7483626180044266,
+  "pred_per_s1": 3.352977395666495
+ },
+ "V-India": {
+  "s1_maxp_lt_0.10": 0.03568355261668063,
+  "singletons_with_maxp_lt_0.10": 0.5993920972644377,
+  "nonsingletons_with_maxp_lt_0.10": 0.0023206169123202573,
+  "singleton_rate": 0.05587762404039946,
+  "singleton_f05": 0.9037487335359676,
+  "share_of_s1_that_are_singletons_with_a_prediction": 0.005378292080889513,
+  "pred_band_0.69_0.80_share": 0.031525693457541255,
+  "pred_band_0.69_0.80_precision": 0.7493111429516147,
+  "pred_per_s1": 3.2586448968500195
+ },
+ "T-US": {
+  "s1_maxp_lt_0.10": 0.035039738901816206,
+  "singletons_with_maxp_lt_0.10": 0.6148589214425875,
+  "nonsingletons_with_maxp_lt_0.10": 0.0007561542554681155,
+  "singleton_rate": 0.05582711311232662,
+  "singleton_f05": 0.8937681845862372,
+  "share_of_s1_that_are_singletons_with_a_prediction": 0.005930615575231936,
+  "pred_band_0.69_0.80_share": 0.026921323913830314,
+  "pred_band_0.69_0.80_precision": 0.6616457114403087,
+  "pred_per_s1": 3.3814481278897586
+ },
+ "T-India": {
+  "s1_maxp_lt_0.10": 0.02892955003510043,
+  "singletons_with_maxp_lt_0.10": 0.48409321175278625,
+  "nonsingletons_with_maxp_lt_0.10": 0.0019908134751687994,
+  "singleton_rate": 0.05587762404039946,
+  "singleton_f05": 0.8541033434650456,
+  "share_of_s1_that_are_singletons_with_a_prediction": 0.008152358522611472,
+  "pred_band_0.69_0.80_share": 0.03451388210953944,
+  "pred_band_0.69_0.80_precision": 0.6531857880111155,
+  "pred_per_s1": 3.305560587875631
+ },
+ "S-US": {
+  "s1_maxp_lt_0.10": 0.005088241515820011,
+  "singletons_with_maxp_lt_0.10": 0.082008254956357,
+  "nonsingletons_with_maxp_lt_0.10": 0.0005401101824772254,
+  "singleton_rate": 0.05582711311232662,
+  "singleton_f05": 0.45429325394140335,
+  "share_of_s1_that_are_singletons_with_a_prediction": 0.030465232238372972,
+  "pred_band_0.69_0.80_share": 0.05712442999826436,
+  "pred_band_0.69_0.80_precision": 0.18851638297137727,
+  "pred_per_s1": 3.830467498715663
+ },
+ "S-India": {
+  "s1_maxp_lt_0.10": 0.0016701012251183224,
+  "singletons_with_maxp_lt_0.10": 0.023100303951367782,
+  "nonsingletons_with_maxp_lt_0.10": 0.0004017605507117758,
+  "singleton_rate": 0.05587762404039946,
+  "singleton_f05": 0.3818642350557244,
+  "share_of_s1_that_are_singletons_with_a_prediction": 0.03453995787948096,
+  "pred_band_0.69_0.80_share": 0.07610050256904528,
+  "pred_band_0.69_0.80_precision": 0.17982423750092313,
+  "pred_per_s1": 4.029433411082678
+ }
+}

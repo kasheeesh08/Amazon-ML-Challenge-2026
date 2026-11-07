@@ -1,0 +1,11 @@
+{
+ "hashes_before": 7.1,
+ "setup": 2.5,
+ "train": 476.0,
+ "select": 41.2,
+ "predict": 720.2,
+ "evaluate": 1423.3,
+ "france": 284.5,
+ "hashes_after": 6.4,
+ "report": 0.1
+}

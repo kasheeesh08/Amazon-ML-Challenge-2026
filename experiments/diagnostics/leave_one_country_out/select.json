@@ -1,0 +1,21 @@
+{
+ "both": {
+  "threshold": 0.69,
+  "note": "Step 3 selection on the full A2 (US + India)"
+ },
+ "US": {
+  "threshold": 0.74,
+  "a2_f05_own_country": 0.9728110560561235,
+  "a2_country": "US"
+ },
+ "IN": {
+  "threshold": 0.68,
+  "a2_f05_own_country": 0.9500529854928355,
+  "a2_country": "India"
+ },
+ "USm": {
+  "threshold": 0.76,
+  "a2_f05_own_country": 0.9721719872816397,
+  "a2_country": "US"
+ }
+}

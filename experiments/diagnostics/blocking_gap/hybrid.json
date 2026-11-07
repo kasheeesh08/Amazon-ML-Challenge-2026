@@ -1,0 +1,31 @@
+{
+ "T_predictions": 1479045,
+ "true_pairs_missed_by_S_blocking": 66750,
+ "true_pairs_missed_by_T_blocking": 30686,
+ "T_true_predictions_removed_because_S_blocking_misses_them": 23947,
+ "overall": {
+  "T (current model, as measured)": {
+   "macro_f05": 0.9543176451626308,
+   "pair_precision": 0.9721536532018972,
+   "pair_recall": 0.9412227931790659,
+   "singleton_f05": 0.8778855125968599
+  },
+  "hybrid: T matcher + S blocking losses": {
+   "macro_f05": 0.9480428555559001,
+   "pair_precision": 0.9716953772185791,
+   "pair_recall": 0.9255470821195955,
+   "singleton_f05": 0.8778855125968599
+  }
+ },
+ "by_country": {
+  "US": {
+   "T (current model, as measured)": 0.9642550173062802,
+   "hybrid: T matcher + S blocking losses": 0.9582776239211157
+  },
+  "India": {
+   "T (current model, as measured)": 0.9394243014906501,
+   "hybrid: T matcher + S blocking losses": 0.9327037980603341
+  }
+ },
+ "blocking_cost_at_test_pool_size": 0.00627478960673078
+}

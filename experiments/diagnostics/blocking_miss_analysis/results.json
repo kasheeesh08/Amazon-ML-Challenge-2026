@@ -1,0 +1,509 @@
+{
+ "envs": {
+  "V": {
+   "true_pairs": 1527650,
+   "missed": 27277,
+   "candidate_recall": 0.9821444702647858,
+   "missed_S2": 13676,
+   "missed_S3": 13601,
+   "missed_US": 10544,
+   "missed_India": 16733,
+   "s1_with_a_miss": 22866,
+   "characteristics": {
+    "name_cos_mean": 0.25971347093582153,
+    "addr_cos_mean": 0.2916904389858246,
+    "nameaddr_cos_median": 0.2219218760728836,
+    "share_no_shared_name_token": 0.48810353044689664,
+    "share_name_cos_ge_0.8": 0.0228030941819115,
+    "share_addr_cos_lt_0.3": 0.4691498331927998,
+    "share_addr_cos_ge_0.8": 0.0009165230780511053,
+    "share_country_equal": 1.0,
+    "share_postal_both_present": 0.0006965575157664716,
+    "share_postal_equal": 0.0003666092234198004,
+    "share_house_both_present": 0.667595386505127,
+    "share_house_equal": 0.19994866847991943,
+    "share_house_differs": 0.467646735344796,
+    "share_target_nonlatin": 0.4350918356124207,
+    "share_target_addr_empty": 0.24588481137955054,
+    "share_target_domain_name": 0.05554129852989698,
+    "share_eq_name_n2": 0.0,
+    "share_eq_name_n3": 0.0,
+    "share_eq_name_tok1": 0.35865381360054016,
+    "share_eq_addr_n2": 0.0,
+    "share_eq_addr_digits": 0.11408879607915878
+   },
+   "exact_channels": {
+    "name_n1": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "name_n2": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "name_n3": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "addr_n1": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "addr_n2": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "name_n2+country": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "addr_n2+country": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "name_n1+addr_n1": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "name_n2+addr_n2": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "name_n3+addr_n2": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "name_n3+house": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "name_tok1+house": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "name_tok1+addr_digits": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "postal+name_tok1": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "postal+house": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "house+addr_digits": {
+     "key_equal": 2369,
+     "key_equal_but_block_dropped_by_cap": 2369
+    }
+   },
+   "retrieval": {
+    "nameaddr@50/mp20000": {
+     "missed_recovered_at_k": {
+      "10": 0,
+      "20": 3650,
+      "30": 5447,
+      "50": 7306
+     },
+     "sanity_missed_with_rank_lt_10_in_production_channel": 0,
+     "new_candidates_per_s1_at_k": {
+      "10": 0.0,
+      "20": 17.03215,
+      "30": 34.88405,
+      "50": 71.6675
+     }
+    },
+    "addr@50/mp20000": {
+     "missed_recovered_at_k": {
+      "10": 0,
+      "20": 3355,
+      "30": 5211,
+      "50": 7552
+     },
+     "sanity_missed_with_rank_lt_10_in_production_channel": 0,
+     "new_candidates_per_s1_at_k": {
+      "10": 0.0,
+      "20": 16.99835,
+      "30": 34.77185,
+      "50": 71.64595
+     }
+    },
+    "name@50/mp20000": {
+     "missed_recovered_at_k": {
+      "10": 172,
+      "20": 691,
+      "30": 1326,
+      "50": 2298
+     },
+     "sanity_missed_with_rank_lt_10_in_production_channel": null,
+     "new_candidates_per_s1_at_k": {
+      "10": 7.45315,
+      "20": 23.8419,
+      "30": 42.11235,
+      "50": 79.9636
+     }
+    },
+    "nameaddr@10/mp200000": {
+     "missed_recovered_at_k": {
+      "10": 4626
+     },
+     "sanity_missed_with_rank_lt_10_in_production_channel": null,
+     "new_candidates_per_s1_at_k": {
+      "10": 5.81285
+     }
+    }
+   },
+   "failure_modes": {
+    "target name non-Latin (script differs)": {
+     "missed": 11868,
+     "share": 0.4350918356124207,
+     "recovered_by": {
+      "nameaddr K=20": 41,
+      "nameaddr K=50": 147,
+      "addr K=20": 2112,
+      "name K=10 (new)": 0,
+      "name K=20 (new)": 0,
+      "nameaddr budget 200k": 21
+     }
+    },
+    "target address empty": {
+     "missed": 6588,
+     "share": 0.24152216152802727,
+     "recovered_by": {
+      "nameaddr K=20": 1624,
+      "nameaddr K=50": 3184,
+      "addr K=20": 0,
+      "name K=10 (new)": 89,
+      "name K=20 (new)": 367,
+      "nameaddr budget 200k": 2074
+     }
+    },
+    "name shares no token (noisy/domain/different name)": {
+     "missed": 2016,
+     "share": 0.07390842101404113,
+     "recovered_by": {
+      "nameaddr K=20": 48,
+      "nameaddr K=50": 176,
+      "addr K=20": 374,
+      "name K=10 (new)": 0,
+      "name K=20 (new)": 0,
+      "nameaddr budget 200k": 8
+     }
+    },
+    "house number differs": {
+     "missed": 5032,
+     "share": 0.18447776515012648,
+     "recovered_by": {
+      "nameaddr K=20": 1461,
+      "nameaddr K=50": 2870,
+      "addr K=20": 584,
+      "name K=10 (new)": 69,
+      "name K=20 (new)": 264,
+      "nameaddr budget 200k": 1794
+     }
+    },
+    "address dissimilar (addr_cos < 0.3)": {
+     "missed": 304,
+     "share": 0.01114492062910144,
+     "recovered_by": {
+      "nameaddr K=20": 73,
+      "nameaddr K=50": 137,
+      "addr K=20": 5,
+      "name K=10 (new)": 8,
+      "name K=20 (new)": 27,
+      "nameaddr budget 200k": 113
+     }
+    },
+    "other (partial name/address differences)": {
+     "missed": 1469,
+     "share": 0.05385489606628295,
+     "recovered_by": {
+      "nameaddr K=20": 403,
+      "nameaddr K=50": 792,
+      "addr K=20": 280,
+      "name K=10 (new)": 6,
+      "name K=20 (new)": 33,
+      "nameaddr budget 200k": 616
+     }
+    }
+   },
+   "combos_total_recovered": {
+    "nameaddr K=20": 3650,
+    "nameaddr K=50": 7306,
+    "addr K=20": 3355,
+    "name K=10 (new)": 172,
+    "name K=20 (new)": 691,
+    "nameaddr budget 200k": 4626
+   },
+   "combos_new_candidates_per_s1": {
+    "nameaddr K=20": 17.03215,
+    "nameaddr K=50": 71.6675,
+    "addr K=20": 16.99835,
+    "name K=10 (new)": 7.45315,
+    "name K=20 (new)": 23.8419,
+    "nameaddr budget 200k": 5.81285
+   },
+   "current_candidates_per_s1": 58.51518927687804,
+   "seconds": 145.7
+  },
+  "S": {
+   "true_pairs": 1527650,
+   "missed": 66750,
+   "candidate_recall": 0.9563054364546854,
+   "missed_S2": 32972,
+   "missed_S3": 33778,
+   "missed_US": 32366,
+   "missed_India": 34384,
+   "s1_with_a_miss": 53248,
+   "characteristics": {
+    "name_cos_mean": 0.38091790676116943,
+    "addr_cos_mean": 0.3678290843963623,
+    "nameaddr_cos_median": 0.3924948573112488,
+    "share_no_shared_name_token": 0.3581573033707865,
+    "share_name_cos_ge_0.8": 0.08579775280898877,
+    "share_addr_cos_lt_0.3": 0.35255430711610486,
+    "share_addr_cos_ge_0.8": 0.017677902621722846,
+    "share_country_equal": 1.0,
+    "share_postal_both_present": 0.0009588014800101519,
+    "share_postal_equal": 0.0004044943780172616,
+    "share_house_both_present": 0.6571236252784729,
+    "share_house_equal": 0.21060673892498016,
+    "share_house_differs": 0.4465168539325843,
+    "share_target_nonlatin": 0.31877153558052435,
+    "share_target_addr_empty": 0.21640449438202247,
+    "share_target_domain_name": 0.09772284644194756,
+    "share_eq_name_n2": 0.024134831503033638,
+    "share_eq_name_n3": 0.026966292411088943,
+    "share_eq_name_tok1": 0.4224269688129425,
+    "share_eq_addr_n2": 0.0,
+    "share_eq_addr_digits": 0.13454681634902954
+   },
+   "exact_channels": {
+    "name_n1": {
+     "key_equal": 335,
+     "key_equal_but_block_dropped_by_cap": 335
+    },
+    "name_n2": {
+     "key_equal": 1611,
+     "key_equal_but_block_dropped_by_cap": 1611
+    },
+    "name_n3": {
+     "key_equal": 1800,
+     "key_equal_but_block_dropped_by_cap": 1800
+    },
+    "addr_n1": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "addr_n2": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "name_n2+country": {
+     "key_equal": 1611,
+     "key_equal_but_block_dropped_by_cap": 1611
+    },
+    "addr_n2+country": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "name_n1+addr_n1": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "name_n2+addr_n2": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "name_n3+addr_n2": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "name_n3+house": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "name_tok1+house": {
+     "key_equal": 39,
+     "key_equal_but_block_dropped_by_cap": 39
+    },
+    "name_tok1+addr_digits": {
+     "key_equal": 13,
+     "key_equal_but_block_dropped_by_cap": 13
+    },
+    "postal+name_tok1": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "postal+house": {
+     "key_equal": 0,
+     "key_equal_but_block_dropped_by_cap": 0
+    },
+    "house+addr_digits": {
+     "key_equal": 7122,
+     "key_equal_but_block_dropped_by_cap": 7122
+    }
+   },
+   "retrieval": {
+    "nameaddr@50/mp20000": {
+     "missed_recovered_at_k": {
+      "10": 0,
+      "20": 7316,
+      "30": 10832,
+      "50": 15162
+     },
+     "sanity_missed_with_rank_lt_10_in_production_channel": 0,
+     "new_candidates_per_s1_at_k": {
+      "10": 0.0,
+      "20": 16.64205,
+      "30": 34.0201,
+      "50": 69.8588
+     }
+    },
+    "addr@50/mp20000": {
+     "missed_recovered_at_k": {
+      "10": 0,
+      "20": 4687,
+      "30": 7353,
+      "50": 10920
+     },
+     "sanity_missed_with_rank_lt_10_in_production_channel": 0,
+     "new_candidates_per_s1_at_k": {
+      "10": 0.0,
+      "20": 17.54335,
+      "30": 35.6866,
+      "50": 72.80495
+     }
+    },
+    "name@50/mp20000": {
+     "missed_recovered_at_k": {
+      "10": 1519,
+      "20": 3082,
+      "30": 4359,
+      "50": 6237
+     },
+     "sanity_missed_with_rank_lt_10_in_production_channel": null,
+     "new_candidates_per_s1_at_k": {
+      "10": 10.8291,
+      "20": 27.08595,
+      "30": 44.56655,
+      "50": 81.0424
+     }
+    },
+    "nameaddr@10/mp200000": {
+     "missed_recovered_at_k": {
+      "10": 19132
+     },
+     "sanity_missed_with_rank_lt_10_in_production_channel": null,
+     "new_candidates_per_s1_at_k": {
+      "10": 6.7208
+     }
+    }
+   },
+   "failure_modes": {
+    "target name non-Latin (script differs)": {
+     "missed": 21278,
+     "share": 0.31877153558052435,
+     "recovered_by": {
+      "nameaddr K=20": 371,
+      "nameaddr K=50": 899,
+      "addr K=20": 2547,
+      "name K=10 (new)": 0,
+      "name K=20 (new)": 1,
+      "nameaddr budget 200k": 34
+     }
+    },
+    "target address empty": {
+     "missed": 14310,
+     "share": 0.2143820224719101,
+     "recovered_by": {
+      "nameaddr K=20": 1819,
+      "nameaddr K=50": 3599,
+      "addr K=20": 0,
+      "name K=10 (new)": 828,
+      "name K=20 (new)": 1475,
+      "nameaddr budget 200k": 5230
+     }
+    },
+    "name shares no token (noisy/domain/different name)": {
+     "missed": 3566,
+     "share": 0.05342322097378277,
+     "recovered_by": {
+      "nameaddr K=20": 128,
+      "nameaddr K=50": 364,
+      "addr K=20": 389,
+      "name K=10 (new)": 0,
+      "name K=20 (new)": 0,
+      "nameaddr budget 200k": 16
+     }
+    },
+    "house number differs": {
+     "missed": 18316,
+     "share": 0.27439700374531834,
+     "recovered_by": {
+      "nameaddr K=20": 3355,
+      "nameaddr K=50": 6947,
+      "addr K=20": 767,
+      "name K=10 (new)": 519,
+      "name K=20 (new)": 1162,
+      "nameaddr budget 200k": 8923
+     }
+    },
+    "address dissimilar (addr_cos < 0.3)": {
+     "missed": 696,
+     "share": 0.010426966292134831,
+     "recovered_by": {
+      "nameaddr K=20": 75,
+      "nameaddr K=50": 168,
+      "addr K=20": 1,
+      "name K=10 (new)": 30,
+      "name K=20 (new)": 61,
+      "nameaddr budget 200k": 236
+     }
+    },
+    "other (partial name/address differences)": {
+     "missed": 8584,
+     "share": 0.1285992509363296,
+     "recovered_by": {
+      "nameaddr K=20": 1568,
+      "nameaddr K=50": 3185,
+      "addr K=20": 983,
+      "name K=10 (new)": 142,
+      "name K=20 (new)": 383,
+      "nameaddr budget 200k": 4693
+     }
+    }
+   },
+   "combos_total_recovered": {
+    "nameaddr K=20": 7316,
+    "nameaddr K=50": 15162,
+    "addr K=20": 4687,
+    "name K=10 (new)": 1519,
+    "name K=20 (new)": 3082,
+    "nameaddr budget 200k": 19132
+   },
+   "combos_new_candidates_per_s1": {
+    "nameaddr K=20": 16.64205,
+    "nameaddr K=50": 69.8588,
+    "addr K=20": 17.54335,
+    "name K=10 (new)": 10.8291,
+    "name K=20 (new)": 27.08595,
+    "nameaddr budget 200k": 6.7208
+   },
+   "current_candidates_per_s1": 72.80006525226344,
+   "seconds": 319.6
+  }
+ },
+ "integrity": {
+  "protected_unchanged": true,
+  "experiments_final_unchanged": true,
+  "n_protected": 34,
+  "n_final_files": 168,
+  "output/matching_results.tsv": "84ede6d4f2e44ab4469ea7798a95fbd8b3c49fc0f3f1561d47064c1caaa0e807",
+  "output/candidate_pairs.tsv": "1842a3df05f69fd9236e4601cef27ded0d18e7e2c481dd803f27e9f8ff4835ea",
+  "camelcase_submission.zip": "93b8db37fd2c8a79d74cc80ceb8051451b546f817393b5b1278f76426ed374a8",
+  "experiments/final/model_final.npz": "1bac911596c3d42eca3dc0c0c01660af3eb4bd6fe27f5e68299f3f4c02866755"
+ },
+ "seconds": 574.6
+}

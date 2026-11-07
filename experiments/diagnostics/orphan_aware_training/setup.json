@@ -1,0 +1,17 @@
+{
+ "S2": {
+  "base_pool_A": 1007354,
+  "orphans_available": 2216011,
+  "orphans_added": 237674,
+  "pool_B": 1245028
+ },
+ "S3": {
+  "base_pool_A": 1056895,
+  "orphans_available": 2366825,
+  "orphans_added": 237820,
+  "pool_B": 1294715
+ },
+ "pool_per_s1": 5.754304836824027,
+ "s1_per_pool_record": 0.1737829378799351,
+ "validation_records_used": 0
+}

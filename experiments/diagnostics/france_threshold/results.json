@@ -1,0 +1,876 @@
+{
+ "checks": {
+  "submission_rows": 1732544,
+  "saved_codes_equal_submitted_file_pairs": true,
+  "saved_codes_equal_rule_recomputation": true,
+  "baseline_min_prob": 0.6900004148483276,
+  "baseline_one_per_target": true
+ },
+ "baseline": {
+  "total_predictions": 5503470,
+  "france_matches": 912688,
+  "france_s1": 259452,
+  "france_matches_per_s1": 3.517752802059726,
+  "france_s1_zero_predictions": 11981,
+  "france_s1_zero_prediction_rate": 0.04617809845366388,
+  "zero_pred_rate_generic10": 0.04370040642539191,
+  "zero_pred_rate_generic100": 0.03785025264124942,
+  "zero_pred_rate_unique": 0.046466559492611595,
+  "pred_per_s1_generic10": 3.591871492161796,
+  "pred_per_s1_unique": 3.5367438173049397,
+  "share_house_conflict": 0.03182029351592064,
+  "share_t_rank0_uncontested": 0.10294646144136879,
+  "us_india_predictions": 4590782
+ },
+ "thresholds": {
+  "0.8": {
+   "total_predictions": 5479787,
+   "france_matches": 889005,
+   "france_s1": 259452,
+   "france_matches_per_s1": 3.4264719485685213,
+   "france_s1_zero_predictions": 12879,
+   "france_s1_zero_prediction_rate": 0.049639239628139306,
+   "zero_pred_rate_generic10": 0.047338881362492743,
+   "zero_pred_rate_generic100": 0.04134129536058796,
+   "zero_pred_rate_unique": 0.04983593560747869,
+   "pred_per_s1_generic10": 3.48631701180569,
+   "pred_per_s1_unique": 3.4448383947381944,
+   "share_house_conflict": 0.024263080209493637,
+   "share_t_rank0_uncontested": 0.10383406167569362,
+   "removed": 23683,
+   "removed_pct_of_france": 0.02594862647476465,
+   "removed_prob_distribution": {
+    "[0.69,0.72)": 6218,
+    "[0.72,0.75)": 6236,
+    "[0.75,0.78)": 6617,
+    "[0.78,0.80)": 4612
+   },
+   "removed_t_rank_distribution": {
+    "0": 21488,
+    "1": 1085,
+    "2": 322,
+    "3-4": 228,
+    "5-9": 216,
+    "10+": 344
+   },
+   "removed_t_rank0_uncontested": 1649,
+   "removed_t_ncand_mean": 13.962884902954102,
+   "removed_on_generic10_s1": 5454,
+   "removed_on_generic100_s1": 1523,
+   "removal_rate_generic10": 0.02938704254493728,
+   "removal_rate_unique": 0.025985886259858863,
+   "removed_house_conflict": 7472,
+   "removal_rate_house_conflict": 0.25728255629777563,
+   "removal_rate_no_house_conflict": 0.018345581828017102,
+   "removed_same_name_diff_address": 6496,
+   "removed_legal_form_only_name_diff": 6746,
+   "removed_target_address_empty": 5975,
+   "france_s1_losing_predictions": 22252,
+   "france_s1_becoming_empty": 898,
+   "loss_per_affected_s1": {
+    "1": 20916,
+    "2": 1248,
+    "3": 81,
+    "4": 7,
+    "5": 0,
+    "6+": 0
+   },
+   "one_per_target_satisfied": true,
+   "us_india_predictions_identical": true,
+   "removed_targets_with_rival_claim_ge_0.69": 168,
+   "rival_claims_by_country": {
+    "US": 0,
+    "India": 0,
+    "France": 182
+   },
+   "example_s1_becoming_empty": [
+    "S1-521482584",
+    "S1-325608211",
+    "S1-324095800",
+    "S1-679163581",
+    "S1-385954406",
+    "S1-422823667",
+    "S1-324897025",
+    "S1-625364879",
+    "S1-9947602",
+    "S1-816716773",
+    "S1-264932422",
+    "S1-185464070",
+    "S1-414180918",
+    "S1-398965843",
+    "S1-742387092"
+   ]
+  },
+  "0.82": {
+   "total_predictions": 5474811,
+   "france_matches": 884029,
+   "france_s1": 259452,
+   "france_matches_per_s1": 3.407293063842252,
+   "france_s1_zero_predictions": 13061,
+   "france_s1_zero_prediction_rate": 0.05034071812897954,
+   "zero_pred_rate_generic10": 0.048132378556222176,
+   "zero_pred_rate_generic100": 0.042259990813045475,
+   "zero_pred_rate_unique": 0.05048191621337914,
+   "pred_per_s1_generic10": 3.4637120185794465,
+   "pred_per_s1_unique": 3.4255690868917323,
+   "share_house_conflict": 0.02336009405553341,
+   "share_t_rank0_uncontested": 0.1040712465315052,
+   "removed": 28659,
+   "removed_pct_of_france": 0.03140065389267745,
+   "removed_prob_distribution": {
+    "[0.69,0.72)": 6218,
+    "[0.72,0.75)": 6236,
+    "[0.75,0.78)": 6617,
+    "[0.78,0.80)": 4612,
+    "[0.80,0.82)": 4976
+   },
+   "removed_t_rank_distribution": {
+    "0": 26045,
+    "1": 1298,
+    "2": 388,
+    "3-4": 270,
+    "5-9": 259,
+    "10+": 399
+   },
+   "removed_t_rank0_uncontested": 1956,
+   "removed_t_ncand_mean": 13.943472862243652,
+   "removed_on_generic10_s1": 6622,
+   "removed_on_generic100_s1": 1865,
+   "removal_rate_generic10": 0.035680417259364626,
+   "removal_rate_unique": 0.03143420506434205,
+   "removed_house_conflict": 8391,
+   "removal_rate_house_conflict": 0.2889263824805454,
+   "removal_rate_no_house_conflict": 0.0229367869033527,
+   "removed_same_name_diff_address": 7802,
+   "removed_legal_form_only_name_diff": 7503,
+   "removed_target_address_empty": 7143,
+   "france_s1_losing_predictions": 26632,
+   "france_s1_becoming_empty": 1080,
+   "loss_per_affected_s1": {
+    "1": 24757,
+    "2": 1732,
+    "3": 135,
+    "4": 7,
+    "5": 1,
+    "6+": 0
+   },
+   "one_per_target_satisfied": true,
+   "us_india_predictions_identical": true,
+   "removed_targets_with_rival_claim_ge_0.69": 223,
+   "rival_claims_by_country": {
+    "US": 0,
+    "India": 0,
+    "France": 241
+   },
+   "example_s1_becoming_empty": [
+    "S1-521482584",
+    "S1-615363988",
+    "S1-755026238",
+    "S1-325608211",
+    "S1-324095800",
+    "S1-679163581",
+    "S1-715847600",
+    "S1-385954406",
+    "S1-186951550",
+    "S1-422823667",
+    "S1-324897025",
+    "S1-625364879",
+    "S1-9947602",
+    "S1-816716773",
+    "S1-264932422"
+   ]
+  },
+  "0.85": {
+   "total_predictions": 5465769,
+   "france_matches": 874987,
+   "france_s1": 259452,
+   "france_matches_per_s1": 3.372442686893915,
+   "france_s1_zero_predictions": 13322,
+   "france_s1_zero_prediction_rate": 0.05134668455051416,
+   "zero_pred_rate_generic10": 0.04946777627249855,
+   "zero_pred_rate_generic100": 0.04290307762976573,
+   "zero_pred_rate_unique": 0.05148759056574688,
+   "pred_per_s1_generic10": 3.424308109154248,
+   "pred_per_s1_unique": 3.3904512321345988,
+   "share_house_conflict": 0.022104328498244286,
+   "share_t_rank0_uncontested": 0.10451583852102946,
+   "removed": 37701,
+   "removed_pct_of_france": 0.041307653875146816,
+   "removed_prob_distribution": {
+    "[0.69,0.72)": 6218,
+    "[0.72,0.75)": 6236,
+    "[0.75,0.78)": 6617,
+    "[0.78,0.80)": 4612,
+    "[0.80,0.82)": 4976,
+    "[0.82,0.85)": 9042
+   },
+   "removed_t_rank_distribution": {
+    "0": 34370,
+    "1": 1624,
+    "2": 498,
+    "3-4": 359,
+    "5-9": 327,
+    "10+": 523
+   },
+   "removed_t_rank0_uncontested": 2508,
+   "removed_t_ncand_mean": 13.957083702087402,
+   "removed_on_generic10_s1": 8658,
+   "removed_on_generic100_s1": 2374,
+   "removal_rate_generic10": 0.04665071770334928,
+   "removal_rate_unique": 0.041363636363636366,
+   "removed_house_conflict": 9701,
+   "removal_rate_house_conflict": 0.3340334687693685,
+   "removal_rate_no_house_conflict": 0.0316868972416556,
+   "removed_same_name_diff_address": 10045,
+   "removed_legal_form_only_name_diff": 8505,
+   "removed_target_address_empty": 9121,
+   "france_s1_losing_predictions": 34281,
+   "france_s1_becoming_empty": 1341,
+   "loss_per_affected_s1": {
+    "1": 31187,
+    "2": 2807,
+    "3": 255,
+    "4": 25,
+    "5": 7,
+    "6+": 0
+   },
+   "one_per_target_satisfied": true,
+   "us_india_predictions_identical": true,
+   "removed_targets_with_rival_claim_ge_0.69": 362,
+   "rival_claims_by_country": {
+    "US": 0,
+    "India": 0,
+    "France": 391
+   },
+   "example_s1_becoming_empty": [
+    "S1-521482584",
+    "S1-823382531",
+    "S1-615363988",
+    "S1-755026238",
+    "S1-325608211",
+    "S1-324095800",
+    "S1-679163581",
+    "S1-715847600",
+    "S1-385954406",
+    "S1-186951550",
+    "S1-422823667",
+    "S1-56504175",
+    "S1-324897025",
+    "S1-625364879",
+    "S1-33537904"
+   ]
+  },
+  "0.88": {
+   "total_predictions": 5454989,
+   "france_matches": 864207,
+   "france_s1": 259452,
+   "france_matches_per_s1": 3.3308935756903013,
+   "france_s1_zero_predictions": 13646,
+   "france_s1_zero_prediction_rate": 0.05259547045310886,
+   "zero_pred_rate_generic10": 0.050880588349138764,
+   "zero_pred_rate_generic100": 0.044281120808452,
+   "zero_pred_rate_unique": 0.05259603455996242,
+   "pred_per_s1_generic10": 3.3755370621250242,
+   "pred_per_s1_unique": 3.3489322968280884,
+   "share_house_conflict": 0.02091049961745739,
+   "share_t_rank0_uncontested": 0.10501534933181518,
+   "removed": 48481,
+   "removed_pct_of_france": 0.0531189190610592,
+   "removed_prob_distribution": {
+    "[0.69,0.72)": 6218,
+    "[0.72,0.75)": 6236,
+    "[0.75,0.78)": 6617,
+    "[0.78,0.80)": 4612,
+    "[0.80,0.82)": 4976,
+    "[0.82,0.85)": 9042,
+    "[0.85,0.88)": 10780
+   },
+   "removed_t_rank_distribution": {
+    "0": 44411,
+    "1": 1993,
+    "2": 612,
+    "3-4": 456,
+    "5-9": 398,
+    "10+": 611
+   },
+   "removed_t_rank0_uncontested": 3203,
+   "removed_t_ncand_mean": 13.915410041809082,
+   "removed_on_generic10_s1": 11178,
+   "removed_on_generic100_s1": 3048,
+   "removal_rate_generic10": 0.0602288891762576,
+   "removal_rate_unique": 0.053102947281029475,
+   "removed_house_conflict": 10971,
+   "removal_rate_house_conflict": 0.3777632394463191,
+   "removal_rate_no_house_conflict": 0.04244912555480362,
+   "removed_same_name_diff_address": 12453,
+   "removed_legal_form_only_name_diff": 9400,
+   "removed_target_address_empty": 11175,
+   "france_s1_losing_predictions": 43013,
+   "france_s1_becoming_empty": 1665,
+   "loss_per_affected_s1": {
+    "1": 38200,
+    "2": 4258,
+    "3": 476,
+    "4": 60,
+    "5": 17,
+    "6+": 2
+   },
+   "one_per_target_satisfied": true,
+   "us_india_predictions_identical": true,
+   "removed_targets_with_rival_claim_ge_0.69": 514,
+   "rival_claims_by_country": {
+    "US": 0,
+    "India": 0,
+    "France": 575
+   },
+   "example_s1_becoming_empty": [
+    "S1-385801270",
+    "S1-521482584",
+    "S1-823382531",
+    "S1-615363988",
+    "S1-755026238",
+    "S1-325608211",
+    "S1-324095800",
+    "S1-679163581",
+    "S1-715847600",
+    "S1-385954406",
+    "S1-186951550",
+    "S1-797209202",
+    "S1-422823667",
+    "S1-168146129",
+    "S1-56504175"
+   ]
+  }
+ },
+ "examples_removed_at_0.80": [
+  {
+   "prob": 0.6900007724761963,
+   "t_rank": 0,
+   "t_ncand": 63,
+   "s1": [
+    "Club des Libre",
+    "4 Rue de Bacalan, Pessac, Nouvelle-Aquitaine"
+   ],
+   "target": [
+    "Club des Libre",
+    ""
+   ],
+   "house_conflict": 0,
+   "s1_name_count": 1
+  },
+  {
+   "prob": 0.6993348598480225,
+   "t_rank": 1,
+   "t_ncand": 16,
+   "s1": [
+    "Roubaix Groupement EURL",
+    "45 Rue Cugnot, Roubaix, Hauts-de-France"
+   ],
+   "target": [
+    "Roubaix EURL & Associés",
+    "45 Rue Cugnot, Roubaix, Nord"
+   ],
+   "house_conflict": 0,
+   "s1_name_count": 31
+  },
+  {
+   "prob": 0.708946943283081,
+   "t_rank": 0,
+   "t_ncand": 3,
+   "s1": [
+    "Varois (France) Comite SAS",
+    "13 Rue du Maréchal Kellermann, Calais, Hauts-de-France"
+   ],
+   "target": [
+    "VAROIS (FRANCE) COMITE S.A.R.L.",
+    "22 RUE DU MARÉCHAL KELLERMANN, CALAIS, Hauts-de-France"
+   ],
+   "house_conflict": 1,
+   "s1_name_count": 1
+  },
+  {
+   "prob": 0.7184866666793823,
+   "t_rank": 0,
+   "t_ncand": 4,
+   "s1": [
+    "Afps & Cie SA",
+    "75 Boulevard de Pyla, La Teste-de-Buch, Nouvelle-Aquitaine"
+   ],
+   "target": [
+    "Afps & Cie SAS",
+    "76 Boulevard De Pyla, La Teste-de-buch, Gironde"
+   ],
+   "house_conflict": 1,
+   "s1_name_count": 1
+  },
+  {
+   "prob": 0.7279766798019409,
+   "t_rank": 0,
+   "t_ncand": 56,
+   "s1": [
+    "Lycée de Antoine",
+    "20 Rue des Fusilles Cazaux, La Teste-de-Buch, Nouvelle-Aquitaine"
+   ],
+   "target": [
+    "Lycee Antoine De",
+    "22 R. Des Fusilles Cazaux, La Teste-de-buch"
+   ],
+   "house_conflict": 1,
+   "s1_name_count": 3
+  },
+  {
+   "prob": 0.7373441457748413,
+   "t_rank": 0,
+   "t_ncand": 24,
+   "s1": [
+    "Roubaix Comite SARL",
+    "9 Cité Flipo, rue monge, Roubaix, Hauts-de-France"
+   ],
+   "target": [
+    "Roubaix SARL-Comite",
+    "29 CITÉ FLIPO, RUE MONGE, ROUBAIX, Hauts-de-France"
+   ],
+   "house_conflict": 1,
+   "s1_name_count": 103
+  },
+  {
+   "prob": 0.7470075488090515,
+   "t_rank": 0,
+   "t_ncand": 21,
+   "s1": [
+    "Lille Maternelle",
+    "25 Rue Nationale, Lille, Hauts-de-France"
+   ],
+   "target": [
+    "Lille Maternelle",
+    "65 R. DE CAMBRAI, LILLE"
+   ],
+   "house_conflict": 1,
+   "s1_name_count": 56
+  },
+  {
+   "prob": 0.7563610672950745,
+   "t_rank": 0,
+   "t_ncand": 7,
+   "s1": [
+    "Comité des Equilibre",
+    "27 RUE Jean Bart, Maison des Associations 2eme et 3eme Etages, Lille, Hauts-de-France"
+   ],
+   "target": [
+    "Comité  des Equilibre SCI",
+    "R Jean Bart, Maison Des Associations 2eme Et 3eme Etages, Lille, Hauts-de-France"
+   ],
+   "house_conflict": 1,
+   "s1_name_count": 1
+  },
+  {
+   "prob": 0.765318751335144,
+   "t_rank": 0,
+   "t_ncand": 6,
+   "s1": [
+    "Ets Lassaut SARL",
+    "10 bis Rue François Girardon, Mérignac, Nouvelle-Aquitaine"
+   ],
+   "target": [
+    "Ets Lassaut SARL",
+    ""
+   ],
+   "house_conflict": 0,
+   "s1_name_count": 1
+  },
+  {
+   "prob": 0.7742558717727661,
+   "t_rank": 0,
+   "t_ncand": 11,
+   "s1": [
+    "Nantes Sportive EURL",
+    "20 Rue Henri Billot, Nantes, Pays de la Loire"
+   ],
+   "target": [
+    "LC",
+    "R HENRI BILLOT, Nantes, Loire-Atlantique"
+   ],
+   "house_conflict": 0,
+   "s1_name_count": 185
+  },
+  {
+   "prob": 0.7829033136367798,
+   "t_rank": 0,
+   "t_ncand": 4,
+   "s1": [
+    "Solidarite Cie",
+    "271 Avenue Antoine de Saint Exupéry, Calais, Hauts-de-France"
+   ],
+   "target": [
+    "SC",
+    "271 AVE ANTOINE DE SASNT EXUPÉRY, Calais, Pas-de-Calais"
+   ],
+   "house_conflict": 0,
+   "s1_name_count": 2
+  },
+  {
+   "prob": 0.7914994955062866,
+   "t_rank": 0,
+   "t_ncand": 18,
+   "s1": [
+    "Familiale & Cie",
+    "Nouvelle-Aquitaine, Bordeaux, 6 Rue Jean Et Charles Pannetier"
+   ],
+   "target": [
+    "FC",
+    "6 R Jean Et Charles Pannetier, Bordeaux"
+   ],
+   "house_conflict": 0,
+   "s1_name_count": 10
+  }
+ ],
+ "labelled_comparison": {
+  "V": {
+   "current model, US (in-distribution)": {
+    "0.69": {
+     "macro_f05": 0.9711942421921572,
+     "singleton_f05": 0.9296298802354692,
+     "predictions": 887627,
+     "removed": 0,
+     "removed_that_were_true_matches": 0,
+     "zero_prediction_rate": 0.05582333565017678
+    },
+    "0.8": {
+     "macro_f05": 0.970202147065465,
+     "singleton_f05": 0.963529332160498,
+     "predictions": 865488,
+     "removed": 22139,
+     "removed_that_were_true_matches": 16568,
+     "zero_prediction_rate": 0.05992565954489136
+    },
+    "0.82": {
+     "macro_f05": 0.9693988017908408,
+     "singleton_f05": 0.9685364368360512,
+     "predictions": 860383,
+     "removed": 27244,
+     "removed_that_were_true_matches": 20723,
+     "zero_prediction_rate": 0.060805808225801575
+    },
+    "0.85": {
+     "macro_f05": 0.9678419394598955,
+     "singleton_f05": 0.9750321401989309,
+     "predictions": 851785,
+     "removed": 35842,
+     "removed_that_were_true_matches": 27973,
+     "zero_prediction_rate": 0.062033483424496084
+    },
+    "0.88": {
+     "macro_f05": 0.9654465357296685,
+     "singleton_f05": 0.980445226334664,
+     "predictions": 842144,
+     "removed": 45483,
+     "removed_that_were_true_matches": 36445,
+     "zero_prediction_rate": 0.06347269650358103
+    }
+   },
+   "current model, India (in-distribution)": {
+    "0.69": {
+     "macro_f05": 0.9503374896999047,
+     "singleton_f05": 0.9037487335359676,
+     "predictions": 575594,
+     "removed": 0,
+     "removed_that_were_true_matches": 0,
+     "zero_prediction_rate": 0.059636767136936976
+    },
+    "0.8": {
+     "macro_f05": 0.947544574195135,
+     "singleton_f05": 0.9367781155015198,
+     "predictions": 557448,
+     "removed": 18146,
+     "removed_that_were_true_matches": 13597,
+     "zero_prediction_rate": 0.06524151362123236
+    },
+    "0.82": {
+     "macro_f05": 0.9460104713889405,
+     "singleton_f05": 0.9423505572441743,
+     "predictions": 552931,
+     "removed": 22663,
+     "removed_that_were_true_matches": 17313,
+     "zero_prediction_rate": 0.06667949908285967
+    },
+    "0.85": {
+     "macro_f05": 0.9429249413280105,
+     "singleton_f05": 0.9521783181357649,
+     "predictions": 544958,
+     "removed": 30636,
+     "removed_that_were_true_matches": 24005,
+     "zero_prediction_rate": 0.06938562920355987
+    },
+    "0.88": {
+     "macro_f05": 0.9382691002974207,
+     "singleton_f05": 0.9621073961499493,
+     "predictions": 535035,
+     "removed": 40559,
+     "removed_that_were_true_matches": 32741,
+     "zero_prediction_rate": 0.07263524989243415
+    }
+   },
+   "LOCO over-merge analogue: India-only model on US": {
+    "0.68": {
+     "macro_f05": 0.9606934367651039,
+     "singleton_f05": 0.8476216252791122,
+     "predictions": 903641,
+     "removed": 0,
+     "removed_that_were_true_matches": 0,
+     "zero_prediction_rate": 0.05021002689553051
+    },
+    "0.8": {
+     "macro_f05": 0.9624116291078512,
+     "singleton_f05": 0.873875093037418,
+     "predictions": 885233,
+     "removed": 18408,
+     "removed_that_were_true_matches": 11865,
+     "zero_prediction_rate": 0.052756036384515426
+    },
+    "0.82": {
+     "macro_f05": 0.9624941620942975,
+     "singleton_f05": 0.8806414507070843,
+     "predictions": 881014,
+     "removed": 22627,
+     "removed_that_were_true_matches": 14903,
+     "zero_prediction_rate": 0.05340575987428606
+    },
+    "0.85": {
+     "macro_f05": 0.9623402322480075,
+     "singleton_f05": 0.8921442587455173,
+     "predictions": 873118,
+     "removed": 30523,
+     "removed_that_were_true_matches": 20690,
+     "zero_prediction_rate": 0.054693874467377834
+    },
+    "0.88": {
+     "macro_f05": 0.9618389873498339,
+     "singleton_f05": 0.9074362270789634,
+     "predictions": 862837,
+     "removed": 40804,
+     "removed_that_were_true_matches": 28499,
+     "zero_prediction_rate": 0.05651461122359554
+    }
+   },
+   "LOCO under-merge analogue: US-only model on India": {
+    "0.74": {
+     "macro_f05": 0.8734790391664562,
+     "singleton_f05": 0.8833839918946302,
+     "predictions": 498509,
+     "removed": 0,
+     "removed_that_were_true_matches": 0,
+     "zero_prediction_rate": 0.09652052809166874
+    },
+    "0.8": {
+     "macro_f05": 0.8670323756362271,
+     "singleton_f05": 0.8996960486322189,
+     "predictions": 484671,
+     "removed": 13838,
+     "removed_that_were_true_matches": 11503,
+     "zero_prediction_rate": 0.10274236282524514
+    },
+    "0.82": {
+     "macro_f05": 0.864242844077888,
+     "singleton_f05": 0.904660587639311,
+     "predictions": 479321,
+     "removed": 19188,
+     "removed_that_were_true_matches": 16069,
+     "zero_prediction_rate": 0.10512579542109196
+    },
+    "0.85": {
+     "macro_f05": 0.8591487035353184,
+     "singleton_f05": 0.9139817629179331,
+     "predictions": 470152,
+     "removed": 28357,
+     "removed_that_were_true_matches": 23925,
+     "zero_prediction_rate": 0.10962091532869857
+    },
+    "0.88": {
+     "macro_f05": 0.8530182511523602,
+     "singleton_f05": 0.922289766970618,
+     "predictions": 459807,
+     "removed": 38702,
+     "removed_that_were_true_matches": 32909,
+     "zero_prediction_rate": 0.11455762132294663
+    }
+   }
+  },
+  "T": {
+   "current model, US (in-distribution)": {
+    "0.69": {
+     "macro_f05": 0.9642550173062802,
+     "singleton_f05": 0.8937681845862372,
+     "predictions": 895164,
+     "removed": 0,
+     "removed_that_were_true_matches": 0,
+     "zero_prediction_rate": 0.05365129491402496
+    },
+    "0.8": {
+     "macro_f05": 0.966198513789678,
+     "singleton_f05": 0.9436362406116787,
+     "predictions": 871065,
+     "removed": 24099,
+     "removed_that_were_true_matches": 15945,
+     "zero_prediction_rate": 0.05850911123870539
+    },
+    "0.82": {
+     "macro_f05": 0.9658326749645487,
+     "singleton_f05": 0.9506055890114351,
+     "predictions": 865555,
+     "removed": 29609,
+     "removed_that_were_true_matches": 20071,
+     "zero_prediction_rate": 0.05951013870841014
+    },
+    "0.85": {
+     "macro_f05": 0.9650518851094603,
+     "singleton_f05": 0.961296434129508,
+     "predictions": 856290,
+     "removed": 38874,
+     "removed_that_were_true_matches": 27244,
+     "zero_prediction_rate": 0.060983348946843555
+    },
+    "0.88": {
+     "macro_f05": 0.9634504388122477,
+     "singleton_f05": 0.9701603626767711,
+     "predictions": 845831,
+     "removed": 49333,
+     "removed_that_were_true_matches": 35824,
+     "zero_prediction_rate": 0.06254344081472303
+    }
+   },
+   "current model, India (in-distribution)": {
+    "0.69": {
+     "macro_f05": 0.9394243014906501,
+     "singleton_f05": 0.8541033434650456,
+     "predictions": 583881,
+     "removed": 0,
+     "removed_that_were_true_matches": 0,
+     "zero_prediction_rate": 0.05627958060644489
+    },
+    "0.8": {
+     "macro_f05": 0.9401044514877338,
+     "singleton_f05": 0.9011144883485309,
+     "predictions": 563729,
+     "removed": 20152,
+     "removed_that_were_true_matches": 13163,
+     "zero_prediction_rate": 0.06272786974342716
+    },
+    "0.82": {
+     "macro_f05": 0.9392920839518881,
+     "singleton_f05": 0.9101317122593718,
+     "predictions": 558782,
+     "removed": 25099,
+     "removed_that_were_true_matches": 16850,
+     "zero_prediction_rate": 0.06425643696641681
+    },
+    "0.85": {
+     "macro_f05": 0.9373647463664733,
+     "singleton_f05": 0.9235055724417427,
+     "predictions": 550257,
+     "removed": 33624,
+     "removed_that_were_true_matches": 23397,
+     "zero_prediction_rate": 0.06700785796779818
+    },
+    "0.88": {
+     "macro_f05": 0.9338778102643175,
+     "singleton_f05": 0.9391084093211752,
+     "predictions": 539725,
+     "removed": 44156,
+     "removed_that_were_true_matches": 32005,
+     "zero_prediction_rate": 0.0704895944201635
+    }
+   },
+   "LOCO over-merge analogue: India-only model on US": {
+    "0.68": {
+     "macro_f05": 0.9500174119041382,
+     "singleton_f05": 0.7937614182285676,
+     "predictions": 915027,
+     "removed": 0,
+     "removed_that_were_true_matches": 0,
+     "zero_prediction_rate": 0.047010516454625124
+    },
+    "0.8": {
+     "macro_f05": 0.9545990912847248,
+     "singleton_f05": 0.8309763854117329,
+     "predictions": 893846,
+     "removed": 21181,
+     "removed_that_were_true_matches": 11455,
+     "zero_prediction_rate": 0.05020624943338068
+    },
+    "0.82": {
+     "macro_f05": 0.9552971044019382,
+     "singleton_f05": 0.8397049868056026,
+     "predictions": 888932,
+     "removed": 26095,
+     "removed_that_were_true_matches": 14485,
+     "zero_prediction_rate": 0.0509579644011967
+    },
+    "0.85": {
+     "macro_f05": 0.9562534636982949,
+     "singleton_f05": 0.8566208809797686,
+     "predictions": 880337,
+     "removed": 34690,
+     "removed_that_were_true_matches": 20047,
+     "zero_prediction_rate": 0.05242739717748028
+    },
+    "0.88": {
+     "macro_f05": 0.9563971617159476,
+     "singleton_f05": 0.8741457473442046,
+     "predictions": 869399,
+     "removed": 45628,
+     "removed_that_were_true_matches": 27724,
+     "zero_prediction_rate": 0.05440678734399081
+    }
+   },
+   "LOCO under-merge analogue: US-only model on India": {
+    "0.74": {
+     "macro_f05": 0.8646800944452362,
+     "singleton_f05": 0.8368794326241135,
+     "predictions": 508017,
+     "removed": 0,
+     "removed_that_were_true_matches": 0,
+     "zero_prediction_rate": 0.0914762562558029
+    },
+    "0.8": {
+     "macro_f05": 0.8602253370963218,
+     "singleton_f05": 0.8598784194528876,
+     "predictions": 493170,
+     "removed": 14847,
+     "removed_that_were_true_matches": 11132,
+     "zero_prediction_rate": 0.09819062931678707
+    },
+    "0.82": {
+     "macro_f05": 0.8582076432946143,
+     "singleton_f05": 0.867983789260385,
+     "predictions": 487386,
+     "removed": 20631,
+     "removed_that_were_true_matches": 15609,
+     "zero_prediction_rate": 0.10080617767612492
+    },
+    "0.85": {
+     "macro_f05": 0.8543457804709681,
+     "singleton_f05": 0.881661600810537,
+     "predictions": 477724,
+     "removed": 30293,
+     "removed_that_were_true_matches": 23258,
+     "zero_prediction_rate": 0.10517674766185829
+    },
+    "0.88": {
+     "macro_f05": 0.8491774949342932,
+     "singleton_f05": 0.8934143870314083,
+     "predictions": 466475,
+     "removed": 41542,
+     "removed_that_were_true_matches": 32425,
+     "zero_prediction_rate": 0.11024932629814986
+    }
+   }
+  }
+ },
+ "integrity": {
+  "protected_files_unchanged": true,
+  "n_files": 34,
+  "output/matching_results.tsv": "84ede6d4f2e44ab4469ea7798a95fbd8b3c49fc0f3f1561d47064c1caaa0e807",
+  "output/candidate_pairs.tsv": "1842a3df05f69fd9236e4601cef27ded0d18e7e2c481dd803f27e9f8ff4835ea"
+ },
+ "seconds": 255.6
+}

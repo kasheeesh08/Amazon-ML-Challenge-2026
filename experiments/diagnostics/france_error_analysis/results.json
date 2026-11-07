@@ -1,0 +1,1200 @@
+{
+ "profiles": {
+  "V-US-Step3": {
+   "cand_per_s1": {
+    "mean": 64.20563748451241,
+    "p5": 32.0,
+    "p50": 39.0,
+    "p90": 141.0,
+    "p99": 214.0
+   },
+   "share_s1_ge_300_candidates": 0.0011710132664470702,
+   "share_s1_name_shared_10+": 0.12805218941706203,
+   "share_s1_name_shared_100+": 0.000453295457979511,
+   "share_s1_house_present": 0.9947531050738871,
+   "cand_share_t_rank0": 0.07065999177503364,
+   "cand_t_ncand": {
+    "mean": 41.72367601869268,
+    "p5": 4.0,
+    "p50": 30.0,
+    "p90": 80.0,
+    "p99": 253.0
+   },
+   "pred_t_gap_p50": 0.0,
+   "pred_per_s1": 3.352977395666495,
+   "zero_prediction_rate": 0.05582333565017678,
+   "true_singleton_rate": 0.05582711311232662
+  },
+  "V-India-Step3": {
+   "cand_per_s1": {
+    "mean": 49.986797708281436,
+    "p5": 32.0,
+    "p50": 39.0,
+    "p90": 76.0,
+    "p99": 197.0
+   },
+   "share_s1_ge_300_candidates": 2.830680042573428e-05,
+   "share_s1_name_shared_10+": 0.24230055028420028,
+   "share_s1_name_shared_100+": 0.0,
+   "share_s1_house_present": 0.9029586267804978,
+   "cand_share_t_rank0": 0.09017961218048472,
+   "cand_t_ncand": {
+    "mean": 50.73162358139811,
+    "p5": 3.0,
+    "p50": 22.0,
+    "p90": 106.0,
+    "p99": 492.0
+   },
+   "pred_t_gap_p50": 0.0,
+   "pred_per_s1": 3.2586448968500195,
+   "zero_prediction_rate": 0.059636767136936976,
+   "true_singleton_rate": 0.05587762404039946
+  },
+  "T-US-Step3": {
+   "cand_per_s1": {
+    "mean": 65.4844972953371,
+    "p5": 32.0,
+    "p50": 39.0,
+    "p90": 146.0,
+    "p99": 222.0
+   },
+   "share_s1_ge_300_candidates": 0.0017754072104197516,
+   "share_s1_name_shared_10+": 0.12805218941706203,
+   "share_s1_name_shared_100+": 0.000453295457979511,
+   "share_s1_house_present": 0.9947531050738871,
+   "cand_share_t_rank0": 0.08301349017454276,
+   "cand_t_ncand": {
+    "mean": 37.14799112576562,
+    "p5": 3.0,
+    "p50": 26.0,
+    "p90": 73.0,
+    "p99": 237.0
+   },
+   "pred_t_gap_p50": 0.0,
+   "pred_per_s1": 3.3814481278897586,
+   "zero_prediction_rate": 0.05365129491402496,
+   "true_singleton_rate": 0.05582711311232662
+  },
+  "T-India-Step3": {
+   "cand_per_s1": {
+    "mean": 51.13605380556625,
+    "p5": 32.0,
+    "p50": 40.0,
+    "p90": 80.0,
+    "p99": 187.0
+   },
+   "share_s1_ge_300_candidates": 4.5290880681174845e-05,
+   "share_s1_name_shared_10+": 0.24230055028420028,
+   "share_s1_name_shared_100+": 0.0,
+   "share_s1_house_present": 0.9029586267804978,
+   "cand_share_t_rank0": 0.10548822315229901,
+   "cand_t_ncand": {
+    "mean": 44.04039626821817,
+    "p5": 3.0,
+    "p50": 19.0,
+    "p90": 88.0,
+    "p99": 457.0
+   },
+   "pred_t_gap_p50": 0.0,
+   "pred_per_s1": 3.305560587875631,
+   "zero_prediction_rate": 0.05627958060644489,
+   "true_singleton_rate": 0.05587762404039946
+  },
+  "T-US-IN-model": {
+   "cand_per_s1": {
+    "mean": 65.4844972953371,
+    "p5": 32.0,
+    "p50": 39.0,
+    "p90": 146.0,
+    "p99": 222.0
+   },
+   "share_s1_ge_300_candidates": 0.0017754072104197516,
+   "share_s1_name_shared_10+": 0.12805218941706203,
+   "share_s1_name_shared_100+": 0.000453295457979511,
+   "share_s1_house_present": 0.9947531050738871,
+   "cand_share_t_rank0": 0.08301349017454276,
+   "cand_t_ncand": {
+    "mean": 37.14799112576562,
+    "p5": 3.0,
+    "p50": 26.0,
+    "p90": 73.0,
+    "p99": 237.0
+   },
+   "pred_t_gap_p50": 0.0,
+   "pred_per_s1": 3.456479858571817,
+   "zero_prediction_rate": 0.047010516454625124,
+   "true_singleton_rate": 0.05582711311232662
+  },
+  "T-India-US-model": {
+   "cand_per_s1": {
+    "mean": 51.13605380556625,
+    "p5": 32.0,
+    "p50": 40.0,
+    "p90": 80.0,
+    "p99": 187.0
+   },
+   "share_s1_ge_300_candidates": 4.5290880681174845e-05,
+   "share_s1_name_shared_10+": 0.24230055028420028,
+   "share_s1_name_shared_100+": 0.0,
+   "share_s1_house_present": 0.9029586267804978,
+   "cand_share_t_rank0": 0.10548822315229901,
+   "cand_t_ncand": {
+    "mean": 44.04039626821817,
+    "p5": 3.0,
+    "p50": 19.0,
+    "p90": 88.0,
+    "p99": 457.0
+   },
+   "pred_t_gap_p50": 0.0,
+   "pred_per_s1": 2.87606716637605,
+   "zero_prediction_rate": 0.0914762562558029,
+   "true_singleton_rate": 0.05587762404039946
+  },
+  "T-India-IN-model": {
+   "cand_per_s1": {
+    "mean": 51.13605380556625,
+    "p5": 32.0,
+    "p50": 40.0,
+    "p90": 80.0,
+    "p99": 187.0
+   },
+   "share_s1_ge_300_candidates": 4.5290880681174845e-05,
+   "share_s1_name_shared_10+": 0.24230055028420028,
+   "share_s1_name_shared_100+": 0.0,
+   "share_s1_house_present": 0.9029586267804978,
+   "cand_share_t_rank0": 0.10548822315229901,
+   "cand_t_ncand": {
+    "mean": 44.04039626821817,
+    "p5": 3.0,
+    "p50": 19.0,
+    "p90": 88.0,
+    "p99": 457.0
+   },
+   "pred_t_gap_p50": 0.0,
+   "pred_per_s1": 3.3268529631558685,
+   "zero_prediction_rate": 0.0554473606739283,
+   "true_singleton_rate": 0.05587762404039946
+  },
+  "T-US-US-model": {
+   "cand_per_s1": {
+    "mean": 65.4844972953371,
+    "p5": 32.0,
+    "p50": 39.0,
+    "p90": 146.0,
+    "p99": 222.0
+   },
+   "share_s1_ge_300_candidates": 0.0017754072104197516,
+   "share_s1_name_shared_10+": 0.12805218941706203,
+   "share_s1_name_shared_100+": 0.000453295457979511,
+   "share_s1_house_present": 0.9947531050738871,
+   "cand_share_t_rank0": 0.08301349017454276,
+   "cand_t_ncand": {
+    "mean": 37.14799112576562,
+    "p5": 3.0,
+    "p50": 26.0,
+    "p90": 73.0,
+    "p99": 237.0
+   },
+   "pred_t_gap_p50": 0.0,
+   "pred_per_s1": 3.355111661781149,
+   "zero_prediction_rate": 0.05529826841135052,
+   "true_singleton_rate": 0.05582711311232662
+  },
+  "S-US-Step3": {
+   "cand_per_s1": {
+    "mean": 70.9679482336587,
+    "p5": 31.0,
+    "p50": 40.0,
+    "p90": 164.0,
+    "p99": 249.0
+   },
+   "share_s1_ge_300_candidates": 0.0031617358194070896,
+   "share_s1_name_shared_10+": 0.12805218941706203,
+   "share_s1_name_shared_100+": 0.000453295457979511,
+   "share_s1_house_present": 0.9947531050738871,
+   "cand_share_t_rank0": 0.20939066874403817,
+   "cand_t_ncand": {
+    "mean": 17.374877622815912,
+    "p5": 1.0,
+    "p50": 10.0,
+    "p90": 35.0,
+    "p99": 145.0
+   },
+   "pred_t_gap_p50": 0.0,
+   "pred_per_s1": 3.830467498715663,
+   "zero_prediction_rate": 0.028096763470430025,
+   "true_singleton_rate": 0.05582711311232662
+  },
+  "S-India-Step3": {
+   "cand_per_s1": {
+    "mean": 75.54589664621028,
+    "p5": 30.0,
+    "p50": 46.0,
+    "p90": 152.0,
+    "p99": 252.0
+   },
+   "share_s1_ge_300_candidates": 0.0024457075567834415,
+   "share_s1_name_shared_10+": 0.24230055028420028,
+   "share_s1_name_shared_100+": 0.0,
+   "share_s1_house_present": 0.9029586267804978,
+   "cand_share_t_rank0": 0.2059564040354838,
+   "cand_t_ncand": {
+    "mean": 16.20538214382734,
+    "p5": 1.0,
+    "p50": 11.0,
+    "p90": 29.0,
+    "p99": 144.0
+   },
+   "pred_t_gap_p50": 0.0,
+   "pred_per_s1": 4.029433411082678,
+   "zero_prediction_rate": 0.02702733304649109,
+   "true_singleton_rate": 0.05587762404039946
+  },
+  "TEST-US-Step3": {
+   "cand_per_s1": {
+    "mean": 67.11220981260915,
+    "p5": 31.0,
+    "p50": 40.0,
+    "p90": 145.0,
+    "p99": 225.0
+   },
+   "share_s1_ge_300_candidates": 0.001155169761697225,
+   "share_s1_name_shared_10+": 0.16791885460243158,
+   "share_s1_name_shared_100+": 0.05489770866196355,
+   "share_s1_house_present": 0.994709744746692,
+   "cand_share_t_rank0": 0.08329396395199007,
+   "cand_t_ncand": {
+    "mean": 51.09196571386585,
+    "p5": 3.0,
+    "p50": 31.0,
+    "p90": 105.0,
+    "p99": 422.0
+   },
+   "pred_t_gap_p50": 0.0,
+   "pred_per_s1": 3.6182812401033924,
+   "zero_prediction_rate": 0.035208548859458365,
+   "true_singleton_rate": null
+  },
+  "TEST-India-Step3": {
+   "cand_per_s1": {
+    "mean": 77.04463780855471,
+    "p5": 30.0,
+    "p50": 47.0,
+    "p90": 157.0,
+    "p99": 255.0
+   },
+   "share_s1_ge_300_candidates": 0.0027815295573009905,
+   "share_s1_name_shared_10+": 0.32832542784690105,
+   "share_s1_name_shared_100+": 0.002022257174815367,
+   "share_s1_house_present": 0.9017168197968853,
+   "cand_share_t_rank0": 0.07177999976923995,
+   "cand_t_ncand": {
+    "mean": 64.25113577216803,
+    "p5": 3.0,
+    "p50": 47.0,
+    "p90": 115.0,
+    "p99": 549.0
+   },
+   "pred_t_gap_p50": 0.0,
+   "pred_per_s1": 3.532912914544202,
+   "zero_prediction_rate": 0.04136985083692805,
+   "true_singleton_rate": null
+  },
+  "TEST-France-Step3": {
+   "cand_per_s1": {
+    "mean": 74.64482833048116,
+    "p5": 34.0,
+    "p50": 43.0,
+    "p90": 173.0,
+    "p99": 292.0
+   },
+   "share_s1_ge_300_candidates": 0.008383053512788492,
+   "share_s1_name_shared_10+": 0.19915051724403743,
+   "share_s1_name_shared_100+": 0.041953810338713905,
+   "share_s1_house_present": 0.9950896504941183,
+   "cand_share_t_rank0": 0.07232929517550846,
+   "cand_t_ncand": {
+    "mean": 43.855826484246954,
+    "p5": 4.0,
+    "p50": 31.0,
+    "p90": 82.0,
+    "p99": 322.0
+   },
+   "pred_t_gap_p50": 0.0,
+   "pred_per_s1": 3.828773723077872,
+   "zero_prediction_rate": 0.026806499853537457,
+   "true_singleton_rate": null
+  },
+  "TEST-US-final": {
+   "cand_per_s1": {
+    "mean": 67.11220981260915,
+    "p5": 31.0,
+    "p50": 40.0,
+    "p90": 145.0,
+    "p99": 225.0
+   },
+   "share_s1_ge_300_candidates": 0.001155169761697225,
+   "share_s1_name_shared_10+": 0.16791885460243158,
+   "share_s1_name_shared_100+": 0.05489770866196355,
+   "share_s1_house_present": 0.994709744746692,
+   "cand_share_t_rank0": null,
+   "cand_t_ncand": null,
+   "pred_t_gap_p50": 0.0,
+   "pred_per_s1": 3.2070302485575457,
+   "zero_prediction_rate": 0.061341625622449505,
+   "true_singleton_rate": null
+  },
+  "TEST-India-final": {
+   "cand_per_s1": {
+    "mean": 77.04463780855471,
+    "p5": 30.0,
+    "p50": 47.0,
+    "p90": 157.0,
+    "p99": 255.0
+   },
+   "share_s1_ge_300_candidates": 0.0027815295573009905,
+   "share_s1_name_shared_10+": 0.32832542784690105,
+   "share_s1_name_shared_100+": 0.002022257174815367,
+   "share_s1_house_present": 0.9017168197968853,
+   "cand_share_t_rank0": null,
+   "cand_t_ncand": null,
+   "pred_t_gap_p50": 0.0,
+   "pred_per_s1": 3.042251347554155,
+   "zero_prediction_rate": 0.07196173761027969,
+   "true_singleton_rate": null
+  },
+  "TEST-France-final": {
+   "cand_per_s1": {
+    "mean": 74.64482833048116,
+    "p5": 34.0,
+    "p50": 43.0,
+    "p90": 173.0,
+    "p99": 292.0
+   },
+   "share_s1_ge_300_candidates": 0.008383053512788492,
+   "share_s1_name_shared_10+": 0.19915051724403743,
+   "share_s1_name_shared_100+": 0.041953810338713905,
+   "share_s1_house_present": 0.9950896504941183,
+   "cand_share_t_rank0": null,
+   "cand_t_ncand": null,
+   "pred_t_gap_p50": 0.0,
+   "pred_per_s1": 3.517752802059726,
+   "zero_prediction_rate": 0.04617809845366388,
+   "true_singleton_rate": null
+  }
+ },
+ "labelled_metrics": {
+  "V-US-Step3": {
+   "macro_f05": 0.9711942421921572,
+   "pair_precision": 0.9852494347287768,
+   "pair_recall": 0.955015026296018,
+   "entity_precision": 0.9831901868108109,
+   "entity_recall": 0.9548675857724903,
+   "fp": 13093,
+   "fn": 41194,
+   "fn_not_in_candidates": 10544,
+   "candidate_recall": 0.9884856638652526,
+   "singleton_f05": 0.9296298802354692,
+   "singleton_false_merge_rate": 0.07037011976453075,
+   "zero_prediction_rate": 0.05582333565017678,
+   "pred_per_s1": 3.352977395666495,
+   "f05_generic10_s1": 0.9619457497222736,
+   "f05_generic100_s1": 0.9789463538440591,
+   "f05_unique_s1": 0.9762059947296964,
+   "fp_prob_ge_0.95": 1585,
+   "share_of_fp_with_prob_ge_0.95": 0.1210570533873062,
+   "precision_by_category": {
+    "house-number conflict": 0.9441608723135272,
+    "house number absent on either side": 0.9665993861807726,
+    "legal-form-only name difference": 0.9754792313619277,
+    "t_rank0 & uncontested target": 0.9839387283888044,
+    "target address empty": 0.8885725333052128,
+    "target name is an initialism": 0.9797822706065319,
+    "prob [0.69,0.80)": 0.7483626180044266,
+    "prob [0.80,0.90)": 0.8644171384457026,
+    "prob [0.90,0.95)": 0.9375792945952803,
+    "prob >=0.95": 0.9980354803405498
+   },
+   "recall_empty_address_targets": null
+  },
+  "V-India-Step3": {
+   "macro_f05": 0.9503374896999047,
+   "pair_precision": 0.9774945534526073,
+   "pair_recall": 0.9194635917649635,
+   "entity_precision": 0.9753821903153339,
+   "entity_recall": 0.9186422673471893,
+   "fp": 12954,
+   "fn": 49282,
+   "fn_not_in_candidates": 16733,
+   "candidate_recall": 0.9726550115864441,
+   "singleton_f05": 0.9037487335359676,
+   "singleton_false_merge_rate": 0.09625126646403243,
+   "zero_prediction_rate": 0.059636767136936976,
+   "pred_per_s1": 3.2586448968500195,
+   "f05_generic10_s1": 0.9205094098577433,
+   "f05_generic100_s1": null,
+   "f05_unique_s1": 0.9664289501372516,
+   "fp_prob_ge_0.95": 2213,
+   "share_of_fp_with_prob_ge_0.95": 0.17083526323915393,
+   "precision_by_category": {
+    "house-number conflict": 0.9481497914633065,
+    "house number absent on either side": 0.9599115054946383,
+    "legal-form-only name difference": 0.981372472581735,
+    "t_rank0 & uncontested target": 0.9738670554297589,
+    "target address empty": 0.9026307448494453,
+    "target name is an initialism": 0.9819563152896487,
+    "prob [0.69,0.80)": 0.7493111429516147,
+    "prob [0.80,0.90)": 0.8669151004536617,
+    "prob [0.90,0.95)": 0.9363863802782524,
+    "prob >=0.95": 0.9955185374190988
+   },
+   "recall_empty_address_targets": null
+  },
+  "T-US-Step3": {
+   "macro_f05": 0.9642550173062802,
+   "pair_precision": 0.9774130773802342,
+   "pair_recall": 0.9554638495273706,
+   "entity_precision": 0.9745103910935663,
+   "entity_recall": 0.955376094125799,
+   "fp": 20219,
+   "fn": 40783,
+   "fn_not_in_candidates": 12181,
+   "candidate_recall": 0.9866980151311306,
+   "singleton_f05": 0.8937681845862372,
+   "singleton_false_merge_rate": 0.10623181541376277,
+   "zero_prediction_rate": 0.05365129491402496,
+   "pred_per_s1": 3.3814481278897586,
+   "f05_generic10_s1": 0.9546194427099747,
+   "f05_generic100_s1": 0.9582600188727012,
+   "f05_unique_s1": 0.969637707126696,
+   "fp_prob_ge_0.95": 2715,
+   "share_of_fp_with_prob_ge_0.95": 0.13427963796429102,
+   "precision_by_category": {
+    "house-number conflict": 0.9263604612441821,
+    "house number absent on either side": 0.9453285144028482,
+    "legal-form-only name difference": 0.9672262854609929,
+    "t_rank0 & uncontested target": 0.9737140306297645,
+    "target address empty": 0.8366664502305046,
+    "target name is an initialism": 0.9572845156369184,
+    "prob [0.69,0.80)": 0.6616457114403087,
+    "prob [0.80,0.90)": 0.8037565154873885,
+    "prob [0.90,0.95)": 0.9028023752474216,
+    "prob >=0.95": 0.9966435319686582
+   },
+   "recall_empty_address_targets": {
+    "candidate": 0.873077456006651,
+    "end_to_end": 0.5951457207519283
+   }
+  },
+  "T-India-Step3": {
+   "macro_f05": 0.9394243014906501,
+   "pair_precision": 0.9640902855205085,
+   "pair_recall": 0.9199113612519243,
+   "entity_precision": 0.9612425013288867,
+   "entity_recall": 0.9191161729946614,
+   "fp": 20967,
+   "fn": 49008,
+   "fn_not_in_candidates": 18505,
+   "candidate_recall": 0.96975921767807,
+   "singleton_f05": 0.8541033434650456,
+   "singleton_false_merge_rate": 0.1458966565349544,
+   "zero_prediction_rate": 0.05627958060644489,
+   "pred_per_s1": 3.305560587875631,
+   "f05_generic10_s1": 0.9083887789080323,
+   "f05_generic100_s1": null,
+   "f05_unique_s1": 0.9562814308488552,
+   "fp_prob_ge_0.95": 3912,
+   "share_of_fp_with_prob_ge_0.95": 0.18657890971526686,
+   "precision_by_category": {
+    "house-number conflict": 0.92845615922539,
+    "house number absent on either side": 0.9356139896982384,
+    "legal-form-only name difference": 0.976162644260887,
+    "t_rank0 & uncontested target": 0.9581995539325017,
+    "target address empty": 0.8491950757575758,
+    "target name is an initialism": 0.962756052141527,
+    "prob [0.69,0.80)": 0.6531857880111155,
+    "prob [0.80,0.90)": 0.8022321293179268,
+    "prob [0.90,0.95)": 0.8945536750052054,
+    "prob >=0.95": 0.9921309417725899
+   },
+   "recall_empty_address_targets": {
+    "candidate": 0.9135869565217392,
+    "end_to_end": 0.5998327759197324
+   }
+  },
+  "T-US-IN-model": {
+   "macro_f05": 0.9500174119041382,
+   "pair_precision": 0.9606623629685245,
+   "pair_recall": 0.9599269652123775,
+   "entity_precision": 0.9552404734338317,
+   "entity_recall": 0.9601217433349188,
+   "fp": 35995,
+   "fn": 36696,
+   "fn_not_in_candidates": 12181,
+   "candidate_recall": 0.9866980151311306,
+   "singleton_f05": 0.7937614182285676,
+   "singleton_false_merge_rate": 0.20623858177143245,
+   "zero_prediction_rate": 0.047010516454625124,
+   "pred_per_s1": 3.456479858571817,
+   "f05_generic10_s1": 0.9404830513028928,
+   "f05_generic100_s1": 0.9191483274343576,
+   "f05_unique_s1": 0.9551085481087351,
+   "fp_prob_ge_0.95": 7853,
+   "share_of_fp_with_prob_ge_0.95": 0.21816919016530073,
+   "precision_by_category": {
+    "house-number conflict": 0.8463013035231446,
+    "house number absent on either side": 0.9352034519723627,
+    "legal-form-only name difference": 0.9286295876029693,
+    "t_rank0 & uncontested target": 0.9524541414681412,
+    "target address empty": 0.8121188144924669,
+    "target name is an initialism": 0.9549274255156608,
+    "prob [0.69,0.80)": 0.540814881261508,
+    "prob [0.80,0.90)": 0.6886993603411514,
+    "prob [0.90,0.95)": 0.8058364200620682,
+    "prob >=0.95": 0.9904191163821764
+   },
+   "recall_empty_address_targets": null
+  },
+  "T-India-US-model": {
+   "macro_f05": 0.8646800944452362,
+   "pair_precision": 0.9551137068247716,
+   "pair_recall": 0.7929343935991842,
+   "entity_precision": 0.9513664664728985,
+   "entity_recall": 0.7871228479427994,
+   "fp": 22803,
+   "fn": 126708,
+   "fn_not_in_candidates": 18505,
+   "candidate_recall": 0.96975921767807,
+   "singleton_f05": 0.8368794326241135,
+   "singleton_false_merge_rate": 0.16312056737588654,
+   "zero_prediction_rate": 0.0914762562558029,
+   "pred_per_s1": 2.87606716637605,
+   "f05_generic10_s1": 0.7469260345557723,
+   "f05_generic100_s1": null,
+   "f05_unique_s1": 0.9192112867812169,
+   "fp_prob_ge_0.95": 8068,
+   "share_of_fp_with_prob_ge_0.95": 0.35381309476823225,
+   "precision_by_category": {
+    "house-number conflict": 0.8873411109176389,
+    "house number absent on either side": 0.9089197799015349,
+    "legal-form-only name difference": 0.979773952167028,
+    "t_rank0 & uncontested target": 0.9516702654642449,
+    "target address empty": 0.8354524550250236,
+    "target name is an initialism": 0.9417652411282984,
+    "prob [0.69,0.80)": 0.7497811005590355,
+    "prob [0.80,0.90)": 0.8056136582056646,
+    "prob [0.90,0.95)": 0.8576533241711046,
+    "prob >=0.95": 0.9811797418629443
+   },
+   "recall_empty_address_targets": null
+  },
+  "T-India-IN-model": {
+   "macro_f05": 0.9387516698452322,
+   "pair_precision": 0.9617794507540305,
+   "pair_recall": 0.9236177159834097,
+   "entity_precision": 0.9590350496731983,
+   "entity_recall": 0.922620646233373,
+   "fp": 22460,
+   "fn": 46740,
+   "fn_not_in_candidates": 18505,
+   "candidate_recall": 0.96975921767807,
+   "singleton_f05": 0.8449848024316109,
+   "singleton_false_merge_rate": 0.15501519756838905,
+   "zero_prediction_rate": 0.0554473606739283,
+   "pred_per_s1": 3.3268529631558685,
+   "f05_generic10_s1": 0.909258012628029,
+   "f05_generic100_s1": null,
+   "f05_unique_s1": 0.9550179572837849,
+   "fp_prob_ge_0.95": 4669,
+   "share_of_fp_with_prob_ge_0.95": 0.2078806767586821,
+   "precision_by_category": {
+    "house-number conflict": 0.9242354740061162,
+    "house number absent on either side": 0.9322079376560349,
+    "legal-form-only name difference": 0.9734147655828992,
+    "t_rank0 & uncontested target": 0.9552362094726741,
+    "target address empty": 0.8385794995964487,
+    "target name is an initialism": 0.9637377963737797,
+    "prob [0.69,0.80)": 0.6170877832768951,
+    "prob [0.80,0.90)": 0.7772087067861716,
+    "prob [0.90,0.95)": 0.8850604416113934,
+    "prob >=0.95": 0.9907493813438262
+   },
+   "recall_empty_address_targets": null
+  },
+  "T-US-US-model": {
+   "macro_f05": 0.9656064168065567,
+   "pair_precision": 0.9802745352356247,
+   "pair_recall": 0.9507976167595618,
+   "entity_precision": 0.9780198337414967,
+   "entity_recall": 0.9506048984353558,
+   "fp": 17520,
+   "fn": 45056,
+   "fn_not_in_candidates": 12181,
+   "candidate_recall": 0.9866980151311306,
+   "singleton_f05": 0.9154881927058665,
+   "singleton_false_merge_rate": 0.08451180729413357,
+   "zero_prediction_rate": 0.05529826841135052,
+   "pred_per_s1": 3.355111661781149,
+   "f05_generic10_s1": 0.9556577842418081,
+   "f05_generic100_s1": 0.957457815807567,
+   "f05_unique_s1": 0.9706272416185979,
+   "fp_prob_ge_0.95": 3278,
+   "share_of_fp_with_prob_ge_0.95": 0.18710045662100458,
+   "precision_by_category": {
+    "house-number conflict": 0.9397953575585154,
+    "house number absent on either side": 0.9513166427664569,
+    "legal-form-only name difference": 0.9777773542472699,
+    "t_rank0 & uncontested target": 0.9757611332188145,
+    "target address empty": 0.8537955273767271,
+    "target name is an initialism": 0.9539969834087482,
+    "prob [0.69,0.80)": 0.6796311444931955,
+    "prob [0.80,0.90)": 0.7777964224586368,
+    "prob [0.90,0.95)": 0.8739920888483189,
+    "prob >=0.95": 0.9959958761677676
+   },
+   "recall_empty_address_targets": null
+  },
+  "S-US-Step3": {
+   "macro_f05": 0.8623379012153473,
+   "pair_precision": 0.8534188270192656,
+   "pair_recall": 0.9450338965282267,
+   "entity_precision": 0.8581672385339151,
+   "entity_recall": 0.9454930714956761,
+   "fp": 148638,
+   "fn": 50334,
+   "fn_not_in_candidates": 32366,
+   "candidate_recall": 0.9646554435378191,
+   "singleton_f05": 0.45429325394140335,
+   "singleton_false_merge_rate": 0.5457067460585967,
+   "zero_prediction_rate": 0.028096763470430025,
+   "pred_per_s1": 3.830467498715663,
+   "f05_generic10_s1": 0.8416250973967271,
+   "f05_generic100_s1": 0.8322671627137979,
+   "f05_unique_s1": 0.8716498052152244,
+   "fp_prob_ge_0.95": 27934,
+   "share_of_fp_with_prob_ge_0.95": 0.1879330992074705,
+   "precision_by_category": {
+    "house-number conflict": 0.6889921660343781,
+    "house number absent on either side": 0.6963632732606585,
+    "legal-form-only name difference": 0.8283467092191924,
+    "t_rank0 & uncontested target": 0.8486923917103639,
+    "target address empty": 0.44359337416196115,
+    "target name is an initialism": 0.7267950963222417,
+    "prob [0.69,0.80)": 0.18851638297137727,
+    "prob [0.80,0.90)": 0.3183485336068914,
+    "prob [0.90,0.95)": 0.4932407966203983,
+    "prob >=0.95": 0.9665555203026693
+   },
+   "recall_empty_address_targets": null
+  },
+  "S-India-Step3": {
+   "macro_f05": 0.8065814854177038,
+   "pair_precision": 0.7832476048236512,
+   "pair_recall": 0.9110164367354009,
+   "entity_precision": 0.8051449740185116,
+   "entity_recall": 0.910380545878639,
+   "fp": 154272,
+   "fn": 54451,
+   "fn_not_in_candidates": 34384,
+   "candidate_recall": 0.9438098319720487,
+   "singleton_f05": 0.3818642350557244,
+   "singleton_false_merge_rate": 0.6181357649442756,
+   "zero_prediction_rate": 0.02702733304649109,
+   "pred_per_s1": 4.029433411082678,
+   "f05_generic10_s1": 0.7713369004600171,
+   "f05_generic100_s1": null,
+   "f05_unique_s1": 0.8273008754042838,
+   "fp_prob_ge_0.95": 37322,
+   "share_of_fp_with_prob_ge_0.95": 0.24192335615017632,
+   "precision_by_category": {
+    "house-number conflict": 0.6861011544020897,
+    "house number absent on either side": 0.6394184089585087,
+    "legal-form-only name difference": 0.8721601848286484,
+    "t_rank0 & uncontested target": 0.7803641048747156,
+    "target address empty": 0.3745361119040822,
+    "target name is an initialism": 0.729254571026723,
+    "prob [0.69,0.80)": 0.17982423750092313,
+    "prob [0.80,0.90)": 0.32546526789947844,
+    "prob [0.90,0.95)": 0.5004994450610433,
+    "prob >=0.95": 0.9303734298949128
+   },
+   "recall_empty_address_targets": null
+  }
+ },
+ "prediction_categories": {
+  "V-US-Step3": {
+   "house-number conflict": 0.1425824135588485,
+   "house number absent on either side": 0.12223715592247644,
+   "legal-form-only name difference": 0.24125561750600197,
+   "t_rank0 & uncontested target": 0.10002512316547378,
+   "target address empty": 0.0320506248683287,
+   "target name is an initialism": 0.00144880676229993,
+   "prob [0.69,0.80)": 0.024941782978661082,
+   "prob [0.80,0.90)": 0.03502372054928478,
+   "prob [0.90,0.95)": 0.03107949622983528,
+   "prob >=0.95": 0.9089550002422189
+  },
+  "V-India-Step3": {
+   "house-number conflict": 0.1957803590725407,
+   "house number absent on either side": 0.14370719639190124,
+   "legal-form-only name difference": 0.2673968109466047,
+   "t_rank0 & uncontested target": 0.11201993071505262,
+   "target address empty": 0.027406470533049336,
+   "target name is an initialism": 0.003658828966250517,
+   "prob [0.69,0.80)": 0.031525693457541255,
+   "prob [0.80,0.90)": 0.05361417943897956,
+   "prob [0.90,0.95)": 0.05694291462384945,
+   "prob >=0.95": 0.8579172124796297
+  },
+  "T-US-Step3": {
+   "house-number conflict": 0.1442517795621808,
+   "house number absent on either side": 0.12425432658149792,
+   "legal-form-only name difference": 0.241940024397764,
+   "t_rank0 & uncontested target": 0.1301303448306679,
+   "target address empty": 0.0344093372834475,
+   "target name is an initialism": 0.0014645361073501615,
+   "prob [0.69,0.80)": 0.026921323913830314,
+   "prob [0.80,0.90)": 0.03729149072125331,
+   "prob [0.90,0.95)": 0.03216952424360229,
+   "prob >=0.95": 0.903617661121314
+  },
+  "T-India-Step3": {
+   "house-number conflict": 0.19739981263305365,
+   "house number absent on either side": 0.14563584017976267,
+   "legal-form-only name difference": 0.26519273619110745,
+   "t_rank0 & uncontested target": 0.13975793012617296,
+   "target address empty": 0.028937403340749228,
+   "target name is an initialism": 0.003678831816757182,
+   "prob [0.69,0.80)": 0.03451388210953944,
+   "prob [0.80,0.90)": 0.05647212360052819,
+   "prob [0.90,0.95)": 0.05757851342996261,
+   "prob >=0.95": 0.8514354808599698
+  },
+  "T-US-IN-model": {
+   "house-number conflict": 0.16248045139651618,
+   "house number absent on either side": 0.12131773160791977,
+   "legal-form-only name difference": 0.25233572342674043,
+   "t_rank0 & uncontested target": 0.1308332978152557,
+   "target address empty": 0.033149841480087476,
+   "target name is an initialism": 0.0014305588796833318,
+   "prob [0.69,0.80)": 0.023147950825494767,
+   "prob [0.80,0.90)": 0.037416382248829816,
+   "prob [0.90,0.95)": 0.04366647104402384,
+   "prob >=0.95": 0.8957691958816516
+  },
+  "T-India-US-model": {
+   "house-number conflict": 0.19218057663424648,
+   "house number absent on either side": 0.14953436597594175,
+   "legal-form-only name difference": 0.28963007143461733,
+   "t_rank0 & uncontested target": 0.12398010302804828,
+   "target address empty": 0.02910532521549476,
+   "target name is an initialism": 0.004326626864849011,
+   "prob [0.69,0.80)": 0.02922539993740367,
+   "prob [0.80,0.90)": 0.06963940183104109,
+   "prob [0.90,0.95)": 0.05729138985506391,
+   "prob >=0.95": 0.8438438083764913
+  },
+  "T-India-IN-model": {
+   "house-number conflict": 0.200326048852873,
+   "house number absent on either side": 0.14586772218459537,
+   "legal-form-only name difference": 0.2652567379458922,
+   "t_rank0 & uncontested target": 0.14008699173986883,
+   "target address empty": 0.02951797182638409,
+   "target name is an initialism": 0.003660391871241334,
+   "prob [0.69,0.80)": 0.032664445359589685,
+   "prob [0.80,0.90)": 0.0491744973980757,
+   "prob [0.90,0.95)": 0.05926567536016827,
+   "prob >=0.95": 0.8588953818821663
+  },
+  "T-US-US-model": {
+   "house-number conflict": 0.13930321371955612,
+   "house number absent on either side": 0.12326501477158092,
+   "legal-form-only name difference": 0.23629575587260412,
+   "t_rank0 & uncontested target": 0.13043013222366334,
+   "target address empty": 0.032674241605418645,
+   "target name is an initialism": 0.0014929204496325118,
+   "prob [0.69,0.80)": 0.015139744559734832,
+   "prob [0.80,0.90)": 0.03354792657443436,
+   "prob [0.90,0.95)": 0.02960170773886727,
+   "prob >=0.95": 0.9217106211269636
+  },
+  "S-US-Step3": {
+   "house-number conflict": 0.16402539564826357,
+   "house number absent on either side": 0.14320356754027486,
+   "legal-form-only name difference": 0.25214588888713574,
+   "t_rank0 & uncontested target": 0.4171327926534863,
+   "target address empty": 0.057807840383735425,
+   "target name is an initialism": 0.0016892958013159348,
+   "prob [0.69,0.80)": 0.05712442999826436,
+   "prob [0.80,0.90)": 0.07017628634993768,
+   "prob [0.90,0.95)": 0.049022121589851204,
+   "prob >=0.95": 0.8236771620619467
+  },
+  "S-India-Step3": {
+   "house-number conflict": 0.21676223018701976,
+   "house number absent on either side": 0.17364694840693903,
+   "legal-form-only name difference": 0.24446886024871337,
+   "t_rank0 & uncontested target": 0.3773117543832535,
+   "target address empty": 0.05413892374073226,
+   "target name is an initialism": 0.003995824335469404,
+   "prob [0.69,0.80)": 0.07610050256904528,
+   "prob [0.80,0.90)": 0.09482074288050603,
+   "prob [0.90,0.95)": 0.07595438241050491,
+   "prob >=0.95": 0.7531243721399438
+  },
+  "TEST-US-Step3": {
+   "house-number conflict": 0.19365741064908823,
+   "house number absent on either side": 0.11117223994958537,
+   "legal-form-only name difference": 0.26603548362358415,
+   "t_rank0 & uncontested target": 0.16283430528186507,
+   "target address empty": 0.02771887180615712,
+   "target name is an initialism": 0.0013908200044679623,
+   "prob [0.69,0.80)": 0.05521601264366666,
+   "prob [0.80,0.90)": 0.055996238909283694,
+   "prob [0.90,0.95)": 0.03747961908953597,
+   "prob >=0.95": 0.8513081293575137
+  },
+  "TEST-India-Step3": {
+   "house-number conflict": 0.24088642407595723,
+   "house number absent on either side": 0.14564633195998056,
+   "legal-form-only name difference": 0.27455907688329295,
+   "t_rank0 & uncontested target": 0.14478422985661918,
+   "target address empty": 0.020834774829553992,
+   "target name is an initialism": 0.0031859687378783274,
+   "prob [0.69,0.80)": 0.0617596388047288,
+   "prob [0.80,0.90)": 0.07883708821257963,
+   "prob [0.90,0.95)": 0.06597614629526735,
+   "prob >=0.95": 0.7934271266874242
+  },
+  "TEST-France-Step3": {
+   "house-number conflict": 0.092608792379173,
+   "house number absent on either side": 0.07602606446858864,
+   "legal-form-only name difference": 0.27813340876580334,
+   "t_rank0 & uncontested target": 0.10194960050655186,
+   "target address empty": 0.024457837510809023,
+   "target name is an initialism": 0.01760247558091894,
+   "prob [0.69,0.80)": 0.043624664404363675,
+   "prob [0.80,0.90)": 0.04753856266918198,
+   "prob [0.90,0.95)": 0.03238831347023253,
+   "prob >=0.95": 0.8764484594562219
+  },
+  "TEST-US-final": {
+   "house-number conflict": 0.11259093736906924,
+   "house number absent on either side": 0.11335929965235604,
+   "legal-form-only name difference": 0.2278142444210268,
+   "t_rank0 & uncontested target": 0.1593270199722468,
+   "target address empty": 0.022560884716973234,
+   "target name is an initialism": 0.0015367245665736074,
+   "prob [0.69,0.80)": 0.03143796132889997,
+   "prob [0.80,0.90)": 0.040676177618650604,
+   "prob [0.90,0.95)": 0.031791107029480375,
+   "prob >=0.95": 0.896094754022969
+  },
+  "TEST-India-final": {
+   "house-number conflict": 0.170437561201876,
+   "house number absent on either side": 0.13824917893612523,
+   "legal-form-only name difference": 0.2734450107358185,
+   "t_rank0 & uncontested target": 0.1343213018848859,
+   "target address empty": 0.02013569620088784,
+   "target name is an initialism": 0.003666532612661164,
+   "prob [0.69,0.80)": 0.05753514047872295,
+   "prob [0.80,0.90)": 0.0757951627741631,
+   "prob [0.90,0.95)": 0.07498312826858092,
+   "prob >=0.95": 0.791686568478533
+  },
+  "TEST-France-final": {
+   "house-number conflict": 0.03182029346282629,
+   "house number absent on either side": 0.07331530599723016,
+   "legal-form-only name difference": 0.25675805970934207,
+   "t_rank0 & uncontested target": 0.10294646144136879,
+   "target address empty": 0.018885971986045615,
+   "target name is an initialism": 0.018174885612608032,
+   "prob [0.69,0.80)": 0.02594862647476465,
+   "prob [0.80,0.90)": 0.036167890889329105,
+   "prob [0.90,0.95)": 0.027858370001577756,
+   "prob >=0.95": 0.9100251126343285
+  }
+ },
+ "reweighted_us": {
+  "France_cell_shares": [
+   0.0026864314015694617,
+   0.5223702264773445,
+   0.0012834743998889969,
+   0.2745093504771596,
+   0.00080168971524598,
+   0.15639501719007753,
+   0.00013875398917718884,
+   0.041815056349536715
+  ],
+  "V": {
+   "US_cell_shares": [
+    0.0036452509745852346,
+    0.6947848357559457,
+    0.000993472545405095,
+    0.1725242513070019,
+    0.0006081714061225106,
+    0.12699072255296,
+    0.0,
+    0.000453295457979511
+   ],
+   "unweighted_f05": 0.9711942421921572,
+   "france_profile_weighted_f05": 0.9690079952225445,
+   "uncovered_france_share": 0.00013875398917718884
+  },
+  "T": {
+   "US_cell_shares": [
+    0.0036452509745852346,
+    0.6947848357559457,
+    0.000993472545405095,
+    0.1725242513070019,
+    0.0006081714061225106,
+    0.12699072255296,
+    0.0,
+    0.000453295457979511
+   ],
+   "unweighted_f05": 0.9642550173062802,
+   "france_profile_weighted_f05": 0.961302032704668,
+   "uncovered_france_share": 0.00013875398917718884
+  },
+  "S": {
+   "US_cell_shares": [
+    0.0036452509745852346,
+    0.6947848357559457,
+    0.000993472545405095,
+    0.1725242513070019,
+    0.0006081714061225106,
+    0.12699072255296,
+    0.0,
+    0.000453295457979511
+   ],
+   "unweighted_f05": 0.8623379012153473,
+   "france_profile_weighted_f05": 0.8566059119098196,
+   "uncovered_france_share": 0.00013875398917718884
+  }
+ },
+ "mix_estimator_validation": {
+  "India in-country cells -> India-only model on US (over-merge, actual cross-country)": {
+   "estimated_precision": 0.9702653287328917,
+   "actual_precision": 0.9606623629685245,
+   "error": 0.009602965764367255
+  },
+  "US in-country cells -> US-only model on India (under-merge, actual cross-country)": {
+   "estimated_precision": 0.9590359007399216,
+   "actual_precision": 0.9551137068247716,
+   "error": 0.00392219391515003
+  },
+  "Step3 US cells -> Step3 India (same model, other country)": {
+   "estimated_precision": 0.9661985433113957,
+   "actual_precision": 0.9640902855205085,
+   "error": 0.0021082577908871913
+  },
+  "Step3 T-US cells -> Step3 S-US (orphan-heavy)": {
+   "estimated_precision": 0.9557884466213932,
+   "actual_precision": 0.8534188270192656,
+   "error": 0.10236961960212754
+  }
+ },
+ "france_mix_implied_precision": {
+  "cells from T-US-Step3": 0.9692933523319403,
+  "same cells applied to TEST-US (reference)": 0.9648953222729971,
+  "cells from T-India-Step3": 0.9686133186984448,
+  "cells from T-US-Step3 -> TEST-India": 0.9516894455579954
+ },
+ "france_actual": {
+  "Step3": {
+   "s1": 259452,
+   "matches": 993383,
+   "matches_per_s1": 3.828773723077872,
+   "no_match_s1": 6955,
+   "no_match_rate": 0.026806499853537457,
+   "candidates_per_s1": {
+    "mean": 74.64482833048116,
+    "p1": 30.0,
+    "p5": 34.0,
+    "p50": 43.0,
+    "p90": 173.0,
+    "p95": 215.0,
+    "p99": 292.0,
+    "max": 533
+   },
+   "prob_bins": {
+    "[0.69,0.80)": 0.043624664404363675,
+    "[0.80,0.90)": 0.04753856266918198,
+    "[0.90,0.95)": 0.03238831347023253,
+    ">=0.95": 0.8764484594562219
+   },
+   "generic_name_rate_s1_10+": 0.19915051724403743,
+   "generic_name_rate_s1_100+": 0.041953810338713905,
+   "s1_house_present_rate": 0.9950896504941183,
+   "pred_house_conflict_rate": 0.092608792379173,
+   "pred_house_absent_rate": 0.07602606446858864,
+   "pred_target_address_empty_rate": 0.024457837510809023,
+   "pred_initialism_target_rate": 0.01760247558091894,
+   "pred_t_rank": {
+    "mean": 0.07233765828487099,
+    "p5": 0.0,
+    "p50": 0.0,
+    "p90": 0.0,
+    "p99": 1.0
+   },
+   "pred_t_gap": {
+    "mean": 0.0008020775302530915,
+    "p5": 0.0,
+    "p50": 0.0,
+    "p90": 0.0,
+    "p99": 0.023528215885161685
+   },
+   "pred_t_ncand": {
+    "mean": 14.443693922686416,
+    "p5": 1.0,
+    "p50": 7.0,
+    "p90": 38.0,
+    "p99": 85.0
+   },
+   "pred_t_rank0_uncontested": 0.10194960050655186,
+   "no_match_rate_generic10_vs_unique": [
+    0.02777240178053029,
+    0.02535473878159249
+   ]
+  },
+  "final": {
+   "s1": 259452,
+   "matches": 912688,
+   "matches_per_s1": 3.517752802059726,
+   "no_match_s1": 11981,
+   "no_match_rate": 0.04617809845366388,
+   "candidates_per_s1": {
+    "mean": 74.64482833048116,
+    "p1": 30.0,
+    "p5": 34.0,
+    "p50": 43.0,
+    "p90": 173.0,
+    "p95": 215.0,
+    "p99": 292.0,
+    "max": 533
+   },
+   "prob_bins": {
+    "[0.69,0.80)": 0.02594862647476465,
+    "[0.80,0.90)": 0.036167890889329105,
+    "[0.90,0.95)": 0.027858370001577756,
+    ">=0.95": 0.9100251126343285
+   },
+   "generic_name_rate_s1_10+": 0.19915051724403743,
+   "generic_name_rate_s1_100+": 0.041953810338713905,
+   "s1_house_present_rate": 0.9950896504941183,
+   "pred_house_conflict_rate": 0.03182029346282629,
+   "pred_house_absent_rate": 0.07331530599723016,
+   "pred_target_address_empty_rate": 0.018885971986045615,
+   "pred_initialism_target_rate": 0.018174885612608032,
+   "pred_t_rank": {
+    "mean": 0.03338161562330172,
+    "p5": 0.0,
+    "p50": 0.0,
+    "p90": 0.0,
+    "p99": 0.0
+   },
+   "pred_t_gap": {
+    "mean": 0.00040759549815490954,
+    "p5": 0.0,
+    "p50": 0.0,
+    "p90": 0.0,
+    "p99": 0.0
+   },
+   "pred_t_ncand": {
+    "mean": 14.654032922532124,
+    "p5": 1.0,
+    "p50": 7.0,
+    "p90": 39.0,
+    "p99": 86.0
+   },
+   "pred_t_rank0_uncontested": 0.10294646144136879,
+   "no_match_rate_generic10_vs_unique": [
+    0.04370040642539191,
+    0.046466559492611595
+   ]
+  }
+ },
+ "pool": {
+  "V-US": {
+   "address empty": 0.03582277959296814,
+   "name non-Latin": 0.0,
+   "postal present": 0.027722711466085664,
+   "house number present": 0.8932258604150487,
+   "name is an initialism": 0.0011233258202500895,
+   "records": 1237397
+  },
+  "V-India": {
+   "address empty": 0.029636242882184503,
+   "name non-Latin": 0.182263256647831,
+   "postal present": 0.02050632513249692,
+   "house number present": 0.8958557891566047,
+   "name is an initialism": 0.0025852172030054812,
+   "records": 826623
+  },
+  "T-US": {
+   "address empty": 0.03593267401379541,
+   "name non-Latin": 0.0,
+   "postal present": 0.027787172756473615,
+   "house number present": 0.8931818286298969,
+   "name is an initialism": 0.001139437610372757,
+   "records": 1522681
+  },
+  "T-India": {
+   "address empty": 0.029516391331108626,
+   "name non-Latin": 0.18249231610265648,
+   "postal present": 0.02041763432317794,
+   "house number present": 0.8960043733813671,
+   "name is an initialism": 0.002556382993367169,
+   "records": 1017062
+  },
+  "S-US": {
+   "address empty": 0.035896809260510115,
+   "name non-Latin": 0.0,
+   "postal present": 0.02797907763744302,
+   "house number present": 0.8930815292313258,
+   "name is an initialism": 0.0011740987733221612,
+   "records": 6186873
+  },
+  "S-India": {
+   "address empty": 0.02970813476539346,
+   "name non-Latin": 0.1821451676196476,
+   "postal present": 0.02042461482779327,
+   "house number present": 0.8955274975770235,
+   "name is an initialism": 0.002475718219573198,
+   "records": 4133346
+  },
+  "TEST-US": {
+   "address empty": 0.02892929085459353,
+   "name non-Latin": 0.0,
+   "postal present": 0.028754023742537067,
+   "house number present": 0.9100156640069206,
+   "name is an initialism": 0.0009585984499470923,
+   "records": 3817031
+  },
+  "TEST-India": {
+   "address empty": 0.023741909226475948,
+   "name non-Latin": 0.18383318512834482,
+   "postal present": 0.020301787044799596,
+   "house number present": 0.9131880535827275,
+   "name is an initialism": 0.001970296116746669,
+   "records": 4717565
+  },
+  "TEST-France": {
+   "address empty": 0.030019658632481135,
+   "name non-Latin": 0.0,
+   "postal present": 0.0027122083522358644,
+   "house number present": 0.9316777155010513,
+   "name is an initialism": 0.01744816873671161,
+   "records": 1434993
+  }
+ },
+ "integrity": {
+  "protected_unchanged": true,
+  "n_protected": 34,
+  "experiments_final_unchanged": true,
+  "n_final_files": 168,
+  "output/matching_results.tsv": "84ede6d4f2e44ab4469ea7798a95fbd8b3c49fc0f3f1561d47064c1caaa0e807",
+  "output/candidate_pairs.tsv": "1842a3df05f69fd9236e4601cef27ded0d18e7e2c481dd803f27e9f8ff4835ea"
+ },
+ "seconds": 752.4
+}

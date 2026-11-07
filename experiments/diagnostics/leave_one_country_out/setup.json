@@ -1,0 +1,23 @@
+{
+ "US": {
+  "a1_s1": 211895,
+  "a1_pairs": 13590824,
+  "a1_positive_pairs": 724210
+ },
+ "IN": {
+  "a1_s1": 141196,
+  "a1_pairs": 7030682,
+  "a1_positive_pairs": 476084
+ },
+ "USm": {
+  "a1_s1": 141196,
+  "a1_pairs": 9084683,
+  "a1_positive_pairs": 482652
+ },
+ "A2_US_s1": 53223,
+ "A2_India_s1": 35050,
+ "validation_s1": {
+  "US": 264728,
+  "India": 176636
+ }
+}

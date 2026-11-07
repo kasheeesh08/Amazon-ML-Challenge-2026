@@ -1,0 +1,10 @@
+{
+ "V": {
+  "max_abs_diff_vs_saved_production_probs": 0.0,
+  "reproduces": true
+ },
+ "S": {
+  "max_abs_diff_vs_saved_production_probs": 0.0,
+  "reproduces": true
+ }
+}

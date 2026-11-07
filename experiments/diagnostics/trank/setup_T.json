@@ -1,0 +1,18 @@
+{
+ "S2": {
+  "validation_pool": 1006652,
+  "added_fit_records": 238376,
+  "added_that_are_fit_targets(orphans)": 174759,
+  "added_that_are_distractors": 63617,
+  "pool": 1245028
+ },
+ "S3": {
+  "validation_pool": 1057368,
+  "added_fit_records": 237347,
+  "added_that_are_fit_targets(orphans)": 177191,
+  "added_that_are_distractors": 60156,
+  "pool": 1294715
+ },
+ "pool_per_s1": 5.754304836824027,
+ "s1_per_pool_record": 0.1737829378799351
+}

@@ -1,0 +1,106 @@
+{
+ "seconds": 503.1,
+ "train_rows": 3192047,
+ "train_pos": 1197471,
+ "train_neg": 1994576,
+ "train_rows_on_orphan_targets": 396367,
+ "train_rows_on_orphan_targets_with_t_rank0": 33091,
+ "gbdt_params": {
+  "n_trees": 300,
+  "max_depth": 6,
+  "learning_rate": 0.1,
+  "lam": 1.0,
+  "min_child_weight": 20.0,
+  "seed": 0
+ },
+ "gain_top10_B": [
+  [
+   "t_rank",
+   0.5255580110646892
+  ],
+  [
+   "addr_jacc",
+   0.2810411936648917
+  ],
+  [
+   "addr_cont_t",
+   0.05456764526548182
+  ],
+  [
+   "nameaddr_cos",
+   0.03575465062624676
+  ],
+  [
+   "t_gap",
+   0.022949263512618497
+  ],
+  [
+   "name_cont_t",
+   0.01402182209759891
+  ],
+  [
+   "t_addr_missing",
+   0.012350880334778741
+  ],
+  [
+   "rank_all",
+   0.005226142039302928
+  ],
+  [
+   "name_nt",
+   0.004830647274968585
+  ],
+  [
+   "gap_src",
+   0.004286040001235402
+  ]
+ ],
+ "gain_top10_A": [
+  [
+   "t_rank",
+   0.7653749450783672
+  ],
+  [
+   "addr_cont_t",
+   0.0914187837471292
+  ],
+  [
+   "t_gap",
+   0.06092418655150568
+  ],
+  [
+   "nameaddr_cos",
+   0.016387996005636698
+  ],
+  [
+   "name_cont_t",
+   0.009153877741507933
+  ],
+  [
+   "t_addr_missing",
+   0.007078235321903909
+  ],
+  [
+   "rank_all",
+   0.0042786946460769285
+  ],
+  [
+   "gap_src",
+   0.0038951823222569764
+  ],
+  [
+   "addr_nt",
+   0.0036299576699576914
+  ],
+  [
+   "eq_addr_digits",
+   0.00361131804767376
+  ]
+ ],
+ "target_context_gain_B": 0.5507704859795498,
+ "target_context_gain_A": 0.8280173472222547,
+ "memory": {
+  "peak_ws_gb": 9.98,
+  "free_gb": 6.4
+ }
+}

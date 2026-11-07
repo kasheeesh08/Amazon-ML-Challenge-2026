@@ -1,0 +1,56 @@
+{
+ "V-US": {
+  "singletons": 14779,
+  "share_singletons_best_cos_ge_0.5": 0.6428716421950065,
+  "singleton_f05_all": 0.9296298802354692,
+  "singleton_f05_best_cos_ge_0.5": 0.8940111567203453,
+  "singleton_f05_best_cos_ge_0.7": 0.8411777347947561,
+  "singleton_f05_best_cos_lt_0.5": 0.9937476316786662,
+  "s1_best_cos_lt_0.5": 0.021112235955395728
+ },
+ "V-India": {
+  "singletons": 9870,
+  "share_singletons_best_cos_ge_0.5": 0.5746707193515704,
+  "singleton_f05_all": 0.9037487335359676,
+  "singleton_f05_best_cos_ge_0.5": 0.8496121297602257,
+  "singleton_f05_best_cos_ge_0.7": 0.7434435575826682,
+  "singleton_f05_best_cos_lt_0.5": 0.9768937589328252,
+  "s1_best_cos_lt_0.5": 0.03203197536176091
+ },
+ "T-US": {
+  "singletons": 14779,
+  "share_singletons_best_cos_ge_0.5": 0.6967995128222478,
+  "singleton_f05_all": 0.8937681845862372,
+  "singleton_f05_best_cos_ge_0.5": 0.8543406486696445,
+  "singleton_f05_best_cos_ge_0.7": 0.7951762523191095,
+  "singleton_f05_best_cos_lt_0.5": 0.9843784869448784,
+  "s1_best_cos_lt_0.5": 0.017961832522438125
+ },
+ "T-India": {
+  "singletons": 9870,
+  "share_singletons_best_cos_ge_0.5": 0.624822695035461,
+  "singleton_f05_all": 0.8541033434650456,
+  "singleton_f05_best_cos_ge_0.5": 0.7929301118858441,
+  "singleton_f05_best_cos_ge_0.7": 0.6863876863876864,
+  "singleton_f05_best_cos_lt_0.5": 0.955981636510937,
+  "s1_best_cos_lt_0.5": 0.028136959623179872
+ },
+ "S-US": {
+  "singletons": 14779,
+  "share_singletons_best_cos_ge_0.5": 0.963529332160498,
+  "singleton_f05_all": 0.45429325394140335,
+  "singleton_f05_best_cos_ge_0.5": 0.44073033707865167,
+  "singleton_f05_best_cos_ge_0.7": 0.3954351960873109,
+  "singleton_f05_best_cos_lt_0.5": 0.8126159554730983,
+  "s1_best_cos_lt_0.5": 0.002481792632437823
+ },
+ "S-India": {
+  "singletons": 9870,
+  "share_singletons_best_cos_ge_0.5": 0.9628166160081054,
+  "singleton_f05_all": 0.3818642350557244,
+  "singleton_f05_best_cos_ge_0.5": 0.374513311585815,
+  "singleton_f05_best_cos_ge_0.7": 0.34107519896053273,
+  "singleton_f05_best_cos_lt_0.5": 0.5722070844686649,
+  "s1_best_cos_lt_0.5": 0.004489458547521457
+ }
+}

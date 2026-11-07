@@ -1,0 +1,384 @@
+{
+ "per_country": {
+  "US": {
+   "n_s1": 663106,
+   "candidates_per_s1": 67.11220981260915,
+   "final": {
+    "pred_per_s1": 3.2070302485575457,
+    "zero_prediction_rate": 0.061341625622449505,
+    "s1_with_3plus_predictions": 0.657397158222064,
+    "prediction_category_shares": {
+     "t_rank0 & uncontested (t_ncand=1)": 0.1593270199722468,
+     "t_rank0 & contested": 0.8399079093821549,
+     "same name / different address": 0.023850736456909407,
+     "house-number conflict": 0.11259093736906924,
+     "target address empty": 0.022560884716973234,
+     "prob [0.69,0.80)": 0.03143796132889997,
+     "prob [0.80,0.95)": 0.07246728464813099,
+     "prob [0.95,1.00)": 0.896094754022969
+    },
+    "legal_form_only_name_difference_share": 0.22781424224376678,
+    "eq_name_n2_share": 0.5505028963088989
+   },
+   "step3_model": {
+    "pred_per_s1": 3.6182812401033924,
+    "zero_prediction_rate": 0.035208548859458365,
+    "prediction_category_shares": {
+     "t_rank0 & uncontested (t_ncand=1)": 0.16283430528186507,
+     "t_rank0 & contested": 0.8362179198634271,
+     "same name / different address": 0.03225352018752105,
+     "house-number conflict": 0.19365741064908823,
+     "target address empty": 0.02771887180615712,
+     "prob [0.69,0.80)": 0.05521601264366666,
+     "prob [0.80,0.95)": 0.09347585799881966,
+     "prob [0.95,1.00)": 0.8513081293575137
+    }
+   },
+   "max_candidate_prob_final": {
+    "<0.10": 0.0167107521271109,
+    "[0.10,0.69)": 0.044566027151013564,
+    ">=0.69": 0.9387232207218755
+   },
+   "generic_names": {
+    "share_s1_name_shared_by_2+": 0.3985320597310234,
+    "share_s1_name_shared_by_10+": 0.16791885460243158,
+    "share_s1_name_shared_by_100+": 0.05489770866196355,
+    "distinct_names_per_s1": 0.6937292076983167,
+    "zero_pred_rate_generic(10+)": 0.06385386356288393,
+    "zero_pred_rate_unique(1)": 0.060646329202155264,
+    "pred_per_s1_generic(10+)": 3.0948737292093256,
+    "pred_per_s1_unique(1)": 3.249981822147895
+   }
+  },
+  "India": {
+   "n_s1": 809986,
+   "candidates_per_s1": 77.04463780855471,
+   "final": {
+    "pred_per_s1": 3.042251347554155,
+    "zero_prediction_rate": 0.07196173761027969,
+    "s1_with_3plus_predictions": 0.6107438894005576,
+    "prediction_category_shares": {
+     "t_rank0 & uncontested (t_ncand=1)": 0.1343213018848859,
+     "t_rank0 & contested": 0.8615966116125399,
+     "same name / different address": 0.02570590390884436,
+     "house-number conflict": 0.170437561201876,
+     "target address empty": 0.02013569620088784,
+     "prob [0.69,0.80)": 0.05753514047872295,
+     "prob [0.80,0.95)": 0.1507778852283984,
+     "prob [0.95,1.00)": 0.7916869742928786
+    },
+    "legal_form_only_name_difference_share": 0.2734450101852417,
+    "eq_name_n2_share": 0.48060065507888794
+   },
+   "step3_model": {
+    "pred_per_s1": 3.532912914544202,
+    "zero_prediction_rate": 0.04136985083692805,
+    "prediction_category_shares": {
+     "t_rank0 & uncontested (t_ncand=1)": 0.14478422985661918,
+     "t_rank0 & contested": 0.8504362928561194,
+     "same name / different address": 0.0284678904532763,
+     "house-number conflict": 0.24088642407595723,
+     "target address empty": 0.020834774829553992,
+     "prob [0.69,0.80)": 0.0617596388047288,
+     "prob [0.80,0.95)": 0.14481323450784697,
+     "prob [0.95,1.00)": 0.7934271266874242
+    }
+   },
+   "max_candidate_prob_final": {
+    "<0.10": 0.018864523584358247,
+    "[0.10,0.69)": 0.05258609408063843,
+    ">=0.69": 0.9285493823350033
+   },
+   "generic_names": {
+    "share_s1_name_shared_by_2+": 0.5258757558772621,
+    "share_s1_name_shared_by_10+": 0.32832542784690105,
+    "share_s1_name_shared_by_100+": 0.002022257174815367,
+    "distinct_names_per_s1": 0.5525181916724486,
+    "zero_pred_rate_generic(10+)": 0.09302133195958472,
+    "zero_pred_rate_unique(1)": 0.06228615174698074,
+    "pred_per_s1_generic(10+)": 2.7389702149741106,
+    "pred_per_s1_unique(1)": 3.198526692949062
+   }
+  },
+  "France": {
+   "n_s1": 259452,
+   "candidates_per_s1": 74.64482833048116,
+   "final": {
+    "pred_per_s1": 3.517752802059726,
+    "zero_prediction_rate": 0.04617809845366388,
+    "s1_with_3plus_predictions": 0.7202989377611273,
+    "prediction_category_shares": {
+     "t_rank0 & uncontested (t_ncand=1)": 0.10294646144136879,
+     "t_rank0 & contested": 0.887343758217485,
+     "same name / different address": 0.02594424381606858,
+     "house-number conflict": 0.03182029346282629,
+     "target address empty": 0.018885971986045615,
+     "prob [0.69,0.80)": 0.02594862647476465,
+     "prob [0.80,0.95)": 0.06402626089090686,
+     "prob [0.95,1.00)": 0.9100251126343285
+    },
+    "legal_form_only_name_difference_share": 0.25675806403160095,
+    "eq_name_n2_share": 0.6845899224281311
+   },
+   "step3_model": {
+    "pred_per_s1": 3.828773723077872,
+    "zero_prediction_rate": 0.026806499853537457,
+    "prediction_category_shares": {
+     "t_rank0 & uncontested (t_ncand=1)": 0.10194960050655186,
+     "t_rank0 & contested": 0.8827461311498184,
+     "same name / different address": 0.03264903868900515,
+     "house-number conflict": 0.092608792379173,
+     "target address empty": 0.024457837510809023,
+     "prob [0.69,0.80)": 0.043624664404363675,
+     "prob [0.80,0.95)": 0.0799268761394145,
+     "prob [0.95,1.00)": 0.8764484594562219
+    }
+   },
+   "max_candidate_prob_final": {
+    "<0.10": 0.012904120993478563,
+    "[0.10,0.69)": 0.031215793287390346,
+    ">=0.69": 0.9558800857191311
+   },
+   "generic_names": {
+    "share_s1_name_shared_by_2+": 0.47494334212108597,
+    "share_s1_name_shared_by_10+": 0.19915051724403743,
+    "share_s1_name_shared_by_100+": 0.041953810338713905,
+    "distinct_names_per_s1": 0.6252100581225044,
+    "zero_pred_rate_generic(10+)": 0.04370040642539191,
+    "zero_pred_rate_unique(1)": 0.046466559492611595,
+    "pred_per_s1_generic(10+)": 3.591871492161796,
+    "pred_per_s1_unique(1)": 3.5367438173049397
+   }
+  }
+ },
+ "labelled_reference_step3_model": {
+  "V": {
+   "US": {
+    "pred_per_s1": 3.352977395666495,
+    "zero_prediction_rate": 0.05582333565017678,
+    "category_share": {
+     "t_rank0 & uncontested (t_ncand=1)": 0.10002512316547378,
+     "t_rank0 & contested": 0.899056698365417,
+     "same name / different address": 0.03209230904422691,
+     "house-number conflict": 0.1425824135588485,
+     "target address empty": 0.0320506248683287,
+     "prob [0.69,0.80)": 0.024941782978661082,
+     "prob [0.80,0.95)": 0.06610321677912005,
+     "prob [0.95,1.00)": 0.9089550002422189
+    },
+    "category_precision": {
+     "t_rank0 & uncontested (t_ncand=1)": 0.9839387283888044,
+     "t_rank0 & contested": 0.9854390891536251,
+     "same name / different address": 0.9034262444709682,
+     "house-number conflict": 0.9441608723135272,
+     "target address empty": 0.8885725333052128,
+     "prob [0.69,0.80)": 0.7483626180044266,
+     "prob [0.80,0.95)": 0.8988155091606306,
+     "prob [0.95,1.00)": 0.9980354803405498
+    }
+   },
+   "India": {
+    "pred_per_s1": 3.2586448968500195,
+    "zero_prediction_rate": 0.059636767136936976,
+    "category_share": {
+     "t_rank0 & uncontested (t_ncand=1)": 0.11201993071505262,
+     "t_rank0 & contested": 0.8849136717894905,
+     "same name / different address": 0.03086550589478,
+     "house-number conflict": 0.1957803590725407,
+     "target address empty": 0.027406470533049336,
+     "prob [0.69,0.80)": 0.031525693457541255,
+     "prob [0.80,0.95)": 0.11055709406282901,
+     "prob [0.95,1.00)": 0.8579172124796297
+    },
+    "category_precision": {
+     "t_rank0 & uncontested (t_ncand=1)": 0.9738670554297589,
+     "t_rank0 & contested": 0.9782409379779367,
+     "same name / different address": 0.913993020375999,
+     "house-number conflict": 0.9481497914633065,
+     "target address empty": 0.9026307448494453,
+     "prob [0.69,0.80)": 0.7493111429516147,
+     "prob [0.80,0.95)": 0.9026965868376391,
+     "prob [0.95,1.00)": 0.9955185374190988
+    }
+   }
+  },
+  "T": {
+   "US": {
+    "pred_per_s1": 3.3814481278897586,
+    "zero_prediction_rate": 0.05365129491402496,
+    "category_share": {
+     "t_rank0 & uncontested (t_ncand=1)": 0.1301303448306679,
+     "t_rank0 & contested": 0.8689446849962689,
+     "same name / different address": 0.03414569844184976,
+     "house-number conflict": 0.1442517795621808,
+     "target address empty": 0.0344093372834475,
+     "prob [0.69,0.80)": 0.026921323913830314,
+     "prob [0.80,0.95)": 0.0694610149648556,
+     "prob [0.95,1.00)": 0.903617661121314
+    },
+    "category_precision": {
+     "t_rank0 & uncontested (t_ncand=1)": 0.9737140306297645,
+     "t_rank0 & contested": 0.9780471248881529,
+     "same name / different address": 0.8621016816070143,
+     "house-number conflict": 0.9263604612441821,
+     "target address empty": 0.8366664502305046,
+     "prob [0.69,0.80)": 0.6616457114403087,
+     "prob [0.80,0.95)": 0.8496276878045642,
+     "prob [0.95,1.00)": 0.9966435319686582
+    }
+   },
+   "India": {
+    "pred_per_s1": 3.305560587875631,
+    "zero_prediction_rate": 0.05627958060644489,
+    "category_share": {
+     "t_rank0 & uncontested (t_ncand=1)": 0.13975793012617296,
+     "t_rank0 & contested": 0.857053063894869,
+     "same name / different address": 0.031955141544253024,
+     "house-number conflict": 0.19739981263305365,
+     "target address empty": 0.028937403340749228,
+     "prob [0.69,0.80)": 0.03451388210953944,
+     "prob [0.80,0.95)": 0.1140506370304908,
+     "prob [0.95,1.00)": 0.8514354808599698
+    },
+    "category_precision": {
+     "t_rank0 & uncontested (t_ncand=1)": 0.9581995539325017,
+     "t_rank0 & contested": 0.9655367423568744,
+     "same name / different address": 0.8795154893343338,
+     "house-number conflict": 0.92845615922539,
+     "target address empty": 0.8491950757575758,
+     "prob [0.69,0.80)": 0.6531857880111155,
+     "prob [0.80,0.95)": 0.8488407015857761,
+     "prob [0.95,1.00)": 0.9921309417725899
+    }
+   }
+  }
+ },
+ "most_frequent_s1_names": {
+  "US": [
+   [
+    "Meridian LLC",
+    273
+   ],
+   [
+    "Raven LLC",
+    180
+   ],
+   [
+    "Family Center, LLC",
+    179
+   ],
+   [
+    "Summit, LLC",
+    177
+   ],
+   [
+    "Ironclad",
+    177
+   ],
+   [
+    "Urgent Care Health",
+    176
+   ],
+   [
+    "Primary Care Medicine LLC",
+    167
+   ],
+   [
+    "Juniper LLC",
+    166
+   ],
+   [
+    "Beacon",
+    165
+   ],
+   [
+    "Forge Corp",
+    164
+   ]
+  ],
+  "India": [
+   [
+    "New Delhi India Private Limited",
+    183
+   ],
+   [
+    "Mumbai India Limited",
+    168
+   ],
+   [
+    "New Delhi Services Limited",
+    139
+   ],
+   [
+    "Shree Trading Private Limited",
+    135
+   ],
+   [
+    "Mumbai Solutions Pvt Ltd",
+    131
+   ],
+   [
+    "Mumbai Services Private Limited",
+    120
+   ],
+   [
+    "Shree & Co",
+    117
+   ],
+   [
+    "Shree Solutions Private Limited",
+    110
+   ],
+   [
+    "Shree & Sons Private Limited",
+    109
+   ],
+   [
+    "Delhi (india) Private Limited",
+    108
+   ]
+  ],
+  "France": [
+   [
+    "Bordeaux Club SAS",
+    516
+   ],
+   [
+    "Nantes Club",
+    473
+   ],
+   [
+    "Lille Club",
+    420
+   ],
+   [
+    "Bordeaux Amicale SASU",
+    336
+   ],
+   [
+    "Bordeaux Ecole SARL",
+    311
+   ],
+   [
+    "Lille Ecole SA",
+    284
+   ],
+   [
+    "Nantes Ecole EURL",
+    269
+   ],
+   [
+    "Bordeaux Comite SAS",
+    261
+   ],
+   [
+    "Nantes Comite",
+    250
+   ],
+   [
+    "Nantes Amicale SAS",
+    250
+   ]
+  ]
+ }
+}
