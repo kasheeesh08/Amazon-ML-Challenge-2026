@@ -1,0 +1,35 @@
+﻿# Datasets
+dataset/
+
+# Python environments
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# IDE and AI tooling
+.idea/
+.vscode/
+.claude/
+
+# Generated experiment artifacts
+experiments/_smoke/
+experiments/_eda_cache/
+experiments/**/checkpoints/
+experiments/**/*.npy
+experiments/**/*.npz
+experiments/**/*.f32
+experiments/**/*.done
+experiments/**/*.log
+
+# Generated outputs and intermediate data
+output/
+work/
+*.tmp
+
+# Archives
+*.zip
+
+# OS files
+.DS_Store
+Thumbs.db
