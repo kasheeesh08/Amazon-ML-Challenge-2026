@@ -33,3 +33,52 @@ work/
 # OS files
 .DS_Store
 Thumbs.db
+
+# Nested submission outputs and generated packages
+**/output/
+FINAL_ZIP/
+
+# Generated experiment data
+experiments/**/*.tsv
+experiments/**/*.csv
+experiments/**/*.parquet
+
+# Python cache directories
+**/__pycache__/
+
+# Local inventory
+repo_inventory.csv
+
+# Datasets and generated files
+dataset/
+output/
+**/output/
+FINAL_ZIP/
+*.zip
+repo_inventory.csv
+
+# Python caches and environments
+**/__pycache__/
+.venv/
+venv/
+*.py[cod]
+
+# Generated experiment artifacts
+experiments/_smoke/
+experiments/_eda_cache/
+experiments/**/checkpoints/
+experiments/**/*.npy
+experiments/**/*.npz
+experiments/**/*.f32
+experiments/**/*.done
+experiments/**/*.log
+experiments/**/*.tsv
+experiments/**/*.csv
+experiments/**/*.parquet
+
+# IDE and local tooling
+.idea/
+.vscode/
+.claude/
+.DS_Store
+Thumbs.db
