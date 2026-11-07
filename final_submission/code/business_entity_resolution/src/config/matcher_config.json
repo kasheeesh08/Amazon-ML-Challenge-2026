@@ -1,0 +1,12 @@
+{
+ "description": "Fixed matcher / decision configuration selected in Step 3 (internal split of the training fold) and used for the submitted predictions.",
+ "gbdt_params": {"n_trees": 300, "max_depth": 6, "learning_rate": 0.1, "lam": 1.0, "min_child_weight": 20.0, "max_bins": 64, "seed": 0},
+ "n_trees_used": 300,
+ "threshold": 0.69,
+ "one_to_one_rule": true,
+ "negative_sampling_rate": 0.1,
+ "negative_weight": 10.0,
+ "negative_sampling_hash": "keep negative pair if ((code * 0x9E3779B97F4A7C15) >> 40) % 1000 < 100 (uint64 arithmetic)",
+ "query_chunk": 450000,
+ "feature_chunk_pairs": 2000000
+}

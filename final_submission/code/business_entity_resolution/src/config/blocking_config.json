@@ -1,0 +1,126 @@
+{
+ "description": "Blocking configuration chosen on the FIT fold (experiments/blocking_experiment.py)",
+ "exact": [
+  {
+   "key": [
+    "name_n1"
+   ],
+   "cap": 100
+  },
+  {
+   "key": [
+    "name_n2"
+   ],
+   "cap": 100
+  },
+  {
+   "key": [
+    "name_n3"
+   ],
+   "cap": 100
+  },
+  {
+   "key": [
+    "addr_n1"
+   ],
+   "cap": 100
+  },
+  {
+   "key": [
+    "addr_n2"
+   ],
+   "cap": 100
+  },
+  {
+   "key": [
+    "name_n2",
+    "country"
+   ],
+   "cap": 100
+  },
+  {
+   "key": [
+    "addr_n2",
+    "country"
+   ],
+   "cap": 100
+  },
+  {
+   "key": [
+    "name_n1",
+    "addr_n1"
+   ],
+   "cap": 100
+  },
+  {
+   "key": [
+    "name_n2",
+    "addr_n2"
+   ],
+   "cap": 100
+  },
+  {
+   "key": [
+    "name_n3",
+    "addr_n2"
+   ],
+   "cap": 100
+  },
+  {
+   "key": [
+    "name_n3",
+    "house"
+   ],
+   "cap": 100
+  },
+  {
+   "key": [
+    "name_tok1",
+    "house"
+   ],
+   "cap": 100
+  },
+  {
+   "key": [
+    "name_tok1",
+    "addr_digits"
+   ],
+   "cap": 100
+  },
+  {
+   "key": [
+    "postal",
+    "name_tok1"
+   ],
+   "cap": 100
+  },
+  {
+   "key": [
+    "postal",
+    "house"
+   ],
+   "cap": 100
+  },
+  {
+   "key": [
+    "house",
+    "addr_digits"
+   ],
+   "cap": 100
+  }
+ ],
+ "retrieval": [
+  {
+   "channel": "nameaddr",
+   "k": 10,
+   "max_postings": 20000
+  },
+  {
+   "channel": "addr",
+   "k": 10,
+   "max_postings": 20000
+  }
+ ],
+ "country_partitioned_retrieval": true,
+ "per_source_k": true
+}
